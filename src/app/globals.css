@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
+@theme {
+  /* ── Brand ─────────────────────────────────────────────────────────── */
+  --color-brand-primary:        #fb0021;
+  --color-brand-yellow:         #fdc300;
+  --color-brand-black:          #141414;
+  --color-brand-black-default:  #262626;
+
+  /* ── Surface / White ────────────────────────────────────────────────── */
+  --color-white:                #ffffff;
+
+  /* ── Greys ──────────────────────────────────────────────────────────── */
+  --color-grey-900:             #1a1a1a;
+  --color-grey-700:             #333333;
+  --color-grey-500:             #999999;
+  --color-grey-200:             #e6e6e6;
+  --color-grey-light:           #e0e8f1;
+  --color-grey-border:          #d2d5da;
+
+  /* ── State ──────────────────────────────────────────────────────────── */
+  --color-error:                #c7001a;
+
+  /* ── Semantic aliases ───────────────────────────────────────────────── */
+  --color-bg-page:              var(--color-white);
+  --color-bg-band:              var(--color-brand-primary);
+  --color-text-default:         var(--color-brand-black);
+  --color-text-muted:           var(--color-grey-500);
+  --color-border-default:       var(--color-grey-border);
+
+  /* ── Typography family ──────────────────────────────────────────────── */
+  --font-sans: var(--font-poppins), system-ui, -apple-system, sans-serif;
+
+  /* ── Type scale (Tailwind v4 — size + per-style modifiers) ─────────── */
+  --text-h2:                    3rem;           /* 48px */
+  --text-h2--line-height:       3.5rem;         /* 56px */
+  --text-h2--font-weight:       700;
+
+  --text-h5:                    1.25rem;        /* 20px */
+  --text-h5--line-height:       1.75rem;        /* 28px */
+  --text-h5--font-weight:       700;
+
+  --text-s1:                    1.125rem;       /* 18px */
+  --text-s1--line-height:       1.5rem;         /* 24px */
+  --text-s1--font-weight:       600;
+
+  --text-s2:                    1rem;           /* 16px */
+  --text-s2--line-height:       1.5rem;         /* 24px */
+  --text-s2--font-weight:       600;
+
+  --text-b2:                    1rem;           /* 16px */
+  --text-b2--line-height:       1.5rem;         /* 24px */
+  --text-b2--font-weight:       400;
+  --text-b2--letter-spacing:    0.0125em;       /* ~0.2px at 16px */
+
+  --text-b3:                    0.875rem;       /* 14px */
+  --text-b3--line-height:       1.25rem;        /* 20px */
+  --text-b3--font-weight:       400;
+  --text-b3--letter-spacing:    0.0143em;
+
+  --text-caption:               0.75rem;        /* 12px */
+  --text-caption--line-height:  1rem;
+  --text-caption--font-weight:  400;
+  --text-caption--letter-spacing: 0.0167em;
+
+  --text-button:                1rem;           /* 16px */
+  --text-button--line-height:   1.5rem;
+  --text-button--font-weight:   700;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-page);
+  color: var(--color-text-default);
+  font-family: var(--font-sans);
+}
+
+/* ── Focus ring (token-based, respects :focus-visible) ─────────────────── */
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
