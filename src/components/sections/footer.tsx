@@ -1,167 +1,186 @@
-// TODO(landing-v1): add WhatsApp social icon when asset is available
+"use client";
+
 import Image from "next/image";
+import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
 import SocialIconLink from "@/components/ui/social-icon-link";
 
 const linkColumns = [
   {
-    title: "App",
+    title: "Nosotros",
     links: [
-      { href: "#download", label: "Descargá la app" },
-      { href: "#features", label: "Cómo funciona" },
-      { href: "#rewards", label: "Recompensas" },
+      { href: "#rewards", label: "Loyalty Program" },
+      { href: "#help", label: "Contáctanos" },
+      { href: "#", label: "Repartidores" },
     ],
   },
   {
-    title: "Para clientes",
+    title: "App Cliente",
     links: [
-      { href: "#help", label: "Ayuda" },
-      { href: "#", label: "Términos y condiciones" },
-      { href: "#", label: "Política de privacidad" },
+      { href: "#", label: "Políticas de Privacidad" },
+      { href: "#", label: "Términos & Condiciones" },
     ],
   },
   {
-    title: "Para restaurantes",
+    title: "App Restaurantes",
     links: [
-      { href: "#", label: "Sumate como aliado" },
-      { href: "#", label: "Centro de socios" },
+      { href: "#", label: "Políticas de Privacidad" },
+      { href: "#", label: "Términos & Condiciones" },
     ],
   },
 ] as const;
 
 const socials = [
-  {
-    src: "/illustration/fb.svg",
-    href: "https://facebook.com/",
-    label: "Facebook",
-  },
-  {
-    src: "/illustration/ig.svg",
-    href: "https://instagram.com/",
-    label: "Instagram",
-  },
-  {
-    src: "/illustration/in.svg",
-    href: "https://linkedin.com/",
-    label: "LinkedIn",
-  },
-  {
-    src: "/illustration/x.svg",
-    href: "https://x.com/",
-    label: "X (Twitter)",
-  },
-  {
-    src: "/illustration/ytb.svg",
-    href: "https://youtube.com/",
-    label: "YouTube",
-  },
+  { src: "/illustration/fb.svg", href: "https://facebook.com/", label: "Facebook" },
+  { src: "/illustration/ig.svg", href: "https://instagram.com/", label: "Instagram" },
+  { src: "/illustration/x.svg", href: "https://x.com/", label: "X (Twitter)" },
+  { src: "/illustration/ytb.svg", href: "https://youtube.com/", label: "YouTube" },
+  { src: "/illustration/in.svg", href: "https://linkedin.com/", label: "LinkedIn" },
 ] as const;
 
 export default function Footer() {
   return (
-    <footer id="site-footer" className="text-white">
-      {/* ── Main red band ─────────────────────────────────────────────── */}
-      <div className="relative overflow-hidden bg-brand-primary">
-        {/* Decorative background — absolute, behind all content */}
-        <Image
-          src="/illustration/bgfotter.svg"
-          alt=""
+    <footer id="site-footer" className="bg-white text-brand-black">
+      <div className="relative overflow-hidden">
+        <motion.div
           aria-hidden="true"
-          fill
-          className="object-cover opacity-20 pointer-events-none select-none"
-        />
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[300px] select-none"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Image
+            src="/illustration/bgfotter.svg"
+            alt=""
+            fill
+            className="object-cover object-bottom"
+          />
+        </motion.div>
 
-        <div className="relative mx-auto max-w-[1280px] px-4 md:px-6 lg:px-8 py-12 md:py-16">
-          {/* Top grid: logo + 3 link columns */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
-            {/* Logo + tagline — spans 2 cols on all breakpoints */}
-            <div className="col-span-2">
+        <div className="relative mx-auto w-11/12 max-w-[1280px] pt-12 md:pt-16 pb-48 md:pb-56">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-12 items-start">
+            <motion.div
+              className="col-span-2 md:col-span-1"
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
+            >
               <Image
                 src="/illustration/logofotter.svg"
                 alt="BipBip"
-                width={140}
-                height={42}
+                width={303}
+                height={87}
+                className="w-[200px] md:w-[240px] lg:w-[280px] h-auto"
               />
-              <p className="mt-4 text-b2 max-w-xs">
-                Tu comida favorita, más cerca que nunca.
-              </p>
-            </div>
+            </motion.div>
 
-            {/* 3 link columns */}
-            {linkColumns.map((col) => (
-              <nav
+            {linkColumns.map((col, index) => (
+              <motion.nav
                 key={col.title}
                 aria-labelledby={`footer-${col.title.replace(/\s+/g, "-")}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.1 + index * 0.1,
+                  ease: "easeOut",
+                }}
               >
                 <h3
                   id={`footer-${col.title.replace(/\s+/g, "-")}`}
-                  className="text-s2 font-bold mb-4"
+                  className="text-[18px] leading-7 font-bold font-sans text-brand-black mb-4"
                 >
                   {col.title}
                 </h3>
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-col gap-3">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="text-b3 hover:underline focus-visible:underline"
+                        className="text-[14px] leading-5 tracking-[0.2px] text-brand-black hover:text-brand-primary focus-visible:text-brand-primary transition-colors"
                       >
                         {link.label}
                       </a>
                     </li>
                   ))}
                 </ul>
-              </nav>
+              </motion.nav>
             ))}
           </div>
 
-          {/* Bottom row: store badges + social icons */}
-          <div className="mt-10 pt-8 border-t border-white/20 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
-            {/* App store badges */}
-            <div className="flex flex-wrap gap-3">
-              <BadgeLink
-                href="https://apps.apple.com/"
-                src="/illustration/appstore.svg"
-                alt="Descargar en App Store"
-              />
+          <div className="relative mt-12 md:mt-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <motion.div
+              className="flex flex-wrap gap-3"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+            >
               <BadgeLink
                 href="https://play.google.com/store/apps"
                 src="/illustration/playstore.svg"
                 alt="Disponible en Google Play"
+                width={162}
+                height={48}
               />
-            </div>
+              <BadgeLink
+                href="https://apps.apple.com/"
+                src="/illustration/appstore.svg"
+                alt="Descargar en App Store"
+                width={144}
+                height={48}
+              />
+            </motion.div>
 
-            {/* Social icon links */}
-            <ul className="flex items-center gap-4" aria-label="Redes sociales">
+            <motion.ul
+              className="flex items-center gap-4"
+              aria-label="Redes sociales"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } },
+              }}
+            >
               {socials.map((social) => (
-                <li key={social.label}>
+                <motion.li
+                  key={social.label}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.6 },
+                    visible: { opacity: 1, scale: 1 },
+                  }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
+                >
                   <SocialIconLink
                     href={social.href}
                     src={social.src}
                     label={social.label}
-                    size={28}
+                    size={32}
                   />
-                </li>
+                </motion.li>
               ))}
-            </ul>
+            </motion.ul>
           </div>
         </div>
       </div>
 
-      {/* ── Bottom black strip — copyright + CIT credit ───────────────── */}
-      <div className="bg-brand-black">
-        <div className="mx-auto flex max-w-[1280px] flex-col-reverse items-center gap-3 px-4 py-5 md:flex-row md:justify-between md:px-6 lg:px-8">
-          <p className="text-caption opacity-80">
-            © {new Date().getFullYear()} BipBip. Todos los derechos reservados.
+      <div className="bg-brand-black text-white">
+        <div className="mx-auto flex w-11/12 max-w-[1280px] flex-col-reverse items-center gap-3 py-4 md:flex-row md:justify-between">
+          <p className="text-[12px] leading-5 tracking-[0.2px]">
+            © {new Date().getFullYear()} Derechos Reservados Grupo Comidas
           </p>
-          <div className="flex items-center gap-2 text-caption opacity-80">
-            <span>Powered by</span>
-            {/* Note: filename has a space — encoded as %20 for Next.js Image src */}
+          <div className="flex items-center gap-2">
             <Image
               src="/illustration/Logo%20CIT.svg"
               alt="CIT"
-              width={56}
-              height={22}
+              width={161}
+              height={33}
+              className="h-7 w-auto"
             />
           </div>
         </div>

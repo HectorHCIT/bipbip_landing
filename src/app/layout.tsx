@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import MotionProvider from "@/components/providers/motion-provider";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -43,7 +44,7 @@ export default function RootLayout({
         >
           Saltar al contenido
         </a>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

@@ -13,7 +13,7 @@ export default function NavLink({ href, children, className }: NavLinkProps) {
     <Link
       href={href}
       className={cn(
-        "text-s2 text-white hover:text-brand-yellow transition-colors",
+        "text-[18px] leading-7 font-medium text-white hover:text-brand-yellow transition-colors",
         className,
       )}
     >

@@ -2,38 +2,54 @@
 
 import { useState, useId } from "react";
 import Image from "next/image";
-import SectionHeading from "@/components/ui/section-heading";
+import { motion } from "motion/react";
 import Button from "@/components/ui/button";
 
 type FormState = {
   name: string;
+  lastName: string;
   email: string;
+  phone: string;
   message: string;
 };
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[+\d][\d\s\-()]{6,}$/;
 
 function validate(values: FormState): FormErrors {
   const errors: FormErrors = {};
-  if (!values.name.trim()) errors.name = "Ingresá tu nombre.";
-  if (!values.email.trim()) errors.email = "Ingresá tu correo.";
-  else if (!EMAIL_RE.test(values.email)) errors.email = "Ingresá un correo válido.";
-  if (!values.message.trim()) errors.message = "Escribí un mensaje.";
+  if (!values.name.trim()) errors.name = "Ingresa tu nombre.";
+  if (!values.lastName.trim()) errors.lastName = "Ingresa tu apellido.";
+  if (!values.email.trim()) errors.email = "Ingresa tu email.";
+  else if (!EMAIL_RE.test(values.email)) errors.email = "Ingresa un email válido.";
+  if (!values.phone.trim()) errors.phone = "Ingresa tu número de teléfono.";
+  else if (!PHONE_RE.test(values.phone)) errors.phone = "Ingresa un teléfono válido.";
+  if (!values.message.trim()) errors.message = "Escribe un mensaje.";
   else if (values.message.trim().length < 10)
     errors.message = "El mensaje debe tener al menos 10 caracteres.";
   return errors;
 }
 
+const inputBase =
+  "w-full h-12 rounded-lg border border-grey-200 bg-white px-4 text-[14px] leading-5 tracking-[0.2px] text-brand-black placeholder:text-grey-500 shadow-[0_5px_12px_rgba(0,0,0,0.05)] focus-visible:outline-2 focus-visible:outline-brand-primary";
+
+const labelBase =
+  "text-[12px] leading-4 tracking-[0.2px] text-grey-900 font-sans";
+
 export default function HelpContact() {
   const nameId = useId();
+  const lastNameId = useId();
   const emailId = useId();
+  const phoneId = useId();
   const messageId = useId();
 
   const [values, setValues] = useState<FormState>({
     name: "",
+    lastName: "",
     email: "",
+    phone: "",
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -46,132 +62,188 @@ export default function HelpContact() {
     if (Object.keys(validationErrors).length > 0) return;
 
     setStatus("submitting");
-    // Stub submit — TODO(landing-v1): wire to real backend (Resend / Formspree / API route)
     console.log("[help-contact] submit", values);
     await new Promise<void>((r) => setTimeout(r, 800));
     setStatus("success");
   }
 
   return (
-    <section id="help" className="bg-grey-light py-16 md:py-20 lg:py-24">
-      <div className="mx-auto max-w-[1280px] px-4 md:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Decorative illustration */}
-          <div
-            className="flex justify-center lg:justify-start"
-            aria-hidden="true"
+    <section
+      id="help"
+      className="relative overflow-hidden bg-white pt-20 pb-32 md:pt-24 md:pb-40 lg:pt-28 lg:pb-48"
+      aria-labelledby="help-heading"
+    >
+      <div className="relative mx-auto w-11/12 max-w-[1280px]">
+        <header className="flex flex-col items-center gap-2 text-center">
+          <motion.h2
+            id="help-heading"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+            className="text-[36px] leading-[44px] md:text-[48px] md:leading-[56px] font-bold font-sans text-brand-primary"
           >
-            <Image
-              src="/illustration/callcentergirl.svg"
-              alt=""
-              width={420}
-              height={420}
-              className="h-auto w-full max-w-[420px]"
-            />
-          </div>
+            ¿Necesitas Ayuda?
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.55, delay: 0.12, ease: "easeOut" }}
+            className="text-[18px] leading-7 md:text-[20px] md:leading-7 font-bold font-sans text-brand-black"
+          >
+            Estamos aquí para resolver tus dudas y mejorar tu experiencia
+          </motion.p>
+        </header>
 
-          {/* Form column */}
-          <div>
-            <SectionHeading
-              eyebrow="Contacto"
-              title="¿Necesitas ayuda?"
-              subtitle="Escribínos y te respondemos a la brevedad."
-              align="left"
-            />
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          className="relative mt-14 mx-auto max-w-[954px] rounded-3xl bg-grey-200 p-6 md:p-10 shadow-[0_5px_12px_rgba(0,0,0,0.05)]"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-12">
+            <motion.div
+              className="flex justify-center lg:justify-start"
+              aria-hidden="true"
+              initial={{ opacity: 0, x: -48 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+            >
+              <Image
+                src="/illustration/callcentergirl.svg"
+                alt=""
+                width={368}
+                height={434}
+                className="h-auto w-full max-w-[280px] md:max-w-[340px] lg:max-w-[368px]"
+              />
+            </motion.div>
 
             {status === "success" ? (
-              <div
+              <motion.div
                 role="status"
                 aria-live="polite"
-                className="mt-8 rounded-xl bg-white p-6 text-text-default"
+                initial={{ opacity: 0, x: 48 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+                className="w-full lg:w-[465px] rounded-2xl bg-white p-6 text-brand-black"
               >
-                <p className="text-s1 font-semibold">¡Mensaje enviado!</p>
-                <p className="mt-2 text-b2">
+                <p className="text-[20px] leading-7 font-bold font-sans">¡Mensaje enviado!</p>
+                <p className="mt-2 text-[16px] leading-6 tracking-[0.2px]">
                   Gracias por escribirnos. Te respondemos pronto.
                 </p>
-              </div>
+              </motion.div>
             ) : (
-              <form
+              <motion.form
                 onSubmit={handleSubmit}
                 noValidate
-                className="mt-8 flex flex-col gap-4"
                 aria-live="polite"
+                initial={{ opacity: 0, x: 48 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+                className="w-full lg:w-[465px] flex flex-col gap-4 rounded-2xl bg-white p-6"
               >
-                {/* Name */}
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor={nameId}
-                    className="text-s2 text-text-default"
-                  >
-                    Nombre
-                  </label>
-                  <input
-                    id={nameId}
-                    name="name"
-                    type="text"
-                    required
-                    aria-invalid={errors.name ? true : undefined}
-                    aria-describedby={
-                      errors.name ? `${nameId}-error` : undefined
-                    }
-                    value={values.name}
-                    onChange={(e) =>
-                      setValues((v) => ({ ...v, name: e.target.value }))
-                    }
-                    className="w-full rounded-xl border border-border-default bg-white px-4 py-3 text-b2 focus-visible:outline-2 focus-visible:outline-brand-primary"
-                  />
-                  {errors.name && (
-                    <span
-                      id={`${nameId}-error`}
-                      role="alert"
-                      className="text-b3 text-error"
-                    >
-                      {errors.name}
-                    </span>
-                  )}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1">
+                    <label htmlFor={nameId} className={labelBase}>
+                      Nombre<span className="text-error">*</span>
+                    </label>
+                    <input
+                      id={nameId}
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Ingresa tu nombre"
+                      aria-invalid={errors.name ? true : undefined}
+                      aria-describedby={errors.name ? `${nameId}-error` : undefined}
+                      value={values.name}
+                      onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
+                      className={inputBase}
+                    />
+                    {errors.name && (
+                      <span id={`${nameId}-error`} role="alert" className="text-[12px] text-error">
+                        {errors.name}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <label htmlFor={lastNameId} className={labelBase}>
+                      Apellido<span className="text-error">*</span>
+                    </label>
+                    <input
+                      id={lastNameId}
+                      name="lastName"
+                      type="text"
+                      required
+                      placeholder="Ingresa tu apellido"
+                      aria-invalid={errors.lastName ? true : undefined}
+                      aria-describedby={errors.lastName ? `${lastNameId}-error` : undefined}
+                      value={values.lastName}
+                      onChange={(e) => setValues((v) => ({ ...v, lastName: e.target.value }))}
+                      className={inputBase}
+                    />
+                    {errors.lastName && (
+                      <span id={`${lastNameId}-error`} role="alert" className="text-[12px] text-error">
+                        {errors.lastName}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                {/* Email */}
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor={emailId}
-                    className="text-s2 text-text-default"
-                  >
-                    Correo electrónico
+                <div className="flex flex-col gap-1">
+                  <label htmlFor={emailId} className={labelBase}>
+                    Email<span className="text-error">*</span>
                   </label>
                   <input
                     id={emailId}
                     name="email"
                     type="email"
                     required
+                    placeholder="Ingresa tu email"
                     aria-invalid={errors.email ? true : undefined}
-                    aria-describedby={
-                      errors.email ? `${emailId}-error` : undefined
-                    }
+                    aria-describedby={errors.email ? `${emailId}-error` : undefined}
                     value={values.email}
-                    onChange={(e) =>
-                      setValues((v) => ({ ...v, email: e.target.value }))
-                    }
-                    className="w-full rounded-xl border border-border-default bg-white px-4 py-3 text-b2 focus-visible:outline-2 focus-visible:outline-brand-primary"
+                    onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
+                    className={inputBase}
                   />
                   {errors.email && (
-                    <span
-                      id={`${emailId}-error`}
-                      role="alert"
-                      className="text-b3 text-error"
-                    >
+                    <span id={`${emailId}-error`} role="alert" className="text-[12px] text-error">
                       {errors.email}
                     </span>
                   )}
                 </div>
 
-                {/* Message */}
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor={messageId}
-                    className="text-s2 text-text-default"
-                  >
-                    Mensaje
+                <div className="flex flex-col gap-1">
+                  <label htmlFor={phoneId} className={labelBase}>
+                    Número de teléfono<span className="text-error">*</span>
+                  </label>
+                  <input
+                    id={phoneId}
+                    name="phone"
+                    type="tel"
+                    required
+                    placeholder="Ingresa tu número de teléfono"
+                    aria-invalid={errors.phone ? true : undefined}
+                    aria-describedby={errors.phone ? `${phoneId}-error` : undefined}
+                    value={values.phone}
+                    onChange={(e) => setValues((v) => ({ ...v, phone: e.target.value }))}
+                    className={inputBase}
+                  />
+                  {errors.phone && (
+                    <span id={`${phoneId}-error`} role="alert" className="text-[12px] text-error">
+                      {errors.phone}
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <label htmlFor={messageId} className={labelBase}>
+                    Comentario<span className="text-error">*</span>
                   </label>
                   <textarea
                     id={messageId}
@@ -179,22 +251,15 @@ export default function HelpContact() {
                     required
                     minLength={10}
                     rows={5}
+                    placeholder="Deja tu mensaje"
                     aria-invalid={errors.message ? true : undefined}
-                    aria-describedby={
-                      errors.message ? `${messageId}-error` : undefined
-                    }
+                    aria-describedby={errors.message ? `${messageId}-error` : undefined}
                     value={values.message}
-                    onChange={(e) =>
-                      setValues((v) => ({ ...v, message: e.target.value }))
-                    }
-                    className="w-full resize-none rounded-xl border border-border-default bg-white px-4 py-3 text-b2 focus-visible:outline-2 focus-visible:outline-brand-primary"
+                    onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
+                    className="w-full resize-none rounded-lg border border-grey-200 bg-white px-4 py-3 text-[14px] leading-5 tracking-[0.2px] text-brand-black placeholder:text-grey-500 shadow-[0_5px_12px_rgba(0,0,0,0.05)] focus-visible:outline-2 focus-visible:outline-brand-primary"
                   />
                   {errors.message && (
-                    <span
-                      id={`${messageId}-error`}
-                      role="alert"
-                      className="text-b3 text-error"
-                    >
+                    <span id={`${messageId}-error`} role="alert" className="text-[12px] text-error">
                       {errors.message}
                     </span>
                   )}
@@ -205,14 +270,61 @@ export default function HelpContact() {
                   variant="primary"
                   size="lg"
                   disabled={status === "submitting"}
+                  className="w-full text-white shadow-[0_5px_24px_rgba(0,0,0,0.05)]"
                 >
                   {status === "submitting" ? "Enviando..." : "Enviar mensaje"}
                 </Button>
-              </form>
+              </motion.form>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
+
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute hidden lg:block right-0 top-[55%] w-[280px] xl:w-[334px] z-10 select-none"
+        initial={{ opacity: 0, x: 40, rotate: -10 }}
+        whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        <motion.div
+          animate={{ y: [0, -10, 0], rotate: [0, 4, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Image
+            src="/floating/pizza.svg"
+            alt=""
+            width={334}
+            height={334}
+            style={{ width: "auto", height: "auto" }}
+            className="w-full drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)]"
+          />
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute hidden md:block left-0 bottom-12 w-[160px] lg:w-[244px] z-10 select-none"
+        initial={{ opacity: 0, x: -40, rotate: 10 }}
+        whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        <motion.div
+          animate={{ y: [0, -8, 0], rotate: [0, -3, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Image
+            src="/floating/egg.svg"
+            alt=""
+            width={244}
+            height={244}
+            style={{ width: "auto", height: "auto" }}
+            className="w-full drop-shadow-[0_14px_14px_rgba(0,0,0,0.15)]"
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

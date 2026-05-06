@@ -1,7 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
 
-// TODO(landing-v1): replace with real App Store / Google Play URLs when available
 const IOS_URL = "https://apps.apple.com/";
 const ANDROID_URL = "https://play.google.com/store/apps";
 
@@ -9,42 +11,114 @@ export default function AppDownload() {
   return (
     <section
       id="download"
-      className="bg-brand-primary text-white py-16 md:py-20 lg:py-24"
+      className="relative bg-white py-32 md:py-36 lg:py-44"
+      aria-labelledby="download-heading"
     >
-      <div className="mx-auto max-w-[1280px] px-4 md:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
-          {/* Phone mockup column — decorative illustration */}
-          <div className="flex justify-center lg:justify-start">
+      <div className="relative mx-auto w-11/12">
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-12 right-0 w-[180px] md:w-[260px] lg:w-[340px] z-10 select-none"
+          initial={{ opacity: 0, scale: 0.85, rotate: -10 }}
+          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <motion.div
+            animate={{ y: [0, -8, 0], rotate: [0, 3, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
             <Image
-              src="/illustration/phonepreview.svg"
+              src="/floating/pizza.svg"
               alt=""
-              aria-hidden="true"
-              width={420}
-              height={520}
-              className="w-full max-w-[420px] h-auto"
+              width={340}
+              height={230}
+              style={{ width: "auto", height: "auto" }}
+              className="w-full"
             />
-          </div>
+          </motion.div>
+        </motion.div>
 
-          {/* Copy + badges column */}
-          <div className="flex flex-col items-start gap-6 lg:gap-8">
-            <h2 className="text-h2 font-sans tracking-tight">
-              ¡Descargá la App y empezá a disfrutar!
-            </h2>
-            <p className="text-b2 max-w-md">
-              Pedí desde tu celular en segundos. Recibí promos exclusivas y ganá
-              puntos en cada compra.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-2">
-              <BadgeLink
-                href={IOS_URL}
-                src="/illustration/appstore.svg"
-                alt="Descargar en App Store"
+        <div className="relative lg:aspect-[1280/450]">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-brand-primary rounded-[48px] lg:hidden"
+          />
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 1280 450"
+            preserveAspectRatio="none"
+            className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none select-none text-brand-primary"
+          >
+            <path
+              fill="currentColor"
+              d="M 80,60 L 1230,15 Q 1280,15 1280,65 L 1280,395 Q 1280,445 1230,440 L 80,390 Q 30,390 30,345 L 30,100 Q 30,55 80,60 Z"
+            />
+          </svg>
+          <div className="relative grid h-full grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-16 px-6 py-14 md:px-12 md:py-16 lg:px-24 lg:py-0">
+            <motion.div
+              className="relative flex justify-center lg:justify-start lg:-translate-x-8 lg:-translate-y-6"
+              initial={{ opacity: 0, x: -32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.65, ease: "easeOut" }}
+            >
+              <Image
+                src="/illustration/phonepreview.svg"
+                alt=""
+                aria-hidden="true"
+                width={420}
+                height={520}
+                style={{ width: "auto", height: "auto" }}
+                className="w-full max-w-[316px] md:max-w-[380px] lg:max-w-[420px] drop-shadow-[20px_20px_64px_rgba(0,0,0,0.45)]"
               />
-              <BadgeLink
-                href={ANDROID_URL}
-                src="/illustration/playstore.svg"
-                alt="Disponible en Google Play"
-              />
+            </motion.div>
+
+            <div className="flex flex-col items-center gap-6 text-center lg:text-center lg:items-center">
+              <motion.h2
+                id="download-heading"
+                className="text-[36px] leading-[44px] md:text-[44px] md:leading-[52px] lg:text-[48px] lg:leading-[56px] font-bold font-sans text-white"
+                initial={{ opacity: 0, x: 48 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
+                ¡Descarga la App y empieza a disfrutar!
+              </motion.h2>
+
+              <motion.p
+                className="text-[18px] leading-6 tracking-[0.2px] font-semibold font-sans text-white max-w-[461px]"
+                initial={{ opacity: 0, x: 48 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+              >
+                Pide rápido y fácil de los mejores restaurantes de tu ciudad:
+              </motion.p>
+
+              <motion.div
+                className="flex flex-wrap items-center justify-center gap-4 mt-2"
+                initial={{ opacity: 0, x: 48 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              >
+                <BadgeLink
+                  href={ANDROID_URL}
+                  src="/illustration/playstore.svg"
+                  alt="Disponible en Google Play"
+                  width={234}
+                  height={70}
+                  className="rounded-md"
+                />
+                <BadgeLink
+                  href={IOS_URL}
+                  src="/illustration/appstore.svg"
+                  alt="Descargar en App Store"
+                  width={210}
+                  height={70}
+                  className="rounded-md"
+                />
+              </motion.div>
             </div>
           </div>
         </div>

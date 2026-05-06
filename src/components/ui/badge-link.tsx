@@ -5,10 +5,12 @@ export type BadgeLinkProps = {
   href: string;
   src: string;
   alt: string;
+  width: number;
+  height: number;
   className?: string;
 };
 
-export default function BadgeLink({ href, src, alt, className }: BadgeLinkProps) {
+export default function BadgeLink({ href, src, alt, width, height, className }: BadgeLinkProps) {
   return (
     <a
       href={href}
@@ -20,7 +22,7 @@ export default function BadgeLink({ href, src, alt, className }: BadgeLinkProps)
         className,
       )}
     >
-      <Image src={src} alt={alt} width={160} height={48} />
+      <Image src={src} alt={alt} width={width} height={height} />
     </a>
   );
 }
