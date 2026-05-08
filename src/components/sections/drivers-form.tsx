@@ -1,0 +1,234 @@
+"use client";
+
+import { motion, type Variants } from "motion/react";
+import type { ReactNode } from "react";
+
+const inputClass =
+  "h-12 w-full rounded-lg border border-grey-200 bg-white px-4 py-2 text-[14px] leading-5 tracking-[0.2px] text-grey-700 placeholder:text-grey-500 shadow-[0_5px_12px_rgba(0,0,0,0.05)] focus:outline-none focus:border-brand-primary transition-colors";
+
+const fieldRowVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+function Field({
+  label,
+  required = false,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div className="flex flex-col gap-1">
+      <label className="text-[14px] leading-5 tracking-[0.2px] text-grey-900">
+        {label}
+        {required && <span className="text-error">*</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+function FileField({ label, required = false }: { label: string; required?: boolean }) {
+  return (
+    <Field label={label} required={required}>
+      <label className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-grey-500 bg-[#fafafa] px-4 py-6 cursor-pointer hover:border-brand-primary transition-colors">
+        <span className="flex size-11 items-center justify-center rounded-full bg-grey-200">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="size-5 text-grey-700"
+            aria-hidden="true"
+          >
+            <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.93 8.8L9.41 17.32a2 2 0 0 1-2.83-2.83l7.07-7.07" />
+          </svg>
+        </span>
+        <span className="text-[14px] leading-5 tracking-[0.2px] text-grey-900">
+          Arrastra o selecciona un archivo
+        </span>
+        <span className="text-[14px] leading-5 tracking-[0.2px] text-grey-500">
+          Max 10 mb.
+        </span>
+        <input type="file" className="sr-only" />
+      </label>
+    </Field>
+  );
+}
+
+export default function DriversForm() {
+  return (
+    <section
+      id="drivers-form"
+      aria-labelledby="drivers-form-heading"
+      className="bg-white pb-20 md:pb-24 lg:pb-28"
+    >
+      <div className="mx-auto w-11/12 max-w-[1280px]">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="rounded-[32px] bg-white px-6 py-12 md:px-8 md:py-16 shadow-[0_10px_40px_0_rgba(0,0,0,0.08)]"
+        >
+          <motion.header
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mb-12 flex flex-col items-center gap-2 text-center"
+          >
+            <h2
+              id="drivers-form-heading"
+              className="text-[32px] leading-[40px] md:text-[48px] md:leading-[56px] font-bold font-sans text-brand-primary"
+            >
+              Aplica para formar parte de Bip Bip
+            </h2>
+            <p className="text-[18px] leading-7 tracking-[0.2px] text-brand-black max-w-[640px]">
+              Completa los campos para formar para empezar a generar con entregas de Bip Bip.
+            </p>
+          </motion.header>
+
+          <motion.form
+            className="flex flex-col gap-4"
+            onSubmit={(event) => event.preventDefault()}
+            noValidate
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.08, delayChildren: 0.15 },
+              },
+            }}
+          >
+            <motion.div
+              variants={fieldRowVariants}
+              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            >
+              <Field label="Nombre" required>
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="Ej. Luis Carlos"
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Apellido" required>
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Ej. Fernández León"
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Nº Documento Identidad">
+                <input
+                  type="text"
+                  name="documentId"
+                  placeholder="Ej. 1234567898765"
+                  className={inputClass}
+                />
+              </Field>
+            </motion.div>
+
+            <motion.div
+              variants={fieldRowVariants}
+              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            >
+              <Field label="Número de teléfono" required>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Ej. +50499123456"
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Ciudad" required>
+                <select
+                  name="city"
+                  defaultValue=""
+                  className={`${inputClass} appearance-none bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22%231a1a1a%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m4%207%206%206%206-6%22/%3E%3C/svg%3E')] bg-[length:20px_20px] bg-[position:right_16px_center] bg-no-repeat pr-10`}
+                >
+                  <option value="" disabled>
+                    Selecciona tu ciudad
+                  </option>
+                  <option value="tegucigalpa">Tegucigalpa</option>
+                  <option value="sps">San Pedro Sula</option>
+                  <option value="lc">La Ceiba</option>
+                  <option value="catacamas">Catacamas</option>
+                </select>
+              </Field>
+              <Field label="Tipo de vehículo" required>
+                <select
+                  name="vehicle"
+                  defaultValue=""
+                  className={`${inputClass} appearance-none bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22%231a1a1a%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m4%207%206%206%206-6%22/%3E%3C/svg%3E')] bg-[length:20px_20px] bg-[position:right_16px_center] bg-no-repeat pr-10`}
+                >
+                  <option value="" disabled>
+                    Selecciona tu vehículo
+                  </option>
+                  <option value="moto">Motocicleta</option>
+                  <option value="car">Automóvil</option>
+                  <option value="bike">Bicicleta</option>
+                </select>
+              </Field>
+            </motion.div>
+
+            <motion.div variants={fieldRowVariants}>
+              <FileField label="Foto de tu DNI" required />
+            </motion.div>
+            <motion.div variants={fieldRowVariants}>
+              <FileField label="Antecedentes penales" required />
+            </motion.div>
+            <motion.div variants={fieldRowVariants}>
+              <FileField label="Foto de Licencia" required />
+            </motion.div>
+
+            <motion.label
+              variants={fieldRowVariants}
+              className="flex items-start gap-4 pb-2 pt-2 cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                defaultChecked
+                className="mt-0.5 size-6 shrink-0 cursor-pointer rounded accent-brand-primary"
+              />
+              <span className="text-[14px] leading-5 tracking-[0.2px] text-brand-black">
+                Acepto que he leído y estoy de acuerdo con las{" "}
+                <a href="/privacy" className="underline">
+                  políticas de privacidad
+                </a>{" "}
+                y los{" "}
+                <a href="/terms" className="underline">
+                  términos y condiciones.
+                </a>
+              </span>
+            </motion.label>
+
+            <motion.button
+              type="submit"
+              variants={fieldRowVariants}
+              whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
+              whileTap={{ scale: 0.98 }}
+              className="h-12 w-full rounded-lg bg-brand-primary text-button text-white shadow-[0_5px_24px_rgba(0,0,0,0.05)] transition-opacity hover:opacity-95"
+            >
+              Aplicar ahora
+            </motion.button>
+          </motion.form>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
