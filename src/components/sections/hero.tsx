@@ -11,7 +11,7 @@ const floatingItems = [
     height: 309,
     className: "absolute top-[16px] left-[45px]",
     delay: 0,
-    priority: true,
+    priority: false,
   },
   {
     src: "/floating/pizza.svg",
@@ -77,7 +77,7 @@ export default function Hero() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-[48px] leading-[72px] font-bold font-sans text-brand-black w-full"
             >
-              Tú comida favorita, más cerca que nunca!
+              Tu comida favorita, más cerca que nunca!
             </motion.h1>
 
             <motion.div

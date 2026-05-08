@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import AnimatedSectionTitle from "@/components/ui/animated-section-title";
 
 const features = [
   {
@@ -29,35 +30,9 @@ export default function FeatureGrid() {
       aria-labelledby="features-heading"
     >
       <div className="relative mx-auto w-11/12">
-        <header className="flex flex-col items-center gap-2 text-center">
-          <motion.h2
-            id="features-heading"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
-            className="text-[40px] leading-[48px] md:text-[48px] md:leading-[56px] font-bold font-sans text-brand-black"
-          >
-            Elije cómo disfrutar tu comida
-          </motion.h2>
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            whileInView={{ scaleX: 1, opacity: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
-            style={{ originX: 0 }}
-            className="w-[260px] md:w-[420px] lg:w-[552px]"
-          >
-            <Image
-              src="/illustration/headline-underline.png"
-              alt=""
-              aria-hidden="true"
-              width={552}
-              height={12}
-              className="w-full h-auto"
-            />
-          </motion.div>
-        </header>
+        <AnimatedSectionTitle id="features-heading">
+          Elije cómo disfrutar tu comida
+        </AnimatedSectionTitle>
 
         <div className="relative mt-24 grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-12 lg:gap-20 lg:max-w-[1060px] lg:mx-auto">
           {features.map((feature, index) => (
@@ -66,7 +41,7 @@ export default function FeatureGrid() {
               initial={
                 index === 0
                   ? { opacity: 0, x: -48 }
-                  : index === 2
+                  : index === features.length - 1
                     ? { opacity: 0, x: 48 }
                     : { opacity: 0, y: 32 }
               }
@@ -78,7 +53,7 @@ export default function FeatureGrid() {
                 ease: "easeOut",
               }}
               className={
-                "relative flex flex-col items-center gap-6 rounded-3xl bg-white px-8 pt-12 pb-6 shadow-[0_5px_12px_rgba(0,0,0,0.05)]" +
+                "relative flex flex-col items-center gap-6 rounded-3xl bg-white px-8 pt-12 pb-6 shadow-card" +
                 (index === 1 ? " md:mt-25" : "")
               }
             >
@@ -92,12 +67,8 @@ export default function FeatureGrid() {
                   className="size-14"
                 />
               </div>
-              <h3 className="text-[20px] leading-7 font-bold font-sans text-brand-black text-center">
-                {feature.title}
-              </h3>
-              <p className="text-[16px] leading-6 tracking-[0.2px] font-sans text-brand-black text-center">
-                {feature.body}
-              </p>
+              <h3 className="text-h5 text-brand-black text-center">{feature.title}</h3>
+              <p className="text-b2 text-brand-black text-center">{feature.body}</p>
             </motion.article>
           ))}
         </div>
@@ -120,6 +91,7 @@ export default function FeatureGrid() {
             src="/floating/cubo%20pollo.svg"
             alt=""
             fill
+            sizes="538px"
             className="object-contain object-left-bottom"
           />
         </motion.div>

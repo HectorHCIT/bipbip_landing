@@ -76,7 +76,7 @@ export default function AppDownload() {
             <div className="flex flex-col items-center gap-6 text-center lg:text-center lg:items-center">
               <motion.h2
                 id="download-heading"
-                className="text-[36px] leading-[44px] md:text-[44px] md:leading-[52px] lg:text-[48px] lg:leading-[56px] font-bold font-sans text-white"
+                className="text-[36px] leading-[44px] md:text-[44px] md:leading-[52px] lg:text-h2 font-bold font-sans text-white"
                 initial={{ opacity: 0, x: 48 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.4 }}

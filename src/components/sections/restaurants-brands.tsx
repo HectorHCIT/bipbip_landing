@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import AnimatedSectionTitle from "@/components/ui/animated-section-title";
 
 type Brand = { src: string; alt: string };
 
@@ -83,35 +84,9 @@ export default function RestaurantsBrands() {
       className="bg-white pt-10 pb-24 md:pb-28 lg:pb-32"
     >
       <div className="mx-auto w-11/12 max-w-[1280px]">
-        <header className="flex flex-col items-center gap-2 text-center">
-          <motion.h2
-            id="restaurants-brands-heading"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
-            className="text-[40px] leading-[48px] md:text-[48px] md:leading-[56px] font-bold font-sans text-brand-black"
-          >
-            Ellos ya forman parte de Bip Bip
-          </motion.h2>
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            whileInView={{ scaleX: 1, opacity: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
-            style={{ originX: 0 }}
-            className="w-[320px] md:w-[520px] lg:w-[681px]"
-          >
-            <Image
-              src="/illustration/headline-underline.png"
-              alt=""
-              aria-hidden="true"
-              width={681}
-              height={12}
-              className="w-full h-auto"
-            />
-          </motion.div>
-        </header>
+        <AnimatedSectionTitle id="restaurants-brands-heading" width="wide">
+          Ellos ya forman parte de Bip Bip
+        </AnimatedSectionTitle>
       </div>
 
       <motion.div

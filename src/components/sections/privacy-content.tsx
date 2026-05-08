@@ -3,9 +3,9 @@ export default function PrivacyContent() {
     <article
       className="
         mx-auto w-11/12 max-w-[1280px] py-16 md:py-20 text-brand-black
-        [&_h1]:text-[24px] [&_h1]:md:text-[28px] [&_h1]:font-bold [&_h1]:leading-[32px] [&_h1]:md:leading-[36px] [&_h1]:mb-2
-        [&_h2]:text-[18px] [&_h2]:md:text-[20px] [&_h2]:font-bold [&_h2]:leading-7 [&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:text-brand-primary
-        [&_h3]:text-[16px] [&_h3]:font-bold [&_h3]:leading-6 [&_h3]:mt-6 [&_h3]:mb-2
+        [&_h2]:text-[24px] [&_h2]:md:text-[28px] [&_h2]:font-bold [&_h2]:leading-[32px] [&_h2]:md:leading-[36px] [&_h2]:mb-2
+        [&_h3]:text-[18px] [&_h3]:md:text-[20px] [&_h3]:font-bold [&_h3]:leading-7 [&_h3]:mt-10 [&_h3]:mb-3 [&_h3]:text-brand-primary
+        [&_h4]:text-[16px] [&_h4]:font-bold [&_h4]:leading-6 [&_h4]:mt-6 [&_h4]:mb-2
         [&_p]:text-[14px] [&_p]:md:text-[15px] [&_p]:leading-6 [&_p]:tracking-[0.2px] [&_p]:mb-3
         [&_strong]:font-semibold
         [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-3 [&_ul]:flex [&_ul]:flex-col [&_ul]:gap-2
@@ -15,7 +15,7 @@ export default function PrivacyContent() {
         [&_a]:text-brand-primary [&_a]:underline
       "
     >
-      <h1>Política de Privacidad para aplicaciones móviles</h1>
+      <h2>Política de Privacidad para aplicaciones móviles</h2>
       <p>
         La información que tienen la obligación de incluir las apps en su política de privacidad
         debe ser lo más clara y completa posible. Un ejemplo de política de privacidad utilizada
@@ -33,7 +33,7 @@ export default function PrivacyContent() {
         tratamiento de estos datos.
       </p>
 
-      <h2>¿Qué datos de carácter personal se pueden recopilar?</h2>
+      <h3>¿Qué datos de carácter personal se pueden recopilar?</h3>
       <ul>
         <li>
           Al crear un ID, solicitar un crédito comercial, comprar un producto, descargar una
@@ -49,7 +49,7 @@ export default function PrivacyContent() {
         </li>
       </ul>
 
-      <h3>Propósito del tratamiento de datos de carácter personal</h3>
+      <h4>Propósito del tratamiento de datos de carácter personal</h4>
       <p>Bip Bip podrá utilizar los datos personales recabados para:</p>
       <ul>
         <li>
@@ -74,7 +74,7 @@ export default function PrivacyContent() {
         </li>
       </ul>
 
-      <h2>Recopilación y tratamiento de datos de carácter no personal</h2>
+      <h3>Recopilación y tratamiento de datos de carácter no personal</h3>
       <p>
         Bip Bip también recopilará datos de un modo que, por sí mismos, no pueden ser asociados
         directamente a una persona determinada. Estos datos de carácter no personal se pueden
@@ -103,7 +103,7 @@ export default function PrivacyContent() {
         tratados como datos personales mientras sigan estando combinados.
       </p>
 
-      <h2>Divulgación a terceros</h2>
+      <h3>Divulgación a terceros</h3>
       <p>
         Ocasionalmente Bip Bip puede facilitar determinados datos de carácter personal a socios
         estratégicos que trabajen con nosotros para proveer productos y servicios o nos ayudan en
@@ -111,7 +111,7 @@ export default function PrivacyContent() {
         propios fines de marketing.
       </p>
 
-      <h2>Proveedores de servicios</h2>
+      <h3>Proveedores de servicios</h3>
       <p>
         Bip Bip compartirá datos de carácter personal con empresas que se ocupan, entre otras
         actividades, de prestar servicios de tratamiento de datos, conceder créditos, tramitar
@@ -120,7 +120,7 @@ export default function PrivacyContent() {
         investigaciones sobre clientes o su grado de satisfacción.
       </p>
 
-      <h2>Otros terceros</h2>
+      <h3>Otros terceros</h3>
       <p>
         Es posible que divulgue datos de carácter personal por mandato legal, en el marco de un
         proceso judicial o por petición de una autoridad pública, tanto dentro como fuera de su
@@ -129,7 +129,7 @@ export default function PrivacyContent() {
         otras razones relevantes de orden público.
       </p>
 
-      <h2>Protección de datos de carácter personal</h2>
+      <h3>Protección de datos de carácter personal</h3>
       <p>
         Bip Bip garantizará la protección de los datos personales mediante cifrado durante el
         tránsito y, los alojados en instalaciones, con medidas de seguridad físicas. Al usar
@@ -140,7 +140,7 @@ export default function PrivacyContent() {
         proporcione en estos casos.
       </p>
 
-      <h2>Integridad y conservación de datos de carácter personal</h2>
+      <h3>Integridad y conservación de datos de carácter personal</h3>
       <p>
         Bip Bip garantizará la exactitud y la calidad de los datos personales, se conservarán
         durante el tiempo necesario para cumplir los fines para los que fueron recabados, salvo
@@ -156,7 +156,7 @@ export default function PrivacyContent() {
         exija derecho de acceso.
       </p>
 
-      <h2>Niños y educación</h2>
+      <h3>Niños y educación</h3>
       <p>
         Bip Bip es consciente de la necesidad de establecer precauciones adicionales para
         preservar la privacidad y la seguridad de los menores que utilizan las aplicaciones y
@@ -166,7 +166,7 @@ export default function PrivacyContent() {
         antes posible.
       </p>
 
-      <h2>Servicios de localización</h2>
+      <h3>Servicios de localización</h3>
       <p>
         Para prestar servicios de localización Bip Bip podrá reunir, utilizar y compartir datos
         exactos sobre ubicaciones, incluyendo la situación geográfica en tiempo real de su
@@ -176,7 +176,7 @@ export default function PrivacyContent() {
         servicios de localización.
       </p>
 
-      <h2>Páginas web y servicios de terceros</h2>
+      <h3>Páginas web y servicios de terceros</h3>
       <p>
         Las aplicaciones pueden contener enlaces a páginas web, productos y servicios de terceros.
         También pueden utilizar u ofrecer productos o servicios de terceros. La recogida de datos
@@ -185,7 +185,7 @@ export default function PrivacyContent() {
         las políticas de privacidad de esos terceros.
       </p>
 
-      <h2>Solicitud Eliminar Cuenta</h2>
+      <h3>Solicitud Eliminar Cuenta</h3>
       <p>
         Para Bip Bip los datos de nuestros clientes son muy valiosos y cuidamos de la protección
         de los mismos. Si por alguna razón personal es requerido borrar la información de una

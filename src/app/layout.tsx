@@ -10,8 +10,14 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://bipbip.hn";
+
 export const metadata: Metadata = {
-  title: "BipBip — Tu comida favorita, más cerca que nunca",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "BipBip — Tu comida favorita, más cerca que nunca",
+    template: "%s | BipBip",
+  },
   description:
     "Pedí tu comida favorita en Honduras: rapidez, restaurantes top y recompensas en cada compra. Descargá la app BipBip.",
   applicationName: "BipBip",
@@ -27,7 +33,6 @@ export const metadata: Metadata = {
     title: "BipBip",
     description: "Tu comida favorita, más cerca que nunca.",
   },
-  // metadataBase: new URL('https://bipbip.example'), // TODO(landing-v1): set when production deploy URL is confirmed
 };
 
 export default function RootLayout({

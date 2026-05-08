@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
 import SocialIconLink from "@/components/ui/social-icon-link";
@@ -9,8 +10,8 @@ const linkColumns = [
   {
     title: "Nosotros",
     links: [
-      { href: "#rewards", label: "Loyalty Program" },
-      { href: "#help", label: "Contáctanos" },
+      { href: "/#rewards", label: "Programa de Lealtad" },
+      { href: "/#help", label: "Contáctanos" },
       { href: "/drivers", label: "Repartidores" },
       { href: "/restaurants", label: "Restaurantes" },
     ],
@@ -39,6 +40,9 @@ const socials = [
   { src: "/illustration/in.svg", href: "https://linkedin.com/", label: "LinkedIn" },
 ] as const;
 
+const linkClass =
+  "text-b3 text-brand-black hover:text-brand-primary focus-visible:text-brand-primary transition-colors";
+
 export default function Footer() {
   return (
     <footer id="site-footer" className="bg-white text-brand-black">
@@ -55,14 +59,15 @@ export default function Footer() {
             src="/illustration/bgfotter.svg"
             alt=""
             fill
+            sizes="100vw"
             className="object-cover object-bottom"
           />
         </motion.div>
 
         <div className="relative mx-auto w-11/12 max-w-[1280px] pt-12 md:pt-16 pb-48 md:pb-56">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 lg:gap-12 items-start">
             <motion.div
-              className="col-span-2 md:col-span-1"
+              className="sm:col-span-2 md:col-span-1"
               initial={{ opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -77,39 +82,39 @@ export default function Footer() {
               />
             </motion.div>
 
-            {linkColumns.map((col, index) => (
-              <motion.nav
-                key={col.title}
-                aria-labelledby={`footer-${col.title.replace(/\s+/g, "-")}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.1 + index * 0.1,
-                  ease: "easeOut",
-                }}
-              >
-                <h3
-                  id={`footer-${col.title.replace(/\s+/g, "-")}`}
-                  className="text-[18px] leading-7 font-bold font-sans text-brand-black mb-4"
+            {linkColumns.map((col, index) => {
+              const headingId = `footer-${col.title.replace(/\s+/g, "-")}`;
+              return (
+                <motion.nav
+                  key={col.title}
+                  aria-labelledby={headingId}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.1 + index * 0.1,
+                    ease: "easeOut",
+                  }}
                 >
-                  {col.title}
-                </h3>
-                <ul className="flex flex-col gap-3">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-[14px] leading-5 tracking-[0.2px] text-brand-black hover:text-brand-primary focus-visible:text-brand-primary transition-colors"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </motion.nav>
-            ))}
+                  <h3
+                    id={headingId}
+                    className="text-[18px] leading-7 font-bold font-sans text-brand-black mb-4"
+                  >
+                    {col.title}
+                  </h3>
+                  <ul className="flex flex-col gap-3">
+                    {col.links.map((link) => (
+                      <li key={link.label}>
+                        <Link href={link.href} className={linkClass}>
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.nav>
+              );
+            })}
           </div>
 
           <div className="relative mt-12 md:mt-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -172,7 +177,7 @@ export default function Footer() {
 
       <div className="bg-brand-black text-white">
         <div className="mx-auto flex w-11/12 max-w-[1280px] flex-col-reverse items-center gap-3 py-4 md:flex-row md:justify-between">
-          <p className="text-[12px] leading-5 tracking-[0.2px]">
+          <p className="text-caption">
             © {new Date().getFullYear()} Derechos Reservados Grupo Comidas
           </p>
           <div className="flex items-center gap-2">

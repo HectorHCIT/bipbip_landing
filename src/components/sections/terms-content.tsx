@@ -3,9 +3,9 @@ export default function TermsContent() {
     <article
       className="
         mx-auto w-11/12 max-w-[1280px] py-16 md:py-20 text-brand-black
-        [&_h1]:text-[24px] [&_h1]:md:text-[28px] [&_h1]:font-bold [&_h1]:leading-[32px] [&_h1]:md:leading-[36px] [&_h1]:mb-2
-        [&_h2]:text-[18px] [&_h2]:md:text-[20px] [&_h2]:font-bold [&_h2]:leading-7 [&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:text-brand-primary
-        [&_h3]:text-[16px] [&_h3]:font-bold [&_h3]:leading-6 [&_h3]:mt-6 [&_h3]:mb-2
+        [&_h2]:text-[24px] [&_h2]:md:text-[28px] [&_h2]:font-bold [&_h2]:leading-[32px] [&_h2]:md:leading-[36px] [&_h2]:mb-2
+        [&_h3]:text-[18px] [&_h3]:md:text-[20px] [&_h3]:font-bold [&_h3]:leading-7 [&_h3]:mt-10 [&_h3]:mb-3 [&_h3]:text-brand-primary
+        [&_h4]:text-[16px] [&_h4]:font-bold [&_h4]:leading-6 [&_h4]:mt-6 [&_h4]:mb-2
         [&_p]:text-[14px] [&_p]:md:text-[15px] [&_p]:leading-6 [&_p]:tracking-[0.2px] [&_p]:mb-3
         [&_strong]:font-semibold
         [&_dl]:flex [&_dl]:flex-col [&_dl]:gap-2 [&_dl]:my-4
@@ -21,7 +21,7 @@ export default function TermsContent() {
         [&_td]:p-3 [&_td]:align-top [&_td]:border [&_td]:border-grey-200 [&_td]:leading-6 [&_td]:tracking-[0.2px]
       "
     >
-      <h1>TÉRMINOS Y CONDICIONES GENERALES</h1>
+      <h2>TÉRMINOS Y CONDICIONES GENERALES</h2>
       <p>
         Los presentes términos y condiciones (en adelante, los{" "}
         <strong>“Términos y Condiciones”</strong>) de BIP SERVICE S. DE R.L. DE C.V. (en adelante,{" "}
@@ -33,7 +33,7 @@ export default function TermsContent() {
         cualquier comunicación anterior, verbal o escrita, entre las mismas.
       </p>
 
-      <h2>PRIMERO: DEFINICIONES</h2>
+      <h3>PRIMERO: DEFINICIONES</h3>
       <dl>
         <div>
           <dt>Acuerdo:</dt>
@@ -171,9 +171,9 @@ export default function TermsContent() {
         </div>
       </dl>
 
-      <h2>SEGUNDO: SERVICIOS</h2>
+      <h3>SEGUNDO: SERVICIOS</h3>
 
-      <h3>2.1. Servicios ofrecidos por BIP BIP</h3>
+      <h4>2.1. Servicios ofrecidos por BIP BIP</h4>
       <p>
         BIP BIP pone a disposición de sus clientes los servicios que se especifican a continuación,
         sin perjuicio de otros Servicios Complementarios que pudieran prestarse oportunamente.
@@ -185,7 +185,7 @@ export default function TermsContent() {
         específica en los términos de los Servicios Complementarios.
       </p>
 
-      <h3>2.1.1. Servicio de Marketplace</h3>
+      <h4>2.1.1. Servicio de Marketplace</h4>
       <p>
         BIP BIP pone a disposición de sus clientes el Servicio de <strong>Marketplace</strong> a
         través de la <strong>Web</strong> y/o a través de la <strong>Aplicación Móvil</strong>,
@@ -213,7 +213,7 @@ export default function TermsContent() {
         ello pueda imputársele algún tipo de responsabilidad y/o incumplimiento a BIP BIP.
       </p>
 
-      <h3>2.1.2. Servicio de Marketplace con Logística</h3>
+      <h4>2.1.2. Servicio de Marketplace con Logística</h4>
       <p>
         En el caso de que el Cliente opte por contratar el Servicio de Marketplace con Logística
         provisto por BIP BIP, ésta se encargará de coordinar a través de sus plataformas
@@ -232,7 +232,7 @@ export default function TermsContent() {
         en Efectivo, a su entera discreción.
       </p>
 
-      <h3>2.1.3. Condiciones generales del Servicio de Marketplace y/o Servicio de Marketplace con Logística</h3>
+      <h4>2.1.3. Condiciones generales del Servicio de Marketplace y/o Servicio de Marketplace con Logística</h4>
       <p>Es obligación del Cliente:</p>
       <ol>
         <li>
@@ -320,7 +320,7 @@ export default function TermsContent() {
         reclamo (ej: Organismos de Defensa del Consumidor) y corresponda un resarcimiento.
       </p>
 
-      <h3>2.1.4. Entrega e instalación de Material Trade</h3>
+      <h4>2.1.4. Entrega e instalación de Material Trade</h4>
       <p>
         El Cliente autoriza la eventual colocación de Material Trade que será asignado de acuerdo a
         disponibilidad y criterio de BIP BIP. BIP BIP, o quien éste designe, y el Cliente, de común
@@ -331,7 +331,7 @@ export default function TermsContent() {
         oportunamente el modo de devolución.
       </p>
 
-      <h3>2.1.5. Servicio de PickUp</h3>
+      <h4>2.1.5. Servicio de PickUp</h4>
       <p>
         En caso de que la opción de Pick-up se encuentre disponible para el Usuario, el Cliente
         pondrá a disposición de éste los productos del pedido para que sean recogidos al finalizar
@@ -342,7 +342,7 @@ export default function TermsContent() {
         modalidad de recogida.
       </p>
 
-      <h3>2.1.6. Servicios de fidelización y/o beneficios a Usuarios y de mejora de posicionamiento dentro del Portal y otros Servicios Complementarios</h3>
+      <h4>2.1.6. Servicios de fidelización y/o beneficios a Usuarios y de mejora de posicionamiento dentro del Portal y otros Servicios Complementarios</h4>
       <p>
         BIP BIP podrá ofrecer al Cliente distintas acciones comerciales y/o programas de
         fidelización definidos, o que a futuro defina, con el fin de incrementar el volumen de
@@ -364,7 +364,7 @@ export default function TermsContent() {
         desee realizar sobre los productos que comercializa a través del Portal.
       </p>
 
-      <h3>2.1.7. Acceso al Partner Portal</h3>
+      <h4>2.1.7. Acceso al Partner Portal</h4>
       <p>
         Junto con el alta de los Servicios Contratados, el Cliente recibirá acceso al Partner
         Portal. En el mismo, podrá autogestionar funcionalidades tales como:
@@ -388,7 +388,7 @@ export default function TermsContent() {
         responsabilidad frente a cualquier mal uso que se le dé al mismo.
       </p>
 
-      <h3>2.1.8. Servicio de Pago Online y Cobro de Pedidos en Efectivo</h3>
+      <h4>2.1.8. Servicio de Pago Online y Cobro de Pedidos en Efectivo</h4>
       <p>
         Con la contratación del Servicio de Marketplace y/o Servicio de Marketplace con Logística,
         el Cliente se adhiere al <strong>Servicio de Pago Online</strong>.
@@ -421,14 +421,14 @@ export default function TermsContent() {
         demora o atraso en los procesos requeridos para dichas transferencias.
       </p>
 
-      <h3>2.2. Servicios Contratados</h3>
+      <h4>2.2. Servicios Contratados</h4>
       <p>
         Al momento de la contratación del servicio, se detallarán en las Condiciones Particulares
         los servicios contratados por el Cliente aplicables a los Servicios Contratados.
       </p>
 
-      <h2>TERCERO: PRECIO</h2>
-      <h3>3.1. Precio de los Servicios Contratados</h3>
+      <h3>TERCERO: PRECIO</h3>
+      <h4>3.1. Precio de los Servicios Contratados</h4>
       <p>
         Como contraprestación por los Servicios Contratados, el Cliente se obliga a abonar a BIP BIP
         los precios más los impuestos correspondientes, indicados en la Condiciones Particulares
@@ -454,8 +454,8 @@ export default function TermsContent() {
         entrar al app”.
       </p>
 
-      <h2>CUARTO: FACTURACIÓN. FORMA DE PAGO. LIQUIDACIÓN</h2>
-      <h3>4.1. Facturación y Forma de pago de BIP BIP</h3>
+      <h3>CUARTO: FACTURACIÓN. FORMA DE PAGO. LIQUIDACIÓN</h3>
+      <h4>4.1. Facturación y Forma de pago de BIP BIP</h4>
       <p>
         BIP BIP emitirá al Cliente una factura semanal por los Servicios Contratados, salvo que las
         Partes acuerden expresamente lo contrario.
@@ -527,7 +527,7 @@ export default function TermsContent() {
         pagos.
       </p>
 
-      <h2>QUINTO: CONFIDENCIALIDAD Y TRATAMIENTO DE DATOS</h2>
+      <h3>QUINTO: CONFIDENCIALIDAD Y TRATAMIENTO DE DATOS</h3>
       <p>
         Las Partes se obligan a no revelar a terceros ninguna información comercial o de cualquier
         otro tipo acerca de BIP BIP o del Cliente, a la que tengan acceso en virtud de la prestación
@@ -571,7 +571,7 @@ export default function TermsContent() {
         consentimiento expreso, libre y voluntario.
       </p>
 
-      <h2>SEXTO: PROPIEDAD INTELECTUAL</h2>
+      <h3>SEXTO: PROPIEDAD INTELECTUAL</h3>
       <p>El Cliente declara y garantiza que:</p>
       <ul>
         <li>
@@ -688,7 +688,7 @@ export default function TermsContent() {
         remoción del Portal.
       </p>
 
-      <h2>SÉPTIMO: ANTICORRUPCIÓN Y ANTISOBORNO</h2>
+      <h3>SÉPTIMO: ANTICORRUPCIÓN Y ANTISOBORNO</h3>
       <p>
         Ni BIP BIP, ni ninguna empresa subsidiaria o afiliada de BIP BIP, ni ninguno de sus
         respectivos directores, funcionarios, agentes, accionistas o empleados que actúen en nombre
@@ -718,7 +718,7 @@ export default function TermsContent() {
         violación de las Normas de Anticorrupción y/o Antisoborno aplicables.
       </p>
 
-      <h2>OCTAVO: CUMPLIMIENTO CON SANCIONES INTERNACIONALES</h2>
+      <h3>OCTAVO: CUMPLIMIENTO CON SANCIONES INTERNACIONALES</h3>
       <p>(1) El Cliente confirma que:</p>
       <p>
         (a) no está sujeto a ninguna medida de sanciones ni es propiedad o está controlado por una
@@ -773,8 +773,8 @@ export default function TermsContent() {
         párrafo (1) anterior.
       </p>
 
-      <h2>NOVENO: RESPONSABILIDAD E INDEMNIDAD</h2>
-      <h3>9.1. Responsabilidad</h3>
+      <h3>NOVENO: RESPONSABILIDAD E INDEMNIDAD</h3>
+      <h4>9.1. Responsabilidad</h4>
       <p>
         BIP BIP en ningún caso asume responsabilidad alguna, tanto frente a los Usuarios como frente
         al Cliente o cualquier tercero, incluyendo entidades u organismos públicos, y en
@@ -827,7 +827,7 @@ export default function TermsContent() {
         <li>supuestos de fuerza mayor o caso fortuito.</li>
       </ul>
 
-      <h3>9.2. Indemnidad</h3>
+      <h4>9.2. Indemnidad</h4>
       <p>
         El Cliente se compromete a indemnizar y mantener indemne a BIP BIP respecto de cualquier
         daño de índole civil, comercial, laboral, administrativa y/o penal y cualquier demanda,
@@ -855,7 +855,7 @@ export default function TermsContent() {
         que sea necesario.
       </p>
 
-      <h2>DÉCIMO: PLAZO</h2>
+      <h3>DÉCIMO: PLAZO</h3>
       <p>
         El plazo se regirá de acuerdo con lo establecido en las Condiciones Particulares para cada
         servicio contratado o ítem regulado en el mismo. En caso de que no se indique un plazo, se
@@ -865,8 +865,8 @@ export default function TermsContent() {
         Condiciones.
       </p>
 
-      <h2>DÉCIMO PRIMERO: INCUMPLIMIENTO Y TERMINACIÓN</h2>
-      <h3>11.1. Mora automática</h3>
+      <h3>DÉCIMO PRIMERO: INCUMPLIMIENTO Y TERMINACIÓN</h3>
+      <h4>11.1. Mora automática</h4>
       <p>
         La mora operará de forma automática y de pleno derecho, sin necesidad de protesto,
         interpelación ni gestión alguna, por el solo vencimiento de los plazos o por la realización
@@ -874,7 +874,7 @@ export default function TermsContent() {
         estipulado.
       </p>
 
-      <h3>11.2. Suspensión en la ejecución de los servicios</h3>
+      <h4>11.2. Suspensión en la ejecución de los servicios</h4>
       <p>
         En caso de incumplimiento por parte del Cliente a alguna de sus obligaciones (incluyendo sin
         limitación, el mantenimiento de saldos impagos, fraude, comportamientos inadecuados en el
@@ -884,7 +884,7 @@ export default function TermsContent() {
         Cliente.
       </p>
 
-      <h3>11.3. Terminación</h3>
+      <h4>11.3. Terminación</h4>
       <p>
         Asimismo, en caso de incumplimiento de una parte de cualquiera de las obligaciones asumidas
         en virtud del presente, la parte cumplidora podrá rescindir el Acuerdo, si subsistiera el
@@ -914,7 +914,7 @@ export default function TermsContent() {
         existan en virtud del presente.
       </p>
 
-      <h3>11.4. Terminación unilateral</h3>
+      <h4>11.4. Terminación unilateral</h4>
       <p>
         Cualquiera de las Partes podrá terminar unilateralmente el Acuerdo, en cualquier momento,
         comunicando su intención a la otra Parte con al menos 15 días naturales de antelación a la
@@ -924,7 +924,7 @@ export default function TermsContent() {
         totalidad.
       </p>
 
-      <h2>DÉCIMO SEGUNDO: NATURALEZA DE LA RELACIÓN</h2>
+      <h3>DÉCIMO SEGUNDO: NATURALEZA DE LA RELACIÓN</h3>
       <p>
         La relación emergente de este Acuerdo es estrictamente comercial y las Partes reconocen
         expresamente que la vinculación entre éstas es independiente, y que no existe ningún tipo
@@ -944,7 +944,7 @@ export default function TermsContent() {
         normas de tránsito y cualquier otra norma que corresponda).
       </p>
 
-      <h2>DÉCIMO TERCERO: MODIFICACIONES AL ACUERDO</h2>
+      <h3>DÉCIMO TERCERO: MODIFICACIONES AL ACUERDO</h3>
       <p>
         El Acuerdo podrá ser modificado por BIP BIP. En cualquier caso, BIP BIP notificará al
         Cliente cada cambio que se realice 15 días naturales previos a su entrada en vigor y el
@@ -961,14 +961,14 @@ export default function TermsContent() {
         modificaciones deberán acordarse por escrito.
       </p>
 
-      <h2>DÉCIMO CUARTO: INACCIÓN</h2>
+      <h3>DÉCIMO CUARTO: INACCIÓN</h3>
       <p>
         La falta de ejercicio en alguna oportunidad de cualquiera de los derechos emergentes de los
         presentes Términos y Condiciones o al Acuerdo no será interpretada como una renuncia a
         ejercerlos, ni precluirá la posibilidad de ejercerlos en cualquier oportunidad ulterior.
       </p>
 
-      <h2>DÉCIMO QUINTO: CESIÓN DE CRÉDITOS Y CESIÓN DE ACUERDO</h2>
+      <h3>DÉCIMO QUINTO: CESIÓN DE CRÉDITOS Y CESIÓN DE ACUERDO</h3>
       <p>
         BIP BIP podrá ceder los créditos a cobrar del Cliente, sin perjuicio de los derechos de éste
         de oponer las excepciones que correspondan.
@@ -980,7 +980,7 @@ export default function TermsContent() {
         cesión perfeccionada con dicha notificación.
       </p>
 
-      <h2>DÉCIMO SEXTO: NULIDAD PARCIAL</h2>
+      <h3>DÉCIMO SEXTO: NULIDAD PARCIAL</h3>
       <p>
         Si cualquier disposición del Acuerdo es calificada como inválida, ilegal, inaplicable o
         inejecutable por un tribunal competente, las demás disposiciones del Acuerdo permanecerán
@@ -988,14 +988,14 @@ export default function TermsContent() {
         sean aplicables.
       </p>
 
-      <h2>DÉCIMO SÉPTIMO: IMPUESTOS</h2>
+      <h3>DÉCIMO SÉPTIMO: IMPUESTOS</h3>
       <p>
         Cada parte tributará y responderá en relación con los impuestos que le correspondan de
         conformidad a los derechos y obligaciones que respectivamente quedan establecidos en la
         presente.
       </p>
 
-      <h2>DÉCIMO OCTAVO: LEY APLICABLE Y JURISDICCIÓN</h2>
+      <h3>DÉCIMO OCTAVO: LEY APLICABLE Y JURISDICCIÓN</h3>
       <p>
         Este Acuerdo será regido e interpretado de acuerdo a las leyes de la República de Honduras.
         Cualquier controversia o conflicto entre las Partes relacionado directa o indirectamente con
@@ -1014,7 +1014,7 @@ export default function TermsContent() {
         cláusula sobrevivirán a la resolución o terminación del presente Acuerdo.
       </p>
 
-      <h2>DÉCIMO NOVENO: DOMICILIOS Y NOTIFICACIONES</h2>
+      <h3>DÉCIMO NOVENO: DOMICILIOS Y NOTIFICACIONES</h3>
       <p>
         A todos los efectos legales y procesales a que diera lugar este Acuerdo, las Partes
         constituyen domicilio en el indicado en las Condiciones Particulares.
@@ -1038,7 +1038,7 @@ export default function TermsContent() {
         fecha en que desea hacer efectivo el cambio de domicilio.
       </p>
 
-      <h2>ANEXO I — POLÍTICA DE REINTEGROS Y CARGOS</h2>
+      <h3>ANEXO I — POLÍTICA DE REINTEGROS Y CARGOS</h3>
       <p>
         La presente política (en adelante, la “Política”) tiene por objeto definir las condiciones
         bajo las cuales BIP BIP gestionará el proceso de reintegros y cargos por cancelación de
@@ -1051,7 +1051,7 @@ export default function TermsContent() {
         de entrada en vigencia de la misma.
       </p>
 
-      <h3>1. Definiciones</h3>
+      <h4>1. Definiciones</h4>
       <p>A los fines de esta Política, se definen los siguientes conceptos:</p>
       <dl>
         <div>
@@ -1101,7 +1101,7 @@ export default function TermsContent() {
         Cliente.
       </p>
 
-      <h3>2. Responsabilidades</h3>
+      <h4>2. Responsabilidades</h4>
       <p>BIP BIP será responsable por:</p>
       <ol>
         <li>
@@ -1114,7 +1114,7 @@ export default function TermsContent() {
         </li>
       </ol>
 
-      <h3>3. Reintegros, cargos y devoluciones</h3>
+      <h4>3. Reintegros, cargos y devoluciones</h4>
       <p>
         <strong>Alcance de la Política:</strong> aplicará únicamente cuando se cumplan de manera
         conjunta las siguientes condiciones:

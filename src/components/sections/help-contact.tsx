@@ -33,7 +33,7 @@ function validate(values: FormState): FormErrors {
 }
 
 const inputBase =
-  "w-full h-12 rounded-lg border border-grey-200 bg-white px-4 text-[14px] leading-5 tracking-[0.2px] text-brand-black placeholder:text-grey-500 shadow-[0_5px_12px_rgba(0,0,0,0.05)] focus-visible:outline-2 focus-visible:outline-brand-primary";
+  "w-full h-12 rounded-lg border border-grey-200 bg-white px-4 text-b3 text-brand-black placeholder:text-grey-500 shadow-card focus-visible:outline-2 focus-visible:outline-brand-primary";
 
 const labelBase =
   "text-[12px] leading-4 tracking-[0.2px] text-grey-900 font-sans";
@@ -62,7 +62,7 @@ export default function HelpContact() {
     if (Object.keys(validationErrors).length > 0) return;
 
     setStatus("submitting");
-    console.log("[help-contact] submit", values);
+    // TODO(forms): replace simulated delay with real submit (server action / API).
     await new Promise<void>((r) => setTimeout(r, 800));
     setStatus("success");
   }
@@ -81,7 +81,7 @@ export default function HelpContact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.55, ease: "easeOut" }}
-            className="text-[36px] leading-[44px] md:text-[48px] md:leading-[56px] font-bold font-sans text-brand-primary"
+            className="text-[36px] leading-[44px] md:text-h2 font-bold font-sans text-brand-primary"
           >
             ¿Necesitas Ayuda?
           </motion.h2>
@@ -101,7 +101,7 @@ export default function HelpContact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="relative mt-14 mx-auto max-w-[954px] rounded-3xl bg-grey-200 p-6 md:p-10 shadow-[0_5px_12px_rgba(0,0,0,0.05)]"
+          className="relative mt-14 mx-auto max-w-[954px] rounded-3xl bg-grey-200 p-6 md:p-10 shadow-card"
         >
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-12">
             <motion.div
@@ -131,8 +131,8 @@ export default function HelpContact() {
                 transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
                 className="w-full lg:w-[465px] rounded-2xl bg-white p-6 text-brand-black"
               >
-                <p className="text-[20px] leading-7 font-bold font-sans">¡Mensaje enviado!</p>
-                <p className="mt-2 text-[16px] leading-6 tracking-[0.2px]">
+                <p className="text-h5 font-sans">¡Mensaje enviado!</p>
+                <p className="mt-2 text-b2">
                   Gracias por escribirnos. Te respondemos pronto.
                 </p>
               </motion.div>
@@ -140,7 +140,6 @@ export default function HelpContact() {
               <motion.form
                 onSubmit={handleSubmit}
                 noValidate
-                aria-live="polite"
                 initial={{ opacity: 0, x: 48 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -256,7 +255,7 @@ export default function HelpContact() {
                     aria-describedby={errors.message ? `${messageId}-error` : undefined}
                     value={values.message}
                     onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
-                    className="w-full resize-none rounded-lg border border-grey-200 bg-white px-4 py-3 text-[14px] leading-5 tracking-[0.2px] text-brand-black placeholder:text-grey-500 shadow-[0_5px_12px_rgba(0,0,0,0.05)] focus-visible:outline-2 focus-visible:outline-brand-primary"
+                    className="w-full resize-none rounded-lg border border-grey-200 bg-white px-4 py-3 text-b3 text-brand-black placeholder:text-grey-500 shadow-card focus-visible:outline-2 focus-visible:outline-brand-primary"
                   />
                   {errors.message && (
                     <span id={`${messageId}-error`} role="alert" className="text-[12px] text-error">
@@ -270,7 +269,7 @@ export default function HelpContact() {
                   variant="primary"
                   size="lg"
                   disabled={status === "submitting"}
-                  className="w-full text-white shadow-[0_5px_24px_rgba(0,0,0,0.05)]"
+                  className="w-full text-white shadow-cta"
                 >
                   {status === "submitting" ? "Enviando..." : "Enviar mensaje"}
                 </Button>

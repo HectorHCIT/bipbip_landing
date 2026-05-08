@@ -88,7 +88,7 @@ export default function Rewards() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.55, ease: "easeOut" }}
-            className="text-[36px] leading-[44px] md:text-[48px] md:leading-[56px] font-bold font-sans text-brand-primary"
+            className="text-[36px] leading-[44px] md:text-h2 font-bold font-sans text-brand-primary"
           >
             ¡Gana más con cada compra!
           </motion.h2>
@@ -97,7 +97,7 @@ export default function Rewards() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.55, delay: 0.12, ease: "easeOut" }}
-            className="text-[18px] leading-7 md:text-[20px] md:leading-7 font-bold font-sans text-brand-black"
+            className="text-[18px] leading-7 md:text-h5 font-bold font-sans text-brand-black"
           >
             Acumula puntos y desbloquea increíbles recompensas.
           </motion.p>
@@ -132,7 +132,7 @@ export default function Rewards() {
                 delay: index * 0.15,
                 ease: "easeOut",
               }}
-              className="relative flex flex-col items-center justify-center gap-8 rounded-2xl bg-white px-8 py-6 shadow-[0_5px_12px_rgba(0,0,0,0.05)]"
+              className="relative flex flex-col items-center justify-center gap-8 rounded-2xl bg-white px-8 py-6 shadow-card"
             >
               <div
                 className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center drop-shadow-[0_5px_10px_rgba(0,0,0,0.2)]"

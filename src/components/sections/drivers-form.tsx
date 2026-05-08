@@ -1,10 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { motion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 
 const inputClass =
-  "h-12 w-full rounded-lg border border-grey-200 bg-white px-4 py-2 text-[14px] leading-5 tracking-[0.2px] text-grey-700 placeholder:text-grey-500 shadow-[0_5px_12px_rgba(0,0,0,0.05)] focus:outline-none focus:border-brand-primary transition-colors";
+  "h-12 w-full rounded-lg border border-grey-200 bg-white px-4 py-2 text-b3 text-grey-700 placeholder:text-grey-500 shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary focus-visible:border-brand-primary transition-colors";
+
+const selectChevronUrl =
+  "url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22%231a1a1a%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m4%207%206%206%206-6%22/%3E%3C/svg%3E')";
+
+const selectStyle = {
+  backgroundImage: selectChevronUrl,
+  backgroundSize: "20px 20px",
+  backgroundPosition: "right 16px center",
+  backgroundRepeat: "no-repeat",
+} as const;
 
 const fieldRowVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -18,17 +29,26 @@ const fieldRowVariants: Variants = {
 function Field({
   label,
   required = false,
+  htmlFor,
   children,
 }: {
   label: string;
   required?: boolean;
+  htmlFor: string;
   children: ReactNode;
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <label className="text-[14px] leading-5 tracking-[0.2px] text-grey-900">
+      <label
+        htmlFor={htmlFor}
+        className="text-b3 text-grey-900"
+      >
         {label}
-        {required && <span className="text-error">*</span>}
+        {required && (
+          <span className="text-error" aria-hidden="true">
+            *
+          </span>
+        )}
       </label>
       {children}
     </div>
@@ -36,10 +56,29 @@ function Field({
 }
 
 function FileField({ label, required = false }: { label: string; required?: boolean }) {
+  const id = useId();
+  const labelId = `${id}-label`;
   return (
-    <Field label={label} required={required}>
-      <label className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-grey-500 bg-[#fafafa] px-4 py-6 cursor-pointer hover:border-brand-primary transition-colors">
-        <span className="flex size-11 items-center justify-center rounded-full bg-grey-200">
+    <div className="flex flex-col gap-1">
+      <span
+        id={labelId}
+        className="text-b3 text-grey-900"
+      >
+        {label}
+        {required && (
+          <span className="text-error" aria-hidden="true">
+            *
+          </span>
+        )}
+      </span>
+      <label
+        htmlFor={id}
+        className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-grey-500 bg-[#fafafa] px-4 py-6 cursor-pointer hover:border-brand-primary transition-colors focus-within:border-brand-primary"
+      >
+        <span
+          className="flex size-11 items-center justify-center rounded-full bg-grey-200"
+          aria-hidden="true"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -49,24 +88,37 @@ function FileField({ label, required = false }: { label: string; required?: bool
             strokeLinecap="round"
             strokeLinejoin="round"
             className="size-5 text-grey-700"
-            aria-hidden="true"
           >
             <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.93 8.8L9.41 17.32a2 2 0 0 1-2.83-2.83l7.07-7.07" />
           </svg>
         </span>
-        <span className="text-[14px] leading-5 tracking-[0.2px] text-grey-900">
+        <span className="text-b3 text-grey-900">
           Arrastra o selecciona un archivo
         </span>
-        <span className="text-[14px] leading-5 tracking-[0.2px] text-grey-500">
+        <span className="text-b3 text-grey-500">
           Max 10 mb.
         </span>
-        <input type="file" className="sr-only" />
       </label>
-    </Field>
+      <input
+        id={id}
+        type="file"
+        className="sr-only"
+        aria-labelledby={labelId}
+        required={required}
+      />
+    </div>
   );
 }
 
 export default function DriversForm() {
+  const firstNameId = useId();
+  const lastNameId = useId();
+  const documentIdId = useId();
+  const phoneId = useId();
+  const cityId = useId();
+  const vehicleId = useId();
+  const termsId = useId();
+
   return (
     <section
       id="drivers-form"
@@ -90,17 +142,18 @@ export default function DriversForm() {
           >
             <h2
               id="drivers-form-heading"
-              className="text-[32px] leading-[40px] md:text-[48px] md:leading-[56px] font-bold font-sans text-brand-primary"
+              className="text-[32px] leading-[40px] md:text-h2 font-bold font-sans text-brand-primary"
             >
               Aplica para formar parte de Bip Bip
             </h2>
             <p className="text-[18px] leading-7 tracking-[0.2px] text-brand-black max-w-[640px]">
-              Completa los campos para formar para empezar a generar con entregas de Bip Bip.
+              Completa los campos para empezar a generar ingresos con entregas de Bip Bip.
             </p>
           </motion.header>
 
           <motion.form
             className="flex flex-col gap-4"
+            // TODO(forms): connect to API/server action — currently swallows submit
             onSubmit={(event) => event.preventDefault()}
             noValidate
             initial="hidden"
@@ -117,24 +170,29 @@ export default function DriversForm() {
               variants={fieldRowVariants}
               className="grid grid-cols-1 md:grid-cols-3 gap-4"
             >
-              <Field label="Nombre" required>
+              <Field label="Nombre" required htmlFor={firstNameId}>
                 <input
+                  id={firstNameId}
                   type="text"
                   name="firstName"
                   placeholder="Ej. Luis Carlos"
+                  required
                   className={inputClass}
                 />
               </Field>
-              <Field label="Apellido" required>
+              <Field label="Apellido" required htmlFor={lastNameId}>
                 <input
+                  id={lastNameId}
                   type="text"
                   name="lastName"
                   placeholder="Ej. Fernández León"
+                  required
                   className={inputClass}
                 />
               </Field>
-              <Field label="Nº Documento Identidad">
+              <Field label="Nº Documento Identidad" htmlFor={documentIdId}>
                 <input
+                  id={documentIdId}
                   type="text"
                   name="documentId"
                   placeholder="Ej. 1234567898765"
@@ -147,19 +205,24 @@ export default function DriversForm() {
               variants={fieldRowVariants}
               className="grid grid-cols-1 md:grid-cols-3 gap-4"
             >
-              <Field label="Número de teléfono" required>
+              <Field label="Número de teléfono" required htmlFor={phoneId}>
                 <input
+                  id={phoneId}
                   type="tel"
                   name="phone"
                   placeholder="Ej. +50499123456"
+                  required
                   className={inputClass}
                 />
               </Field>
-              <Field label="Ciudad" required>
+              <Field label="Ciudad" required htmlFor={cityId}>
                 <select
+                  id={cityId}
                   name="city"
                   defaultValue=""
-                  className={`${inputClass} appearance-none bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22%231a1a1a%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m4%207%206%206%206-6%22/%3E%3C/svg%3E')] bg-[length:20px_20px] bg-[position:right_16px_center] bg-no-repeat pr-10`}
+                  required
+                  style={selectStyle}
+                  className={`${inputClass} appearance-none pr-10`}
                 >
                   <option value="" disabled>
                     Selecciona tu ciudad
@@ -170,11 +233,14 @@ export default function DriversForm() {
                   <option value="catacamas">Catacamas</option>
                 </select>
               </Field>
-              <Field label="Tipo de vehículo" required>
+              <Field label="Tipo de vehículo" required htmlFor={vehicleId}>
                 <select
+                  id={vehicleId}
                   name="vehicle"
                   defaultValue=""
-                  className={`${inputClass} appearance-none bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22%231a1a1a%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m4%207%206%206%206-6%22/%3E%3C/svg%3E')] bg-[length:20px_20px] bg-[position:right_16px_center] bg-no-repeat pr-10`}
+                  required
+                  style={selectStyle}
+                  className={`${inputClass} appearance-none pr-10`}
                 >
                   <option value="" disabled>
                     Selecciona tu vehículo
@@ -198,22 +264,30 @@ export default function DriversForm() {
 
             <motion.label
               variants={fieldRowVariants}
+              htmlFor={termsId}
               className="flex items-start gap-4 pb-2 pt-2 cursor-pointer"
             >
               <input
+                id={termsId}
                 type="checkbox"
-                defaultChecked
+                required
                 className="mt-0.5 size-6 shrink-0 cursor-pointer rounded accent-brand-primary"
               />
-              <span className="text-[14px] leading-5 tracking-[0.2px] text-brand-black">
+              <span className="text-b3 text-brand-black">
                 Acepto que he leído y estoy de acuerdo con las{" "}
-                <a href="/privacy" className="underline">
+                <Link
+                  href="/privacy"
+                  className="underline hover:text-brand-primary focus-visible:text-brand-primary transition-colors"
+                >
                   políticas de privacidad
-                </a>{" "}
+                </Link>{" "}
                 y los{" "}
-                <a href="/terms" className="underline">
+                <Link
+                  href="/terms"
+                  className="underline hover:text-brand-primary focus-visible:text-brand-primary transition-colors"
+                >
                   términos y condiciones.
-                </a>
+                </Link>
               </span>
             </motion.label>
 
@@ -222,7 +296,7 @@ export default function DriversForm() {
               variants={fieldRowVariants}
               whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.98 }}
-              className="h-12 w-full rounded-lg bg-brand-primary text-button text-white shadow-[0_5px_24px_rgba(0,0,0,0.05)] transition-opacity hover:opacity-95"
+              className="h-12 w-full rounded-lg bg-brand-primary text-button text-white shadow-cta transition-opacity hover:opacity-95"
             >
               Aplicar ahora
             </motion.button>

@@ -1,13 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { motion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 
 const inputClass =
-  "h-12 w-full rounded-lg border border-grey-200 bg-white px-4 py-2 text-[14px] leading-5 tracking-[0.2px] text-grey-700 placeholder:text-grey-500 shadow-[0_5px_12px_rgba(0,0,0,0.05)] focus:outline-none focus:border-brand-primary transition-colors";
+  "h-12 w-full rounded-lg border border-grey-200 bg-white px-4 py-2 text-b3 text-grey-700 placeholder:text-grey-500 shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary focus-visible:border-brand-primary transition-colors";
 
 const selectChevronUrl =
   "url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20stroke%3D%22%231a1a1a%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m4%207%206%206%206-6%22/%3E%3C/svg%3E')";
+
+const selectStyle = {
+  backgroundImage: selectChevronUrl,
+  backgroundSize: "20px 20px",
+  backgroundPosition: "right 16px center",
+  backgroundRepeat: "no-repeat",
+} as const;
 
 const fieldRowVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -21,17 +29,26 @@ const fieldRowVariants: Variants = {
 function Field({
   label,
   required = false,
+  htmlFor,
   children,
 }: {
   label: string;
   required?: boolean;
+  htmlFor: string;
   children: ReactNode;
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <label className="text-[14px] leading-5 tracking-[0.2px] text-grey-900">
+      <label
+        htmlFor={htmlFor}
+        className="text-b3 text-grey-900"
+      >
         {label}
-        {required && <span className="text-error">*</span>}
+        {required && (
+          <span className="text-error" aria-hidden="true">
+            *
+          </span>
+        )}
       </label>
       {children}
     </div>
@@ -39,6 +56,16 @@ function Field({
 }
 
 export default function RestaurantsForm() {
+  const firstNameId = useId();
+  const lastNameId = useId();
+  const emailId = useId();
+  const phoneId = useId();
+  const addressId = useId();
+  const cityId = useId();
+  const businessTypeId = useId();
+  const brandNameId = useId();
+  const termsId = useId();
+
   return (
     <section
       id="restaurants-form"
@@ -62,7 +89,7 @@ export default function RestaurantsForm() {
           >
             <h2
               id="restaurants-form-heading"
-              className="text-[32px] leading-[40px] md:text-[48px] md:leading-[56px] font-bold font-sans text-brand-primary"
+              className="text-[32px] leading-[40px] md:text-h2 font-bold font-sans text-brand-primary"
             >
               Aplica para vender con BipBip
             </h2>
@@ -73,6 +100,7 @@ export default function RestaurantsForm() {
 
           <motion.form
             className="flex flex-col gap-4"
+            // TODO(forms): connect to API/server action — currently swallows submit
             onSubmit={(event) => event.preventDefault()}
             noValidate
             initial="hidden"
@@ -89,24 +117,29 @@ export default function RestaurantsForm() {
               variants={fieldRowVariants}
               className="grid grid-cols-1 md:grid-cols-3 gap-4"
             >
-              <Field label="Nombre" required>
+              <Field label="Nombre" required htmlFor={firstNameId}>
                 <input
+                  id={firstNameId}
                   type="text"
                   name="firstName"
                   placeholder="Ej. Luis Carlos"
+                  required
                   className={inputClass}
                 />
               </Field>
-              <Field label="Apellido" required>
+              <Field label="Apellido" required htmlFor={lastNameId}>
                 <input
+                  id={lastNameId}
                   type="text"
                   name="lastName"
                   placeholder="Ej. Fernández León"
+                  required
                   className={inputClass}
                 />
               </Field>
-              <Field label="Correo electrónico">
+              <Field label="Correo electrónico" htmlFor={emailId}>
                 <input
+                  id={emailId}
                   type="email"
                   name="email"
                   placeholder="Ej. prueba@email.com"
@@ -119,32 +152,31 @@ export default function RestaurantsForm() {
               variants={fieldRowVariants}
               className="grid grid-cols-1 md:grid-cols-3 gap-4"
             >
-              <Field label="Número de teléfono" required>
+              <Field label="Número de teléfono" required htmlFor={phoneId}>
                 <input
+                  id={phoneId}
                   type="tel"
                   name="phone"
                   placeholder="Ej. +50499123456"
+                  required
                   className={inputClass}
                 />
               </Field>
-              <Field label="Dirección del negocio">
+              <Field label="Dirección del negocio" htmlFor={addressId}>
                 <input
+                  id={addressId}
                   type="text"
                   name="address"
                   placeholder="Ej. Av circunvalación..."
                   className={inputClass}
                 />
               </Field>
-              <Field label="Ciudad">
+              <Field label="Ciudad" htmlFor={cityId}>
                 <select
+                  id={cityId}
                   name="city"
                   defaultValue=""
-                  style={{
-                    backgroundImage: selectChevronUrl,
-                    backgroundSize: "20px 20px",
-                    backgroundPosition: "right 16px center",
-                    backgroundRepeat: "no-repeat",
-                  }}
+                  style={selectStyle}
                   className={`${inputClass} appearance-none pr-10`}
                 >
                   <option value="" disabled>
@@ -162,16 +194,12 @@ export default function RestaurantsForm() {
               variants={fieldRowVariants}
               className="grid grid-cols-1 md:grid-cols-2 gap-4"
             >
-              <Field label="Tipo de negocio">
+              <Field label="Tipo de negocio" htmlFor={businessTypeId}>
                 <select
+                  id={businessTypeId}
                   name="businessType"
                   defaultValue=""
-                  style={{
-                    backgroundImage: selectChevronUrl,
-                    backgroundSize: "20px 20px",
-                    backgroundPosition: "right 16px center",
-                    backgroundRepeat: "no-repeat",
-                  }}
+                  style={selectStyle}
                   className={`${inputClass} appearance-none pr-10`}
                 >
                   <option value="" disabled>
@@ -184,11 +212,13 @@ export default function RestaurantsForm() {
                   <option value="other">Otro</option>
                 </select>
               </Field>
-              <Field label="Nombre de la marca" required>
+              <Field label="Nombre de la marca" required htmlFor={brandNameId}>
                 <input
+                  id={brandNameId}
                   type="text"
                   name="brandName"
                   placeholder="Ej. La Pizzería del Centro"
+                  required
                   className={inputClass}
                 />
               </Field>
@@ -196,22 +226,30 @@ export default function RestaurantsForm() {
 
             <motion.label
               variants={fieldRowVariants}
+              htmlFor={termsId}
               className="flex items-start gap-4 pb-2 pt-2 cursor-pointer"
             >
               <input
+                id={termsId}
                 type="checkbox"
-                defaultChecked
+                required
                 className="mt-0.5 size-6 shrink-0 cursor-pointer rounded accent-brand-primary"
               />
-              <span className="text-[14px] leading-5 tracking-[0.2px] text-brand-black">
+              <span className="text-b3 text-brand-black">
                 Acepto que he leído y estoy de acuerdo con las{" "}
-                <a href="/privacy" className="underline">
+                <Link
+                  href="/privacy"
+                  className="underline hover:text-brand-primary focus-visible:text-brand-primary transition-colors"
+                >
                   políticas de privacidad
-                </a>{" "}
+                </Link>{" "}
                 y los{" "}
-                <a href="/terms" className="underline">
+                <Link
+                  href="/terms"
+                  className="underline hover:text-brand-primary focus-visible:text-brand-primary transition-colors"
+                >
                   términos y condiciones.
-                </a>
+                </Link>
               </span>
             </motion.label>
 
@@ -220,7 +258,7 @@ export default function RestaurantsForm() {
               variants={fieldRowVariants}
               whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
               whileTap={{ scale: 0.98 }}
-              className="h-12 w-full rounded-lg bg-brand-primary text-button text-white shadow-[0_5px_24px_rgba(0,0,0,0.05)] transition-opacity hover:opacity-95"
+              className="h-12 w-full rounded-lg bg-brand-primary text-button text-white shadow-cta transition-opacity hover:opacity-95"
             >
               Aplicar ahora
             </motion.button>

@@ -66,6 +66,12 @@
   --text-button:                1rem;           /* 16px */
   --text-button--line-height:   1.5rem;
   --text-button--font-weight:   700;
+
+  /* ── Shadows ────────────────────────────────────────────────────────────── */
+  --shadow-card:                0 5px 12px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover:          0 15px 30px rgba(0, 0, 0, 0.08);
+  --shadow-cta:                 0 5px 24px rgba(0, 0, 0, 0.05);
+  --shadow-hero-card:           0 10px 40px rgba(0, 0, 0, 0.10);
 }
 
 /* ── Base ───────────────────────────────────────────────────────────────── */
