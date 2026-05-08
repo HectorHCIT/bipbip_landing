@@ -11,21 +11,22 @@ const linkColumns = [
     links: [
       { href: "#rewards", label: "Loyalty Program" },
       { href: "#help", label: "Contáctanos" },
-      { href: "#", label: "Repartidores" },
+      { href: "/drivers", label: "Repartidores" },
+      { href: "/restaurants", label: "Restaurantes" },
     ],
   },
   {
     title: "App Cliente",
     links: [
-      { href: "#", label: "Políticas de Privacidad" },
-      { href: "#", label: "Términos & Condiciones" },
+      { href: "/privacy", label: "Políticas de Privacidad" },
+      { href: "/terms", label: "Términos & Condiciones" },
     ],
   },
   {
     title: "App Restaurantes",
     links: [
-      { href: "#", label: "Políticas de Privacidad" },
-      { href: "#", label: "Términos & Condiciones" },
+      { href: "/privacy", label: "Políticas de Privacidad" },
+      { href: "/terms", label: "Términos & Condiciones" },
     ],
   },
 ] as const;
