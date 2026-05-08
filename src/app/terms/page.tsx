@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/sections/header";
 import Footer from "@/components/sections/footer";
 import LegalHero from "@/components/sections/legal-hero";
+import TermsContent from "@/components/sections/terms-content";
 
 export const metadata: Metadata = {
   title: "Términos y Condiciones | BipBip",
@@ -14,7 +15,7 @@ export default function TermsPage() {
       <Header />
       <main id="main">
         <LegalHero title="Términos & Condiciones" />
-        <section className="mx-auto w-11/12 max-w-[1280px] py-16 md:py-20" />
+        <TermsContent />
       </main>
       <Footer />
     </>
