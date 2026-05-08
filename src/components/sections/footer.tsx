@@ -64,12 +64,12 @@ export default function Footer() {
           />
         </motion.div>
 
-        <div className="relative mx-auto w-11/12 max-w-[1280px] pt-12 md:pt-16 pb-48 md:pb-56">
+        <div className="relative mx-auto w-11/12 max-w-[1280px] pt-12 md:pt-16 pb-24 md:pb-56">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 lg:gap-12 items-start">
             <motion.div
-              className="sm:col-span-2 md:col-span-1"
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="sm:col-span-2 md:col-span-1 flex justify-center md:justify-start"
+              initial={{ opacity: 0, y: -16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.55, ease: "easeOut" }}
             >
@@ -96,6 +96,7 @@ export default function Footer() {
                     delay: 0.1 + index * 0.1,
                     ease: "easeOut",
                   }}
+                  className="text-center md:text-left"
                 >
                   <h3
                     id={headingId}
@@ -103,7 +104,7 @@ export default function Footer() {
                   >
                     {col.title}
                   </h3>
-                  <ul className="flex flex-col gap-3">
+                  <ul className="flex flex-col items-center md:items-start gap-3">
                     {col.links.map((link) => (
                       <li key={link.label}>
                         <Link href={link.href} className={linkClass}>
@@ -117,76 +118,75 @@ export default function Footer() {
             })}
           </div>
 
-          <div className="relative mt-12 md:mt-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <motion.div
-              className="flex flex-wrap gap-3"
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-            >
-              <BadgeLink
-                href="https://play.google.com/store/apps"
-                src="/illustration/playstore.svg"
-                alt="Disponible en Google Play"
-                width={162}
-                height={48}
-              />
-              <BadgeLink
-                href="https://apps.apple.com/"
-                src="/illustration/appstore.svg"
-                alt="Descargar en App Store"
-                width={144}
-                height={48}
-              />
-            </motion.div>
-
-            <motion.ul
-              className="flex items-center gap-4"
-              aria-label="Redes sociales"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.4 }}
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } },
-              }}
-            >
-              {socials.map((social) => (
-                <motion.li
-                  key={social.label}
-                  variants={{
-                    hidden: { opacity: 0, scale: 0.6 },
-                    visible: { opacity: 1, scale: 1 },
-                  }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
-                >
-                  <SocialIconLink
-                    href={social.href}
-                    src={social.src}
-                    label={social.label}
-                    size={32}
-                  />
-                </motion.li>
-              ))}
-            </motion.ul>
-          </div>
+          <motion.div
+            className="relative mt-10 md:mt-16 flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-start md:gap-3"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+          >
+            <BadgeLink
+              href="https://play.google.com/store/apps"
+              src="/illustration/playstore.svg"
+              alt="Disponible en Google Play"
+              width={162}
+              height={48}
+            />
+            <BadgeLink
+              href="https://apps.apple.com/"
+              src="/illustration/appstore.svg"
+              alt="Descargar en App Store"
+              width={144}
+              height={48}
+            />
+          </motion.div>
         </div>
       </div>
 
       <div className="bg-brand-black text-white">
-        <div className="mx-auto flex w-11/12 max-w-[1280px] flex-col-reverse items-center gap-3 py-4 md:flex-row md:justify-between">
-          <p className="text-caption">
+        <div className="mx-auto flex w-11/12 max-w-[1280px] flex-col items-center gap-4 py-5 md:flex-row md:justify-between md:py-4">
+          <motion.ul
+            className="flex items-center gap-4 md:order-2"
+            aria-label="Redes sociales"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
+            }}
+          >
+            {socials.map((social) => (
+              <motion.li
+                key={social.label}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.6 },
+                  visible: { opacity: 1, scale: 1 },
+                }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
+              >
+                <SocialIconLink
+                  href={social.href}
+                  src={social.src}
+                  label={social.label}
+                  size={28}
+                />
+              </motion.li>
+            ))}
+          </motion.ul>
+
+          <p className="text-caption text-center md:order-1 md:text-left">
             © {new Date().getFullYear()} Derechos Reservados Grupo Comidas
           </p>
-          <div className="flex items-center gap-2">
+
+          <div className="flex items-center gap-2 md:order-3">
             <Image
               src="/illustration/Logo%20CIT.svg"
               alt="CIT"
               width={161}
               height={33}
-              className="h-7 w-auto"
+              className="h-6 md:h-7 w-auto"
             />
           </div>
         </div>

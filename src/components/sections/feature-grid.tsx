@@ -76,7 +76,7 @@ export default function FeatureGrid() {
 
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-10 bottom-0 hidden lg:block w-[538px] h-[342px] select-none"
+        className="pointer-events-none absolute left-0 bottom-0 z-10 hidden lg:block w-[538px] h-[342px] select-none"
         initial={{ opacity: 0, x: -40 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.1 }}

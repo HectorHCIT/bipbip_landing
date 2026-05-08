@@ -45,7 +45,7 @@ export default function DriversFeatures() {
 
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute right-6 top-12 hidden lg:block w-[234px] h-[156px] select-none"
+        className="pointer-events-none absolute right-6 top-12 hidden md:block w-[234px] h-[156px] select-none"
         initial={{ opacity: 0, rotate: -12 }}
         whileInView={{ opacity: 1, rotate: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -62,7 +62,7 @@ export default function DriversFeatures() {
 
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute right-8 bottom-16 hidden lg:block w-[260px] h-[240px] select-none"
+        className="pointer-events-none absolute right-8 bottom-16 hidden md:block w-[260px] h-[240px] select-none"
         initial={{ opacity: 0, rotate: 12 }}
         whileInView={{ opacity: 1, rotate: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -79,7 +79,7 @@ export default function DriversFeatures() {
 
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-12 bottom-0 hidden lg:block w-[420px] h-[380px] select-none"
+        className="pointer-events-none absolute -left-12 bottom-0 hidden md:block w-[420px] h-[380px] select-none"
         initial={{ opacity: 0, x: -120 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -96,7 +96,7 @@ export default function DriversFeatures() {
           }}
         >
           <Image
-            src="/drivers/driverinmotoanimado.png"
+            src="/drivers/driverinmotoanimado.webp"
             alt=""
             fill
             className="object-contain object-left-bottom"

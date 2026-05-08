@@ -101,7 +101,7 @@ export default function HelpContact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="relative mt-14 mx-auto max-w-[954px] rounded-3xl bg-grey-200 p-6 md:p-10 shadow-card"
+          className="relative mt-14 mx-auto max-w-[1100px] rounded-3xl bg-grey-200 p-3 md:p-10 shadow-card"
         >
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-12">
             <motion.div
@@ -129,7 +129,7 @@ export default function HelpContact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-                className="w-full lg:w-[465px] rounded-2xl bg-white p-6 text-brand-black"
+                className="w-full lg:w-full lg:max-w-[560px] rounded-2xl bg-white p-4 md:p-6 text-brand-black"
               >
                 <p className="text-h5 font-sans">¡Mensaje enviado!</p>
                 <p className="mt-2 text-b2">
@@ -144,7 +144,7 @@ export default function HelpContact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-                className="w-full lg:w-[465px] flex flex-col gap-4 rounded-2xl bg-white p-6"
+                className="w-full lg:w-full lg:max-w-[560px] flex flex-col gap-4 rounded-2xl bg-white p-4 md:p-6"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1">

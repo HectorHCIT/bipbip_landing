@@ -15,7 +15,7 @@ const navItems = [
 ] as const;
 
 const navLinkClass =
-  "text-[18px] leading-7 font-semibold text-white hover:text-brand-yellow focus-visible:text-brand-yellow transition-colors";
+  "relative text-[16px] lg:text-[18px] leading-7 font-semibold text-white transition-colors hover:text-brand-yellow focus-visible:text-brand-yellow after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-0.5 after:rounded-full after:bg-brand-yellow after:scale-x-0 after:origin-center hover:after:scale-x-100 focus-visible:after:scale-x-100 after:transition-transform after:duration-300";
 
 export default function Header() {
   const { scrollY } = useScroll();
@@ -33,13 +33,14 @@ export default function Header() {
       animate={{
         top: isScrolled ? 8 : 24,
         boxShadow: isScrolled
-          ? "0 10px 30px rgba(0,0,0,0.18)"
-          : "0 0 0 rgba(0,0,0,0)",
+          ? "0 14px 32px rgba(251, 0, 33, 0.28)"
+          : "0 6px 18px rgba(251, 0, 33, 0.18)",
       }}
       transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-      className="fixed left-1/2 z-50 w-11/12 -translate-x-1/2 rounded-[48px] bg-brand-primary text-white"
+      style={{ x: "-50%" }}
+      className="fixed left-1/2 z-50 w-11/12 rounded-[28px] md:rounded-[48px] bg-brand-primary text-white"
     >
-      <div className="flex items-center gap-4 md:gap-10 px-6 md:px-10 py-4">
+      <div className="flex items-center gap-4 md:gap-10 px-5 md:px-10 py-3.5 md:py-4">
         <Link href="/" aria-label="BipBip — ir al inicio" className="shrink-0">
           <Image
             src="/illustration/Logonav.svg"
@@ -47,18 +48,25 @@ export default function Header() {
             width={167}
             height={48}
             priority
+            className="h-9 md:h-12 w-auto"
           />
         </Link>
 
         <nav
           aria-label="Principal"
-          className="hidden md:flex flex-1 items-center justify-end gap-10"
+          className="hidden md:flex flex-1 items-center justify-end gap-8 lg:gap-10"
         >
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className={navLinkClass}>
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/#download"
+            className="inline-flex items-center justify-center h-11 rounded-full bg-white px-5 text-button text-brand-primary shadow-cta hover:opacity-90 focus-visible:opacity-90 transition-opacity"
+          >
+            Descargar app
+          </Link>
         </nav>
 
         <button
@@ -74,10 +82,10 @@ export default function Header() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2.4"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="size-6"
+            className="size-5"
             aria-hidden="true"
           >
             {open ? (
@@ -107,7 +115,7 @@ export default function Header() {
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="md:hidden overflow-hidden"
           >
-            <ul className="flex flex-col gap-1 px-6 pb-5 pt-1">
+            <ul className="flex flex-col gap-1 px-5 pb-4 pt-1">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
@@ -119,6 +127,15 @@ export default function Header() {
                   </Link>
                 </li>
               ))}
+              <li className="px-3 pt-3 pb-1">
+                <Link
+                  href="/#download"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center h-11 w-full rounded-full bg-white text-button text-brand-primary shadow-cta hover:opacity-90 focus-visible:opacity-90 transition-opacity"
+                >
+                  Descargar app
+                </Link>
+              </li>
             </ul>
           </motion.nav>
         )}

@@ -17,7 +17,7 @@ export default function AppDownload() {
       <div className="relative mx-auto w-11/12">
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-12 right-0 w-[180px] md:w-[260px] lg:w-[340px] z-10 select-none"
+          className="pointer-events-none absolute -top-6 -right-8 w-[300px] md:-top-12 md:right-0 md:w-[300px] lg:-top-16 lg:w-[340px] z-10 select-none"
           initial={{ opacity: 0, scale: 0.85, rotate: -10 }}
           whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -39,10 +39,17 @@ export default function AppDownload() {
         </motion.div>
 
         <div className="relative lg:aspect-[1280/450]">
-          <div
+          <svg
             aria-hidden="true"
-            className="absolute inset-0 bg-brand-primary rounded-[48px] lg:hidden"
-          />
+            viewBox="0 0 360 600"
+            preserveAspectRatio="none"
+            className="lg:hidden absolute inset-0 w-full h-full pointer-events-none select-none text-brand-primary"
+          >
+            <path
+              fill="currentColor"
+              d="M 29,83 L 331,7 Q 360,0 360,30 L 360,480 Q 360,510 331,517 L 29,593 Q 0,600 0,570 L 0,120 Q 0,90 29,83 Z"
+            />
+          </svg>
           <svg
             aria-hidden="true"
             viewBox="0 0 1280 450"
@@ -54,7 +61,7 @@ export default function AppDownload() {
               d="M 80,60 L 1230,15 Q 1280,15 1280,65 L 1280,395 Q 1280,445 1230,440 L 80,390 Q 30,390 30,345 L 30,100 Q 30,55 80,60 Z"
             />
           </svg>
-          <div className="relative grid h-full grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-16 px-6 py-14 md:px-12 md:py-16 lg:px-24 lg:py-0">
+          <div className="relative grid h-full grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-16 px-6 py-28 pb-36 md:px-12 md:py-32 md:pb-40 lg:px-24 lg:py-0 lg:pb-0">
             <motion.div
               className="relative flex justify-center lg:justify-start lg:-translate-x-8 lg:-translate-y-6"
               initial={{ opacity: 0, x: -32 }}
@@ -96,7 +103,7 @@ export default function AppDownload() {
               </motion.p>
 
               <motion.div
-                className="flex flex-wrap items-center justify-center gap-4 mt-2"
+                className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-2"
                 initial={{ opacity: 0, x: 48 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.4 }}

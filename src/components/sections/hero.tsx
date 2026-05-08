@@ -75,7 +75,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-[48px] leading-[72px] font-bold font-sans text-brand-black w-full"
+              className="text-[36px] leading-[44px] sm:text-[44px] sm:leading-[52px] md:text-[52px] md:leading-[60px] lg:text-[56px] lg:leading-[64px] font-bold font-sans text-brand-black w-full"
             >
               Tu comida favorita, más cerca que nunca!
             </motion.h1>
@@ -92,7 +92,7 @@ export default function Hero() {
                 alt="Disponible en Google Play"
                 width={209}
                 height={62}
-                className="rounded-lg"
+                className="rounded-lg w-[170px] md:w-[209px] [&_img]:w-full [&_img]:h-auto"
               />
               <BadgeLink
                 href="https://apps.apple.com/"
@@ -100,46 +100,48 @@ export default function Hero() {
                 alt="Descargar en App Store"
                 width={186}
                 height={62}
-                className="rounded-lg"
+                className="rounded-lg w-[170px] md:w-[186px] [&_img]:w-full [&_img]:h-auto"
               />
             </motion.div>
           </div>
 
           <div
-            className="hidden lg:block relative w-[648px] h-[591px] mx-auto scale-[1.5] origin-center"
+            className="hidden md:flex relative md:h-[640px] lg:h-[886px] items-center justify-center overflow-hidden"
             aria-hidden="true"
           >
-            {floatingItems.map((item) => (
-              <motion.div
-                key={item.src}
-                className={item.className}
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  opacity: { duration: 0.5, delay: item.delay * 0.15 },
-                  scale: { duration: 0.5, delay: item.delay * 0.15 },
-                  y: {
-                    duration: 4 + item.delay * 0.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: item.delay,
-                  },
-                }}
-              >
-                <Image
-                  src={item.src}
-                  alt=""
-                  width={item.width}
-                  height={item.height}
-                  priority={item.priority}
-                  style={{ width: "auto", height: "auto" }}
-                />
-              </motion.div>
-            ))}
+            <div className="relative w-[648px] h-[591px] md:scale-100 lg:scale-[1.5] origin-center">
+              {floatingItems.map((item) => (
+                <motion.div
+                  key={item.src}
+                  className={item.className}
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    y: [0, -10, 0],
+                  }}
+                  transition={{
+                    opacity: { duration: 0.5, delay: item.delay * 0.15 },
+                    scale: { duration: 0.5, delay: item.delay * 0.15 },
+                    y: {
+                      duration: 4 + item.delay * 0.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: item.delay,
+                    },
+                  }}
+                >
+                  <Image
+                    src={item.src}
+                    alt=""
+                    width={item.width}
+                    height={item.height}
+                    priority={item.priority}
+                    style={{ width: "auto", height: "auto" }}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

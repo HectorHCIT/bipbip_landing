@@ -43,7 +43,7 @@ export default function HeroCard({
 }) {
   const v = variants[variant];
   const ctaClass =
-    "inline-flex h-12 w-full max-w-[288px] items-center justify-center rounded-lg bg-brand-primary px-4 text-button text-white shadow-cta transition-opacity hover:opacity-95";
+    "inline-flex h-12 w-full md:max-w-[288px] items-center justify-center rounded-lg bg-brand-primary px-4 text-button text-white shadow-cta transition-opacity hover:opacity-95";
 
   return (
     <section
