@@ -45,3 +45,8 @@ skills-lock.json
 claude.md
 agents.md
 .atl/
+
+# Local agent / MCP config (per-developer, not committed)
+.mcp.json
+claude-rules.json
+claude-rules.lock.json
