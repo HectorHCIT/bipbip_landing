@@ -5,8 +5,9 @@ import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
 import { cdn } from "@/lib/cdn";
 
-const IOS_URL = "https://apps.apple.com/";
-const ANDROID_URL = "https://play.google.com/store/apps";
+const IOS_URL = "https://apps.apple.com/hn/app/bip-bip/id1501865149";
+const ANDROID_URL =
+  "https://play.google.com/store/apps/details?id=hn.cit.gccustomerapp";
 
 export default function AppDownload() {
   return (

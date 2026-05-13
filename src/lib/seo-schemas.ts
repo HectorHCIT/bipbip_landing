@@ -4,11 +4,8 @@ import { SITE_NAME, SITE_URL } from "@/lib/seo";
 type Schema = Record<string, unknown>;
 
 const SOCIAL_PROFILES = [
-  "https://www.facebook.com/bipbip",
-  "https://www.instagram.com/bipbip",
-  "https://x.com/bipbip",
-  "https://www.youtube.com/@bipbip",
-  "https://www.linkedin.com/company/bipbip",
+  "https://www.facebook.com/BipBipFoodDelivery",
+  "https://www.instagram.com/bipbip.hn",
 ] as const;
 
 /**

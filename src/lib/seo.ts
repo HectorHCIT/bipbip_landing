@@ -7,7 +7,9 @@ export const SITE_LOCALE = "es_HN";
 export const DEFAULT_DESCRIPTION =
   "BipBip es la app #1 de delivery en Honduras: pedí comida, mandados y compras de tus restaurantes y tiendas favoritas, con entrega rápida y seguimiento en vivo.";
 export const DEFAULT_OG_IMAGE_PATH = "/og/home.png";
-export const TWITTER_HANDLE = "@bipbip";
+// BipBip currently has no X / Twitter account. Set this if/when one exists
+// so the per-page Twitter card metadata can attribute `site` and `creator`.
+export const TWITTER_HANDLE: string | undefined = undefined;
 
 export interface PageMetaInput {
   /**
@@ -82,8 +84,7 @@ export function pageMetadata(input: PageMetaInput): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      site: TWITTER_HANDLE,
-      creator: TWITTER_HANDLE,
+      ...(TWITTER_HANDLE ? { site: TWITTER_HANDLE, creator: TWITTER_HANDLE } : {}),
       title: ogTwitterTitle,
       description,
       images: [ogImageUrl],

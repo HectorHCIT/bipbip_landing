@@ -34,11 +34,16 @@ const linkColumns = [
 ] as const;
 
 const socials = [
-  { src: cdn("/illustration/fb.svg"), href: "https://facebook.com/", label: "Facebook" },
-  { src: cdn("/illustration/ig.svg"), href: "https://instagram.com/", label: "Instagram" },
-  { src: cdn("/illustration/x.svg"), href: "https://x.com/", label: "X (Twitter)" },
-  { src: cdn("/illustration/ytb.svg"), href: "https://youtube.com/", label: "YouTube" },
-  { src: cdn("/illustration/in.svg"), href: "https://linkedin.com/", label: "LinkedIn" },
+  {
+    src: cdn("/illustration/fb.svg"),
+    href: "https://www.facebook.com/BipBipFoodDelivery/",
+    label: "Facebook",
+  },
+  {
+    src: cdn("/illustration/ig.svg"),
+    href: "https://www.instagram.com/bipbip.hn/",
+    label: "Instagram",
+  },
 ] as const;
 
 const linkClass =
@@ -134,14 +139,14 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
           >
             <BadgeLink
-              href="https://play.google.com/store/apps"
+              href="https://play.google.com/store/apps/details?id=hn.cit.gccustomerapp"
               src={cdn("/illustration/playstore.svg")}
               alt="Disponible en Google Play"
               width={162}
               height={48}
             />
             <BadgeLink
-              href="https://apps.apple.com/"
+              href="https://apps.apple.com/hn/app/bip-bip/id1501865149"
               src={cdn("/illustration/appstore.svg")}
               alt="Descargar en App Store"
               width={144}
