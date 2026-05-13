@@ -55,9 +55,18 @@ function Field({
   );
 }
 
-function FileField({ label, required = false }: { label: string; required?: boolean }) {
+function FileField({
+  label,
+  name,
+  required = false,
+}: {
+  label: string;
+  name: string;
+  required?: boolean;
+}) {
   const id = useId();
   const labelId = `${id}-label`;
+  const hintId = `${id}-${name}-hint`;
   return (
     <div className="flex flex-col gap-1">
       <span
@@ -73,7 +82,7 @@ function FileField({ label, required = false }: { label: string; required?: bool
       </span>
       <label
         htmlFor={id}
-        className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-grey-500 bg-[#fafafa] px-4 py-6 cursor-pointer hover:border-brand-primary transition-colors focus-within:border-brand-primary"
+        className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-grey-500 bg-grey-50 px-4 py-6 cursor-pointer hover:border-brand-primary transition-colors focus-within:border-brand-primary"
       >
         <span
           className="flex size-11 items-center justify-center rounded-full bg-grey-200"
@@ -95,15 +104,17 @@ function FileField({ label, required = false }: { label: string; required?: bool
         <span className="text-b3 text-grey-900">
           Arrastra o selecciona un archivo
         </span>
-        <span className="text-b3 text-grey-500">
+        <span id={hintId} className="text-b3 text-grey-500">
           Max 10 mb.
         </span>
       </label>
       <input
         id={id}
+        name={name}
         type="file"
         className="sr-only"
         aria-labelledby={labelId}
+        aria-describedby={hintId}
         required={required}
       />
     </div>
@@ -118,6 +129,7 @@ export default function DriversForm() {
   const cityId = useId();
   const vehicleId = useId();
   const termsId = useId();
+  const documentsLegendId = useId();
 
   return (
     <section
@@ -131,7 +143,7 @@ export default function DriversForm() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-[32px] bg-white px-6 py-12 md:px-8 md:py-16 shadow-[0_10px_40px_0_rgba(0,0,0,0.08)]"
+          className="rounded-[32px] bg-white px-6 py-12 md:px-8 md:py-16 shadow-hero-card"
         >
           <motion.header
             initial={{ opacity: 0, y: 16 }}
@@ -142,11 +154,15 @@ export default function DriversForm() {
           >
             <h2
               id="drivers-form-heading"
+              // TODO(TW-060): no exact text-h2 token match for mobile (32px/40px); h2 token is 48px/56px
               className="text-[32px] leading-[40px] md:text-h2 font-bold font-sans text-brand-primary"
             >
               Aplica para formar parte de Bip Bip
             </h2>
-            <p className="text-[18px] leading-7 tracking-[0.2px] text-brand-black max-w-[640px]">
+            <p
+              // TODO(TW-060): align with text-s1 token (18px / 24px line-height differs from leading-7)
+              className="text-[18px] leading-7 tracking-[0.2px] text-brand-black max-w-[640px]"
+            >
               Completa los campos para empezar a generar ingresos con entregas de Bip Bip.
             </p>
           </motion.header>
@@ -175,6 +191,7 @@ export default function DriversForm() {
                   id={firstNameId}
                   type="text"
                   name="firstName"
+                  autoComplete="given-name"
                   placeholder="Ej. Luis Carlos"
                   required
                   className={inputClass}
@@ -185,6 +202,7 @@ export default function DriversForm() {
                   id={lastNameId}
                   type="text"
                   name="lastName"
+                  autoComplete="family-name"
                   placeholder="Ej. Fernández León"
                   required
                   className={inputClass}
@@ -195,6 +213,7 @@ export default function DriversForm() {
                   id={documentIdId}
                   type="text"
                   name="documentId"
+                  autoComplete="off"
                   placeholder="Ej. 1234567898765"
                   className={inputClass}
                 />
@@ -210,6 +229,7 @@ export default function DriversForm() {
                   id={phoneId}
                   type="tel"
                   name="phone"
+                  autoComplete="tel"
                   placeholder="Ej. +50499123456"
                   required
                   className={inputClass}
@@ -219,6 +239,7 @@ export default function DriversForm() {
                 <select
                   id={cityId}
                   name="city"
+                  autoComplete="address-level2"
                   defaultValue=""
                   required
                   style={selectStyle}
@@ -252,15 +273,18 @@ export default function DriversForm() {
               </Field>
             </motion.div>
 
-            <motion.div variants={fieldRowVariants}>
-              <FileField label="Foto de tu DNI" required />
-            </motion.div>
-            <motion.div variants={fieldRowVariants}>
-              <FileField label="Antecedentes penales" required />
-            </motion.div>
-            <motion.div variants={fieldRowVariants}>
-              <FileField label="Foto de Licencia" required />
-            </motion.div>
+            <motion.fieldset
+              variants={fieldRowVariants}
+              aria-labelledby={documentsLegendId}
+              className="flex flex-col gap-4 border-0 p-0 m-0"
+            >
+              <legend id={documentsLegendId} className="sr-only">
+                Documentación requerida
+              </legend>
+              <FileField label="Foto de tu DNI" name="dni" required />
+              <FileField label="Antecedentes penales" name="antecedentes" required />
+              <FileField label="Foto de Licencia" name="licencia" required />
+            </motion.fieldset>
 
             <motion.label
               variants={fieldRowVariants}

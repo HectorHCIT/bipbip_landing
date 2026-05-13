@@ -1,6 +1,7 @@
 export default function TermsContent() {
   return (
     <article
+      aria-label="Términos y condiciones"
       className="
         mx-auto w-11/12 max-w-[1280px] py-16 md:py-20 text-brand-black
         [&_h2]:text-[24px] [&_h2]:md:text-[28px] [&_h2]:font-bold [&_h2]:leading-[32px] [&_h2]:md:leading-[36px] [&_h2]:mb-2

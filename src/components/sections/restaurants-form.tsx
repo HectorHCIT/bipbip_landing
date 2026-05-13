@@ -89,11 +89,15 @@ export default function RestaurantsForm() {
           >
             <h2
               id="restaurants-form-heading"
+              // TODO(TW-060): no exact text-h2 token match for mobile (32px/40px); h2 token is 48px/56px
               className="text-[32px] leading-[40px] md:text-h2 font-bold font-sans text-brand-primary"
             >
               Aplica para vender con BipBip
             </h2>
-            <p className="text-[18px] leading-7 tracking-[0.2px] text-brand-black max-w-[720px]">
+            <p
+              // TODO(TW-060): align with text-s1 token (18px / 24px line-height differs from leading-7)
+              className="text-[18px] leading-7 tracking-[0.2px] text-brand-black max-w-[720px]"
+            >
               Completa tus datos y nuestro equipo te contactará para ayudarte a comenzar a vender en BipBip.
             </p>
           </motion.header>
@@ -122,6 +126,7 @@ export default function RestaurantsForm() {
                   id={firstNameId}
                   type="text"
                   name="firstName"
+                  autoComplete="given-name"
                   placeholder="Ej. Luis Carlos"
                   required
                   className={inputClass}
@@ -132,17 +137,21 @@ export default function RestaurantsForm() {
                   id={lastNameId}
                   type="text"
                   name="lastName"
+                  autoComplete="family-name"
                   placeholder="Ej. Fernández León"
                   required
                   className={inputClass}
                 />
               </Field>
-              <Field label="Correo electrónico" htmlFor={emailId}>
+              <Field label="Correo electrónico" required htmlFor={emailId}>
                 <input
                   id={emailId}
                   type="email"
                   name="email"
+                  autoComplete="email"
                   placeholder="Ej. prueba@email.com"
+                  required
+                  aria-required="true"
                   className={inputClass}
                 />
               </Field>
@@ -157,6 +166,7 @@ export default function RestaurantsForm() {
                   id={phoneId}
                   type="tel"
                   name="phone"
+                  autoComplete="tel"
                   placeholder="Ej. +50499123456"
                   required
                   className={inputClass}
@@ -167,6 +177,7 @@ export default function RestaurantsForm() {
                   id={addressId}
                   type="text"
                   name="address"
+                  autoComplete="street-address"
                   placeholder="Ej. Av circunvalación..."
                   className={inputClass}
                 />
@@ -175,6 +186,7 @@ export default function RestaurantsForm() {
                 <select
                   id={cityId}
                   name="city"
+                  autoComplete="address-level2"
                   defaultValue=""
                   style={selectStyle}
                   className={`${inputClass} appearance-none pr-10`}
@@ -217,6 +229,7 @@ export default function RestaurantsForm() {
                   id={brandNameId}
                   type="text"
                   name="brandName"
+                  autoComplete="organization"
                   placeholder="Ej. La Pizzería del Centro"
                   required
                   className={inputClass}

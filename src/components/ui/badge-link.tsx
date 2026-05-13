@@ -22,7 +22,7 @@ export default function BadgeLink({ href, src, alt, width, height, className }: 
         className,
       )}
     >
-      <Image src={src} alt={alt} width={width} height={height} />
+      <Image src={src} alt="" aria-hidden="true" width={width} height={height} />
     </a>
   );
 }

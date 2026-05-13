@@ -2,20 +2,21 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import type { ReactElement } from "react";
 
-export type FeatureCard = {
+export interface FeatureCard {
   readonly icon: string;
   readonly iconSize: number;
   readonly iconOffset: number;
   readonly title: string;
   readonly body: string;
-};
+}
 
 export default function FeatureCards({
   cards,
 }: {
   cards: ReadonlyArray<FeatureCard>;
-}) {
+}): ReactElement {
   const last = cards.length - 1;
   return (
     <div className="relative mt-32 grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-12 lg:gap-20 lg:max-w-[1060px] lg:mx-auto">

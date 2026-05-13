@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import type { ReactElement } from "react";
 
 type HeroCardVariant = "split-547" | "split-50";
 
@@ -40,8 +41,10 @@ export default function HeroCard({
   ctaHref?: string;
   imageSrc: string;
   imageAlt: string;
-}) {
+}): ReactElement {
   const v = variants[variant];
+  // STY-005: replacing this ad-hoc CTA with the shared <Button> component is
+  // out of scope here — requires verifying the variant prop API across pages.
   const ctaClass =
     "inline-flex h-12 w-full md:max-w-[288px] items-center justify-center rounded-lg bg-brand-primary px-4 text-button text-white shadow-cta transition-opacity hover:opacity-95";
 
@@ -66,6 +69,7 @@ export default function HeroCard({
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
+                  // TODO(TW-060): no exact text token for 40/44 (mobile) or 56/60 (desktop); h2 is 48/56
                   className="text-[40px] leading-[44px] md:text-[56px] md:leading-[60px] font-bold font-sans text-brand-black"
                 >
                   {title}
