@@ -74,6 +74,7 @@ export default function Rewards() {
                 width={141}
                 height={141}
                 className="h-auto w-full drop-shadow-[0_8px_16px_rgba(253,195,0,0.25)]"
+                style={{ width: "auto", height: "auto" }}
               />
             </motion.div>
           </motion.div>

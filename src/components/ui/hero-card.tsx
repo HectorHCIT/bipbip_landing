@@ -75,7 +75,7 @@ export default function HeroCard({
               fill
               className="object-cover"
               priority
-              sizes="100vw"
+              sizes="(max-width: 767px) 92vw, 1px"
             />
             <div className="absolute inset-0 bg-black/30" />
           </motion.div>

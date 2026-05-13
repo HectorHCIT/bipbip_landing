@@ -338,6 +338,7 @@ export default function HelpContact() {
             width={334}
             height={334}
             className="h-auto w-full drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)]"
+            style={{ width: "auto", height: "auto" }}
           />
         </motion.div>
       </motion.div>
@@ -360,6 +361,7 @@ export default function HelpContact() {
             width={244}
             height={244}
             className="h-auto w-full drop-shadow-[0_14px_14px_rgba(0,0,0,0.15)]"
+            style={{ width: "auto", height: "auto" }}
           />
         </motion.div>
       </motion.div>

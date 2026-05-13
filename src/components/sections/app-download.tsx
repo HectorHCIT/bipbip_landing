@@ -35,6 +35,7 @@ export default function AppDownload() {
               width={340}
               height={230}
               className="w-full h-auto"
+              style={{ width: "auto", height: "auto" }}
             />
           </motion.div>
         </motion.div>
@@ -78,6 +79,7 @@ export default function AppDownload() {
                 width={420}
                 height={520}
                 className="h-auto w-full max-w-[316px] md:max-w-[380px] lg:max-w-[420px] drop-shadow-[20px_20px_64px_rgba(0,0,0,0.45)]"
+                style={{ width: "auto", height: "auto" }}
               />
             </motion.div>
 

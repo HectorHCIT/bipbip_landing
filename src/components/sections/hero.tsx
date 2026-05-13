@@ -12,7 +12,6 @@ const floatingItems = [
     height: 309,
     className: "absolute top-[16px] left-[45px]",
     delay: 0,
-    priority: true,
   },
   {
     src: cdn("/floating/pizza.svg"),
@@ -20,7 +19,6 @@ const floatingItems = [
     height: 171,
     className: "absolute top-0 left-[334px]",
     delay: 0.4,
-    priority: false,
   },
   {
     src: cdn("/floating/egg.svg"),
@@ -28,7 +26,6 @@ const floatingItems = [
     height: 178,
     className: "absolute top-[200px] left-[401px]",
     delay: 0.8,
-    priority: false,
   },
   {
     src: cdn("/floating/cubo pollo.svg"),
@@ -36,7 +33,6 @@ const floatingItems = [
     height: 287,
     className: "absolute top-[291px] left-0",
     delay: 1.2,
-    priority: false,
   },
   {
     src: cdn("/floating/rice wolk.svg"),
@@ -44,7 +40,6 @@ const floatingItems = [
     height: 263,
     className: "absolute top-[328px] left-[362px]",
     delay: 1.6,
-    priority: false,
   },
 ] as const;
 
@@ -149,8 +144,9 @@ export default function Hero() {
                     alt=""
                     width={item.width}
                     height={item.height}
-                    priority={item.priority}
+                    priority
                     className="w-auto h-auto"
+                    style={{ width: "auto", height: "auto" }}
                   />
                 </motion.div>
               ))}
