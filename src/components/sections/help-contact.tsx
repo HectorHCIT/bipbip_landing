@@ -97,7 +97,7 @@ export default function HelpContact() {
       className="relative overflow-hidden bg-white pt-20 pb-32 md:pt-24 md:pb-40 lg:pt-28 lg:pb-48"
       aria-labelledby="help-heading"
     >
-      <div className="relative mx-auto w-11/12 max-w-[1280px]">
+      <div className="relative mx-auto w-11/12 max-w-[1440px]">
         <header className="flex flex-col items-center gap-2 text-center">
           <motion.h2
             id="help-heading"
@@ -125,11 +125,11 @@ export default function HelpContact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="relative mt-14 mx-auto max-w-[1100px] rounded-3xl bg-grey-200 p-3 md:p-10 shadow-card"
+          className="relative mt-14 mx-auto w-full lg:max-w-[1080px] xl:max-w-[1200px] rounded-3xl bg-grey-200 p-3 md:p-8 lg:p-8 xl:p-10 shadow-card"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] xl:grid-cols-[460px_1fr] items-center gap-8 lg:gap-10">
             <motion.div
-              className="flex justify-center lg:justify-start"
+              className="hidden md:flex justify-center lg:justify-start"
               aria-hidden="true"
               initial={{ opacity: 0, x: -48 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -141,7 +141,7 @@ export default function HelpContact() {
                 alt=""
                 width={368}
                 height={434}
-                className="h-auto w-full max-w-[280px] md:max-w-[340px] lg:max-w-[368px]"
+                className="h-auto w-full max-w-[280px] md:max-w-[340px] lg:max-w-none"
               />
             </motion.div>
 
@@ -153,7 +153,7 @@ export default function HelpContact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-                className="w-full lg:w-full lg:max-w-[560px] rounded-2xl bg-white p-4 md:p-6 text-brand-black"
+                className="w-full lg:max-w-[440px] xl:max-w-[560px] lg:justify-self-center rounded-2xl bg-white p-4 md:p-6 lg:p-8 text-brand-black"
               >
                 <p className="text-h5 font-sans">¡Mensaje enviado!</p>
                 <p className="mt-2 text-b2">
@@ -168,7 +168,7 @@ export default function HelpContact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-                className="w-full lg:w-full lg:max-w-[560px] flex flex-col gap-4 rounded-2xl bg-white p-4 md:p-6"
+                className="w-full lg:max-w-[440px] xl:max-w-[560px] lg:justify-self-center flex flex-col gap-4 rounded-2xl bg-white p-4 md:p-6 lg:p-8"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1">
