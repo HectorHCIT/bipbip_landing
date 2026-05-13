@@ -1,29 +1,30 @@
 import AnimatedSectionTitle from "@/components/ui/animated-section-title";
 import FeatureCards, { type FeatureCard } from "@/components/ui/feature-cards";
+import { cdn } from "@/lib/cdn";
 
-const cards: ReadonlyArray<FeatureCard> = [
+const cards = [
   {
-    icon: "/restaurants/image%2084.svg",
+    icon: cdn("/restaurants/image 84.svg"),
     iconSize: 90,
     iconOffset: 63,
     title: "Mayor alcance",
     body: "Aumenta la visibilidad de tu restaurante frente a nuevos clientes.",
   },
   {
-    icon: "/restaurants/Rectangle%20545.svg",
+    icon: cdn("/restaurants/Rectangle 545.svg"),
     iconSize: 106,
     iconOffset: 72,
     title: "Canal adicional de ventas",
     body: "Recibe pedidos desde una plataforma diseñada para facilitar tu operación.",
   },
   {
-    icon: "/restaurants/Rectangle%20546.svg",
+    icon: cdn("/restaurants/Rectangle 546.svg"),
     iconSize: 106,
     iconOffset: 72,
     title: "Crecimiento para tu negocio",
     body: "Genera más ingresos con una solución enfocada en impulsar tus ventas.",
   },
-];
+] as const satisfies ReadonlyArray<FeatureCard>;
 
 export default function RestaurantsFeatures() {
   return (

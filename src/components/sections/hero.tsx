@@ -3,18 +3,19 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
+import { cdn } from "@/lib/cdn";
 
 const floatingItems = [
   {
-    src: "/floating/burguer.svg",
+    src: cdn("/floating/burguer.svg"),
     width: 343,
     height: 309,
     className: "absolute top-[16px] left-[45px]",
     delay: 0,
-    priority: false,
+    priority: true,
   },
   {
-    src: "/floating/pizza.svg",
+    src: cdn("/floating/pizza.svg"),
     width: 253,
     height: 171,
     className: "absolute top-0 left-[334px]",
@@ -22,7 +23,7 @@ const floatingItems = [
     priority: false,
   },
   {
-    src: "/floating/egg.svg",
+    src: cdn("/floating/egg.svg"),
     width: 247,
     height: 178,
     className: "absolute top-[200px] left-[401px]",
@@ -30,7 +31,7 @@ const floatingItems = [
     priority: false,
   },
   {
-    src: "/floating/cubo%20pollo.svg",
+    src: cdn("/floating/cubo pollo.svg"),
     width: 281,
     height: 287,
     className: "absolute top-[291px] left-0",
@@ -38,7 +39,7 @@ const floatingItems = [
     priority: false,
   },
   {
-    src: "/floating/rice%20wolk.svg",
+    src: cdn("/floating/rice wolk.svg"),
     width: 204,
     height: 263,
     className: "absolute top-[328px] left-[362px]",
@@ -59,7 +60,7 @@ export default function Hero() {
         aria-hidden="true"
       >
         <Image
-          src="/illustration/herotexture.svg"
+          src={cdn("/illustration/herotexture.svg")}
           alt=""
           fill
           className="object-cover object-center"
@@ -70,6 +71,7 @@ export default function Hero() {
       <div className="relative mx-auto w-11/12">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
           <div className="flex flex-col gap-10 w-full mx-auto justify-center items-start">
+            {/* TODO(TW-060): partial token match — none of the responsive sizes (36/44/52/56) match text-h2 (48px) exactly */}
             <motion.h1
               id="hero-heading"
               initial={{ opacity: 0, y: 24 }}
@@ -88,7 +90,7 @@ export default function Hero() {
             >
               <BadgeLink
                 href="https://play.google.com/store/apps"
-                src="/illustration/playstore.svg"
+                src={cdn("/illustration/playstore.svg")}
                 alt="Disponible en Google Play"
                 width={209}
                 height={62}
@@ -96,7 +98,7 @@ export default function Hero() {
               />
               <BadgeLink
                 href="https://apps.apple.com/"
-                src="/illustration/appstore.svg"
+                src={cdn("/illustration/appstore.svg")}
                 alt="Descargar en App Store"
                 width={186}
                 height={62}
@@ -120,6 +122,7 @@ export default function Hero() {
                     scale: 1,
                     y: [0, -10, 0],
                   }}
+                  viewport={{ amount: 0.1 }}
                   transition={{
                     opacity: { duration: 0.5, delay: item.delay * 0.15 },
                     scale: { duration: 0.5, delay: item.delay * 0.15 },
@@ -137,7 +140,7 @@ export default function Hero() {
                     width={item.width}
                     height={item.height}
                     priority={item.priority}
-                    style={{ width: "auto", height: "auto" }}
+                    className="w-auto h-auto"
                   />
                 </motion.div>
               ))}

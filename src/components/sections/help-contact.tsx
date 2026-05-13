@@ -4,6 +4,7 @@ import { useState, useId } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import Button from "@/components/ui/button";
+import { cdn } from "@/lib/cdn";
 
 type FormState = {
   name: string;
@@ -14,6 +15,12 @@ type FormState = {
 };
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
+
+type SubmitState =
+  | { status: "idle" }
+  | { status: "submitting" }
+  | { status: "success" }
+  | { status: "error"; message: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[+\d][\d\s\-()]{6,}$/;
@@ -35,8 +42,7 @@ function validate(values: FormState): FormErrors {
 const inputBase =
   "w-full h-12 rounded-lg border border-grey-200 bg-white px-4 text-b3 text-brand-black placeholder:text-grey-500 shadow-card focus-visible:outline-2 focus-visible:outline-brand-primary";
 
-const labelBase =
-  "text-[12px] leading-4 tracking-[0.2px] text-grey-900 font-sans";
+const labelBase = "text-caption text-grey-900 font-sans";
 
 export default function HelpContact() {
   const nameId = useId();
@@ -53,7 +59,7 @@ export default function HelpContact() {
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [submitState, setSubmitState] = useState<SubmitState>({ status: "idle" });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -61,11 +67,29 @@ export default function HelpContact() {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
 
-    setStatus("submitting");
-    // TODO(forms): replace simulated delay with real submit (server action / API).
-    await new Promise<void>((r) => setTimeout(r, 800));
-    setStatus("success");
+    setSubmitState({ status: "submitting" });
+    try {
+      // TODO(forms): replace simulated delay with real submit (server action / API).
+      await new Promise<void>((r) => setTimeout(r, 800));
+      setSubmitState({ status: "success" });
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "No pudimos enviar tu mensaje. Intenta de nuevo.";
+      setSubmitState({ status: "error", message });
+    }
   }
+
+  const isSubmitting = submitState.status === "submitting";
+  const submitStatusMessage =
+    submitState.status === "submitting"
+      ? "Enviando mensaje..."
+      : submitState.status === "success"
+      ? "Mensaje enviado correctamente."
+      : submitState.status === "error"
+      ? submitState.message
+      : "";
 
   return (
     <section
@@ -113,7 +137,7 @@ export default function HelpContact() {
               transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
             >
               <Image
-                src="/illustration/callcentergirl.svg"
+                src={cdn("/illustration/callcentergirl.svg")}
                 alt=""
                 width={368}
                 height={434}
@@ -121,7 +145,7 @@ export default function HelpContact() {
               />
             </motion.div>
 
-            {status === "success" ? (
+            {submitState.status === "success" ? (
               <motion.div
                 role="status"
                 aria-live="polite"
@@ -156,18 +180,21 @@ export default function HelpContact() {
                       name="name"
                       type="text"
                       required
+                      autoComplete="given-name"
                       placeholder="Ingresa tu nombre"
                       aria-invalid={errors.name ? true : undefined}
-                      aria-describedby={errors.name ? `${nameId}-error` : undefined}
+                      aria-describedby={`${nameId}-error`}
                       value={values.name}
                       onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
                       className={inputBase}
                     />
-                    {errors.name && (
-                      <span id={`${nameId}-error`} role="alert" className="text-[12px] text-error">
-                        {errors.name}
-                      </span>
-                    )}
+                    <span
+                      id={`${nameId}-error`}
+                      aria-live="polite"
+                      className="text-caption text-error min-h-4"
+                    >
+                      {errors.name ?? ""}
+                    </span>
                   </div>
 
                   <div className="flex flex-col gap-1">
@@ -179,18 +206,21 @@ export default function HelpContact() {
                       name="lastName"
                       type="text"
                       required
+                      autoComplete="family-name"
                       placeholder="Ingresa tu apellido"
                       aria-invalid={errors.lastName ? true : undefined}
-                      aria-describedby={errors.lastName ? `${lastNameId}-error` : undefined}
+                      aria-describedby={`${lastNameId}-error`}
                       value={values.lastName}
                       onChange={(e) => setValues((v) => ({ ...v, lastName: e.target.value }))}
                       className={inputBase}
                     />
-                    {errors.lastName && (
-                      <span id={`${lastNameId}-error`} role="alert" className="text-[12px] text-error">
-                        {errors.lastName}
-                      </span>
-                    )}
+                    <span
+                      id={`${lastNameId}-error`}
+                      aria-live="polite"
+                      className="text-caption text-error min-h-4"
+                    >
+                      {errors.lastName ?? ""}
+                    </span>
                   </div>
                 </div>
 
@@ -203,18 +233,21 @@ export default function HelpContact() {
                     name="email"
                     type="email"
                     required
+                    autoComplete="email"
                     placeholder="Ingresa tu email"
                     aria-invalid={errors.email ? true : undefined}
-                    aria-describedby={errors.email ? `${emailId}-error` : undefined}
+                    aria-describedby={`${emailId}-error`}
                     value={values.email}
                     onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
                     className={inputBase}
                   />
-                  {errors.email && (
-                    <span id={`${emailId}-error`} role="alert" className="text-[12px] text-error">
-                      {errors.email}
-                    </span>
-                  )}
+                  <span
+                    id={`${emailId}-error`}
+                    aria-live="polite"
+                    className="text-caption text-error min-h-4"
+                  >
+                    {errors.email ?? ""}
+                  </span>
                 </div>
 
                 <div className="flex flex-col gap-1">
@@ -226,18 +259,21 @@ export default function HelpContact() {
                     name="phone"
                     type="tel"
                     required
+                    autoComplete="tel"
                     placeholder="Ingresa tu número de teléfono"
                     aria-invalid={errors.phone ? true : undefined}
-                    aria-describedby={errors.phone ? `${phoneId}-error` : undefined}
+                    aria-describedby={`${phoneId}-error`}
                     value={values.phone}
                     onChange={(e) => setValues((v) => ({ ...v, phone: e.target.value }))}
                     className={inputBase}
                   />
-                  {errors.phone && (
-                    <span id={`${phoneId}-error`} role="alert" className="text-[12px] text-error">
-                      {errors.phone}
-                    </span>
-                  )}
+                  <span
+                    id={`${phoneId}-error`}
+                    aria-live="polite"
+                    className="text-caption text-error min-h-4"
+                  >
+                    {errors.phone ?? ""}
+                  </span>
                 </div>
 
                 <div className="flex flex-col gap-1">
@@ -252,27 +288,32 @@ export default function HelpContact() {
                     rows={5}
                     placeholder="Deja tu mensaje"
                     aria-invalid={errors.message ? true : undefined}
-                    aria-describedby={errors.message ? `${messageId}-error` : undefined}
+                    aria-describedby={`${messageId}-error`}
                     value={values.message}
                     onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
                     className="w-full resize-none rounded-lg border border-grey-200 bg-white px-4 py-3 text-b3 text-brand-black placeholder:text-grey-500 shadow-card focus-visible:outline-2 focus-visible:outline-brand-primary"
                   />
-                  {errors.message && (
-                    <span id={`${messageId}-error`} role="alert" className="text-[12px] text-error">
-                      {errors.message}
-                    </span>
-                  )}
+                  <span
+                    id={`${messageId}-error`}
+                    aria-live="polite"
+                    className="text-caption text-error min-h-4"
+                  >
+                    {errors.message ?? ""}
+                  </span>
                 </div>
 
                 <Button
                   type="submit"
                   variant="primary"
                   size="lg"
-                  disabled={status === "submitting"}
+                  disabled={isSubmitting}
                   className="w-full text-white shadow-cta"
                 >
-                  {status === "submitting" ? "Enviando..." : "Enviar mensaje"}
+                  {isSubmitting ? "Enviando..." : "Enviar mensaje"}
                 </Button>
+                <span aria-live="polite" className="sr-only">
+                  {submitStatusMessage}
+                </span>
               </motion.form>
             )}
           </div>
@@ -292,12 +333,11 @@ export default function HelpContact() {
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
           <Image
-            src="/floating/pizza.svg"
+            src={cdn("/floating/pizza.svg")}
             alt=""
             width={334}
             height={334}
-            style={{ width: "auto", height: "auto" }}
-            className="w-full drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)]"
+            className="h-auto w-full drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)]"
           />
         </motion.div>
       </motion.div>
@@ -315,12 +355,11 @@ export default function HelpContact() {
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         >
           <Image
-            src="/floating/egg.svg"
+            src={cdn("/floating/egg.svg")}
             alt=""
             width={244}
             height={244}
-            style={{ width: "auto", height: "auto" }}
-            className="w-full drop-shadow-[0_14px_14px_rgba(0,0,0,0.15)]"
+            className="h-auto w-full drop-shadow-[0_14px_14px_rgba(0,0,0,0.15)]"
           />
         </motion.div>
       </motion.div>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
+import { cdn } from "@/lib/cdn";
 
 const SCROLL_THRESHOLD = 80;
 
@@ -14,6 +15,9 @@ const navItems = [
   { href: "/#help", label: "Contáctanos" },
 ] as const;
 
+// TODO(TW-060): text-s2/text-s1 tokens use leading 24px (line-height 1.5rem),
+// but the design here uses leading-7 (28px). Either widen the token line-height
+// or define a header-specific text token before swapping these utilities.
 const navLinkClass =
   "relative text-[16px] lg:text-[18px] leading-7 font-semibold text-white transition-colors hover:text-brand-yellow focus-visible:text-brand-yellow after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-0.5 after:rounded-full after:bg-brand-yellow after:scale-x-0 after:origin-center hover:after:scale-x-100 focus-visible:after:scale-x-100 after:transition-transform after:duration-300";
 
@@ -30,20 +34,15 @@ export default function Header() {
     <motion.header
       id="top"
       initial={false}
-      animate={{
-        top: isScrolled ? 8 : 24,
-        boxShadow: isScrolled
-          ? "0 14px 32px rgba(251, 0, 33, 0.28)"
-          : "0 6px 18px rgba(251, 0, 33, 0.18)",
-      }}
+      animate={{ top: isScrolled ? 8 : 24 }}
       transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
       style={{ x: "-50%" }}
-      className="fixed left-1/2 z-50 w-11/12 rounded-[28px] md:rounded-[48px] bg-brand-primary text-white"
+      className={`fixed left-1/2 z-50 w-11/12 rounded-[28px] md:rounded-[48px] bg-brand-primary text-white transition-shadow duration-300 ${isScrolled ? "shadow-header-glow" : "shadow-header-glow-soft"}`}
     >
       <div className="flex items-center gap-4 md:gap-10 px-5 md:px-10 py-3.5 md:py-4">
         <Link href="/" aria-label="BipBip — ir al inicio" className="shrink-0">
           <Image
-            src="/illustration/Logonav.svg"
+            src={cdn("/illustration/Logonav.svg")}
             alt="BipBip"
             width={167}
             height={48}
@@ -75,7 +74,7 @@ export default function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          className="ml-auto md:hidden flex size-10 items-center justify-center rounded-full hover:bg-white/10 focus-visible:bg-white/10 transition-colors"
+          className="ml-auto md:hidden flex size-11 min-h-11 min-w-11 items-center justify-center rounded-full hover:bg-white/10 focus-visible:bg-white/10 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

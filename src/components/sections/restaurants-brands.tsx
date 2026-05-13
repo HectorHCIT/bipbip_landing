@@ -3,39 +3,40 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import AnimatedSectionTitle from "@/components/ui/animated-section-title";
+import { cdn } from "@/lib/cdn";
 
 type Brand = { src: string; alt: string };
 
 const row1: Brand[] = [
-  { src: "/brands/KFC_logo%20.jpg", alt: "KFC" },
-  { src: "/brands/cinnabon_logo%20.png", alt: "Cinnabon" },
-  { src: "/brands/Wingstreet_Logo%20.png", alt: "WingStreet" },
-  { src: "/brands/Wendys-logo%20.jpg", alt: "Wendy's" },
-  { src: "/brands/PizzaHut_logo%20.jpg", alt: "Pizza Hut" },
-  { src: "/brands/TatosWings_Logo%20.png", alt: "Tato's Wings" },
-  { src: "/brands/Bigos_Logo%20.jpg", alt: "Bigos" },
-  { src: "/brands/Chitos_Logo%20.jpg", alt: "Chitos" },
-  { src: "/brands/Dennys_Logo%20.png", alt: "Denny's" },
-  { src: "/brands/Fridays_logo%20.png", alt: "TGI Fridays" },
-  { src: "/brands/Alamitos_Logo%20.png", alt: "Alamitos" },
-  { src: "/brands/ChinaWok_Logo%20.jpg", alt: "China Wok" },
-  { src: "/brands/McDonald's_logo%20.png", alt: "McDonald's" },
+  { src: cdn("/brands/KFC_logo .jpg"), alt: "KFC" },
+  { src: cdn("/brands/cinnabon_logo .png"), alt: "Cinnabon" },
+  { src: cdn("/brands/Wingstreet_Logo .png"), alt: "WingStreet" },
+  { src: cdn("/brands/Wendys-logo .jpg"), alt: "Wendy's" },
+  { src: cdn("/brands/PizzaHut_logo .jpg"), alt: "Pizza Hut" },
+  { src: cdn("/brands/TatosWings_Logo .png"), alt: "Tato's Wings" },
+  { src: cdn("/brands/Bigos_Logo .jpg"), alt: "Bigos" },
+  { src: cdn("/brands/Chitos_Logo .jpg"), alt: "Chitos" },
+  { src: cdn("/brands/Dennys_Logo .png"), alt: "Denny's" },
+  { src: cdn("/brands/Fridays_logo .png"), alt: "TGI Fridays" },
+  { src: cdn("/brands/Alamitos_Logo .png"), alt: "Alamitos" },
+  { src: cdn("/brands/ChinaWok_Logo .jpg"), alt: "China Wok" },
+  { src: cdn("/brands/McDonald's_logo .png"), alt: "McDonald's" },
 ];
 
 const row2: Brand[] = [
-  { src: "/brands/Papa_Johns_logo%20.png", alt: "Papa John's" },
-  { src: "/brands/logo_tapachula_franquician%20.jpg", alt: "Tapachula" },
-  { src: "/brands/TacoPollo_Logo%20.png", alt: "Taco Pollo" },
-  { src: "/brands/LaCacerola_logo%20.jpg", alt: "La Cacerola" },
-  { src: "/brands/LaPikalita_Logo%20.png", alt: "La Pikalita" },
-  { src: "/brands/totosPizza_Logo%20.png", alt: "Toto's Pizza" },
-  { src: "/brands/churrinChurron_logo%20.jpg", alt: "Churrin Churron" },
-  { src: "/brands/PolloCampesino_Logo%20.jpg", alt: "Pollo Campesino" },
-  { src: "/brands/BaleadasExpress_logo%20.jpg", alt: "Baleadas Express" },
-  { src: "/brands/GoldChickenGold_Logo%20.png", alt: "Gold Chicken Gold" },
-  { src: "/brands/PastelitosMonica_Logo%20.jpg", alt: "Pastelitos Mónica" },
-  { src: "/brands/PolloselHondureño_logo%20.jpg", alt: "Pollos el Hondureño" },
-  { src: "/brands/LaFondaMexicanFood_Logo%20.jpg", alt: "La Fonda Mexican Food" },
+  { src: cdn("/brands/Papa_Johns_logo .png"), alt: "Papa John's" },
+  { src: cdn("/brands/logo_tapachula_franquician .jpg"), alt: "Tapachula" },
+  { src: cdn("/brands/TacoPollo_Logo .png"), alt: "Taco Pollo" },
+  { src: cdn("/brands/LaCacerola_logo .jpg"), alt: "La Cacerola" },
+  { src: cdn("/brands/LaPikalita_Logo .png"), alt: "La Pikalita" },
+  { src: cdn("/brands/totosPizza_Logo .png"), alt: "Toto's Pizza" },
+  { src: cdn("/brands/churrinChurron_logo .jpg"), alt: "Churrin Churron" },
+  { src: cdn("/brands/PolloCampesino_Logo .jpg"), alt: "Pollo Campesino" },
+  { src: cdn("/brands/BaleadasExpress_logo .jpg"), alt: "Baleadas Express" },
+  { src: cdn("/brands/GoldChickenGold_Logo .png"), alt: "Gold Chicken Gold" },
+  { src: cdn("/brands/PastelitosMonica_Logo .jpg"), alt: "Pastelitos Mónica" },
+  { src: cdn("/brands/PolloselHondureño_logo .jpg"), alt: "Pollos el Hondureño" },
+  { src: cdn("/brands/LaFondaMexicanFood_Logo .jpg"), alt: "La Fonda Mexican Food" },
 ];
 
 function MarqueeRow({
@@ -49,11 +50,15 @@ function MarqueeRow({
 }) {
   const doubled = [...items, ...items];
   return (
-    <div className="group overflow-hidden">
+    <div
+      className="group overflow-hidden"
+      role="region"
+      aria-label="Marcas asociadas"
+    >
       <div
         className={`flex w-max items-center gap-10 md:gap-12 ${
           reverse ? "animate-marquee-reverse" : "animate-marquee"
-        } group-hover:[animation-play-state:paused]`}
+        } group-hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:[animation:none]`}
         style={{ animationDuration: `${duration}s` }}
       >
         {doubled.map((brand, index) => (

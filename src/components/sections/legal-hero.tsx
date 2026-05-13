@@ -1,13 +1,15 @@
 import Image from "next/image";
+import type { ReactElement } from "react";
+import { cdn } from "@/lib/cdn";
 
-export default function LegalHero({ title }: { title: string }) {
+export default function LegalHero({ title }: { title: string }): ReactElement {
   return (
     <section
       aria-labelledby="legal-hero-heading"
       className="relative h-[420px] md:h-[480px] lg:h-[530px] overflow-hidden"
     >
       <Image
-        src="/illustration/Overlay%2BBackground.jpg"
+        src={cdn("/illustration/Overlay+Background.jpg")}
         alt=""
         aria-hidden="true"
         fill

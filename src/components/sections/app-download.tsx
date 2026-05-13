@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
+import { cdn } from "@/lib/cdn";
 
 const IOS_URL = "https://apps.apple.com/";
 const ANDROID_URL = "https://play.google.com/store/apps";
@@ -28,17 +29,17 @@ export default function AppDownload() {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           >
             <Image
-              src="/floating/pizza.svg"
+              src={cdn("/floating/pizza.svg")}
               alt=""
               width={340}
               height={230}
-              style={{ width: "auto", height: "auto" }}
-              className="w-full"
+              className="w-full h-auto"
             />
           </motion.div>
         </motion.div>
 
         <div className="relative lg:aspect-[1280/450]">
+          {/* TODO(PERF-050): extract to /public/illustration/app-download-card-{mobile,desktop}.svg and load via Image fill */}
           <svg
             aria-hidden="true"
             viewBox="0 0 360 600"
@@ -70,13 +71,12 @@ export default function AppDownload() {
               transition={{ duration: 0.65, ease: "easeOut" }}
             >
               <Image
-                src="/illustration/phonepreview.svg"
+                src={cdn("/illustration/phonepreview.svg")}
                 alt=""
                 aria-hidden="true"
                 width={420}
                 height={520}
-                style={{ width: "auto", height: "auto" }}
-                className="w-full max-w-[316px] md:max-w-[380px] lg:max-w-[420px] drop-shadow-[20px_20px_64px_rgba(0,0,0,0.45)]"
+                className="h-auto w-full max-w-[316px] md:max-w-[380px] lg:max-w-[420px] drop-shadow-[20px_20px_64px_rgba(0,0,0,0.45)]"
               />
             </motion.div>
 
@@ -92,8 +92,9 @@ export default function AppDownload() {
                 ¡Descarga la App y empieza a disfrutar!
               </motion.h2>
 
+              {/* TODO(TW-060): partial token match — text-s1 matches size/line-height/weight; tracking-[0.2px] is not part of the token */}
               <motion.p
-                className="text-[18px] leading-6 tracking-[0.2px] font-semibold font-sans text-white max-w-[461px]"
+                className="text-s1 tracking-[0.2px] font-sans text-white max-w-[461px]"
                 initial={{ opacity: 0, x: 48 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
@@ -111,7 +112,7 @@ export default function AppDownload() {
               >
                 <BadgeLink
                   href={ANDROID_URL}
-                  src="/illustration/playstore.svg"
+                  src={cdn("/illustration/playstore.svg")}
                   alt="Disponible en Google Play"
                   width={234}
                   height={70}
@@ -119,7 +120,7 @@ export default function AppDownload() {
                 />
                 <BadgeLink
                   href={IOS_URL}
-                  src="/illustration/appstore.svg"
+                  src={cdn("/illustration/appstore.svg")}
                   alt="Descargar en App Store"
                   width={210}
                   height={70}

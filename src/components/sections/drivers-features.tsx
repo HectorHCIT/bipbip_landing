@@ -4,30 +4,31 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import AnimatedSectionTitle from "@/components/ui/animated-section-title";
 import FeatureCards, { type FeatureCard } from "@/components/ui/feature-cards";
+import { cdn } from "@/lib/cdn";
 
-const cards: ReadonlyArray<FeatureCard> = [
+const cards = [
   {
-    icon: "/drivers/image84.png",
+    icon: cdn("/drivers/image84.png"),
     iconSize: 90,
     iconOffset: 63,
     title: "Tu tiempo tus horas",
     body: "Tu decide en que horarios y días trabajar.",
   },
   {
-    icon: "/drivers/Rectangle545.png",
+    icon: cdn("/drivers/Rectangle545.png"),
     iconSize: 106,
     iconOffset: 72,
     title: "Establece tu zona de trabajo",
     body: "Establece en que zonas y cuales órdenes entregar.",
   },
   {
-    icon: "/drivers/Rectangle546.png",
+    icon: cdn("/drivers/Rectangle546.png"),
     iconSize: 106,
     iconOffset: 72,
     title: "Genera ingresos",
     body: "Por cada orden entregada vas a generar ingresos.",
   },
-];
+] as const satisfies ReadonlyArray<FeatureCard>;
 
 export default function DriversFeatures() {
   return (
@@ -56,7 +57,13 @@ export default function DriversFeatures() {
           animate={{ y: [0, -8, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Image src="/floating/pizza.svg" alt="" fill className="object-contain" />
+          <Image
+            src={cdn("/floating/pizza.svg")}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 0px, 234px"
+            className="object-contain"
+          />
         </motion.div>
       </motion.div>
 
@@ -73,7 +80,13 @@ export default function DriversFeatures() {
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
         >
-          <Image src="/drivers/60236155.svg" alt="" fill className="object-contain" />
+          <Image
+            src={cdn("/drivers/60236155.svg")}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 0px, 260px"
+            className="object-contain"
+          />
         </motion.div>
       </motion.div>
 
@@ -96,9 +109,10 @@ export default function DriversFeatures() {
           }}
         >
           <Image
-            src="/drivers/driverinmotoanimado.webp"
+            src={cdn("/drivers/driverinmotoanimado.webp")}
             alt=""
             fill
+            sizes="(max-width: 768px) 0px, 420px"
             className="object-contain object-left-bottom"
           />
         </motion.div>

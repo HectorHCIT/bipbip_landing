@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
 import SocialIconLink from "@/components/ui/social-icon-link";
+import { cdn } from "@/lib/cdn";
 
 const linkColumns = [
   {
@@ -33,11 +34,11 @@ const linkColumns = [
 ] as const;
 
 const socials = [
-  { src: "/illustration/fb.svg", href: "https://facebook.com/", label: "Facebook" },
-  { src: "/illustration/ig.svg", href: "https://instagram.com/", label: "Instagram" },
-  { src: "/illustration/x.svg", href: "https://x.com/", label: "X (Twitter)" },
-  { src: "/illustration/ytb.svg", href: "https://youtube.com/", label: "YouTube" },
-  { src: "/illustration/in.svg", href: "https://linkedin.com/", label: "LinkedIn" },
+  { src: cdn("/illustration/fb.svg"), href: "https://facebook.com/", label: "Facebook" },
+  { src: cdn("/illustration/ig.svg"), href: "https://instagram.com/", label: "Instagram" },
+  { src: cdn("/illustration/x.svg"), href: "https://x.com/", label: "X (Twitter)" },
+  { src: cdn("/illustration/ytb.svg"), href: "https://youtube.com/", label: "YouTube" },
+  { src: cdn("/illustration/in.svg"), href: "https://linkedin.com/", label: "LinkedIn" },
 ] as const;
 
 const linkClass =
@@ -45,7 +46,11 @@ const linkClass =
 
 export default function Footer() {
   return (
-    <footer id="site-footer" className="bg-white text-brand-black">
+    <footer
+      id="site-footer"
+      aria-label="Pie de página"
+      className="bg-white text-brand-black"
+    >
       <div className="relative overflow-hidden">
         <motion.div
           aria-hidden="true"
@@ -56,7 +61,7 @@ export default function Footer() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <Image
-            src="/illustration/bgfotter.svg"
+            src={cdn("/illustration/bgfotter.svg")}
             alt=""
             fill
             sizes="100vw"
@@ -74,7 +79,7 @@ export default function Footer() {
               transition={{ duration: 0.55, ease: "easeOut" }}
             >
               <Image
-                src="/illustration/logofotter.svg"
+                src={cdn("/illustration/logofotter.svg")}
                 alt="BipBip"
                 width={303}
                 height={87}
@@ -98,6 +103,9 @@ export default function Footer() {
                   }}
                   className="text-center md:text-left"
                 >
+                  {/* TODO(TW-060): text-s1 token uses leading 24px and weight 600,
+                      but this heading needs leading-7 (28px) and font-bold (700).
+                      Add a heading-specific text token before swapping. */}
                   <h3
                     id={headingId}
                     className="text-[18px] leading-7 font-bold font-sans text-brand-black mb-4"
@@ -127,14 +135,14 @@ export default function Footer() {
           >
             <BadgeLink
               href="https://play.google.com/store/apps"
-              src="/illustration/playstore.svg"
+              src={cdn("/illustration/playstore.svg")}
               alt="Disponible en Google Play"
               width={162}
               height={48}
             />
             <BadgeLink
               href="https://apps.apple.com/"
-              src="/illustration/appstore.svg"
+              src={cdn("/illustration/appstore.svg")}
               alt="Descargar en App Store"
               width={144}
               height={48}
@@ -145,36 +153,37 @@ export default function Footer() {
 
       <div className="bg-brand-black text-white">
         <div className="mx-auto flex w-11/12 max-w-[1280px] flex-col items-center gap-4 py-5 md:flex-row md:justify-between md:py-4">
-          <motion.ul
-            className="flex items-center gap-4 md:order-2"
-            aria-label="Redes sociales"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.4 }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
-            }}
-          >
-            {socials.map((social) => (
-              <motion.li
-                key={social.label}
-                variants={{
-                  hidden: { opacity: 0, scale: 0.6 },
-                  visible: { opacity: 1, scale: 1 },
-                }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
-              >
-                <SocialIconLink
-                  href={social.href}
-                  src={social.src}
-                  label={social.label}
-                  size={28}
-                />
-              </motion.li>
-            ))}
-          </motion.ul>
+          <nav aria-label="Redes sociales" className="md:order-2">
+            <motion.ul
+              className="flex items-center gap-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
+              }}
+            >
+              {socials.map((social) => (
+                <motion.li
+                  key={social.label}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.6 },
+                    visible: { opacity: 1, scale: 1 },
+                  }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
+                >
+                  <SocialIconLink
+                    href={social.href}
+                    src={social.src}
+                    label={social.label}
+                    size={28}
+                  />
+                </motion.li>
+              ))}
+            </motion.ul>
+          </nav>
 
           <p className="text-caption text-center md:order-1 md:text-left">
             © {new Date().getFullYear()} Derechos Reservados Grupo Comidas
@@ -182,7 +191,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-2 md:order-3">
             <Image
-              src="/illustration/Logo%20CIT.svg"
+              src={cdn("/illustration/Logo CIT.svg")}
               alt="CIT"
               width={161}
               height={33}

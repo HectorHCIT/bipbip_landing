@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
+import { cdn } from "@/lib/cdn";
 
 const widthMap = {
   default: "w-[260px] md:w-[420px] lg:w-[552px]",
@@ -19,7 +20,7 @@ export default function AnimatedSectionTitle({
   id: string;
   width?: AnimatedSectionTitleWidth;
   children: ReactNode;
-}) {
+}): ReactElement {
   return (
     <header className="flex flex-col items-center gap-2 text-center">
       <motion.h2
@@ -41,7 +42,7 @@ export default function AnimatedSectionTitle({
         className={widthMap[width]}
       >
         <Image
-          src="/illustration/headline-underline.png"
+          src={cdn("/illustration/headline-underline.png")}
           alt=""
           aria-hidden="true"
           width={width === "wide" ? 681 : 552}

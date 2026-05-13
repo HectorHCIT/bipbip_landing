@@ -3,20 +3,21 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import AnimatedSectionTitle from "@/components/ui/animated-section-title";
+import { cdn } from "@/lib/cdn";
 
 const features = [
   {
-    icon: "/icons/moto.svg",
+    icon: cdn("/icons/moto.svg"),
     title: "Envío a domicilio",
     body: "Tu comida favorita, directo a tu puerta. Pide con Bipbip y relájate mientras nosotros la llevamos.",
   },
   {
-    icon: "/icons/bag.svg",
+    icon: cdn("/icons/bag.svg"),
     title: "Recoger en Restaurante",
     body: "Ordena desde la app y recoge tu pedido sin esperas. ¡Comodidad en cada paso!",
   },
   {
-    icon: "/icons/spoon.svg",
+    icon: cdn("/icons/spoon.svg"),
     title: "Comer en Restaurante",
     body: "Ordena desde la app y recoge tu pedido sin esperas. ¡Comodidad en cada paso!",
   },
@@ -57,6 +58,7 @@ export default function FeatureGrid() {
                 (index === 1 ? " md:mt-25" : "")
               }
             >
+              {/* TODO(STY-008): --shadow-card uses opacity 0.05; this raw value uses 0.08 — confirm intended token before swapping */}
               <div className="absolute -top-11 left-1/2 -translate-x-1/2 flex size-22 items-center justify-center rounded-full bg-white shadow-[0_5px_12px_rgba(0,0,0,0.08)]">
                 <Image
                   src={feature.icon}
@@ -88,7 +90,7 @@ export default function FeatureGrid() {
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
           <Image
-            src="/floating/cubo%20pollo.svg"
+            src={cdn("/floating/cubo pollo.svg")}
             alt=""
             fill
             sizes="538px"
