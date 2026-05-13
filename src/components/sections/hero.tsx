@@ -66,18 +66,28 @@ export default function Hero() {
           className="object-cover object-center"
           priority
         />
+        <video
+          className="absolute inset-0 h-full w-full object-cover md:hidden motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        >
+          <source src={cdn("/video.mp4")} type="video/mp4" />
+        </video>
       </div>
 
       <div className="relative mx-auto w-11/12">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
-          <div className="flex flex-col gap-10 w-full mx-auto justify-center items-start">
+          <div className="relative z-10 flex flex-col gap-10 w-full mx-auto justify-center items-start">
             {/* TODO(TW-060): partial token match — none of the responsive sizes (36/44/52/56) match text-h2 (48px) exactly */}
             <motion.h1
               id="hero-heading"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-[36px] leading-[44px] sm:text-[44px] sm:leading-[52px] md:text-[52px] md:leading-[60px] lg:text-[56px] lg:leading-[64px] font-bold font-sans text-brand-black w-full"
+              className="text-[36px] leading-[44px] sm:text-[44px] sm:leading-[52px] md:text-[52px] md:leading-[60px] lg:text-[56px] lg:leading-[64px] font-bold font-sans text-white md:text-brand-black motion-reduce:text-brand-black w-full"
             >
               Tu comida favorita, más cerca que nunca!
             </motion.h1>
@@ -86,10 +96,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="flex flex-wrap items-center gap-4"
+              className="hidden md:flex flex-wrap items-center gap-4"
             >
               <BadgeLink
-                href="https://play.google.com/store/apps"
+                href="https://play.google.com/store/apps/details?id=hn.cit.gccustomerapp"
                 src={cdn("/illustration/playstore.svg")}
                 alt="Disponible en Google Play"
                 width={209}
@@ -97,7 +107,7 @@ export default function Hero() {
                 className="rounded-lg w-[170px] md:w-[209px] [&_img]:w-full [&_img]:h-auto"
               />
               <BadgeLink
-                href="https://apps.apple.com/"
+                href="https://apps.apple.com/hn/app/bip-bip/id1501865149"
                 src={cdn("/illustration/appstore.svg")}
                 alt="Descargar en App Store"
                 width={186}
@@ -108,7 +118,7 @@ export default function Hero() {
           </div>
 
           <div
-            className="hidden md:flex relative md:h-[640px] lg:h-[886px] items-center justify-center overflow-hidden"
+            className="hidden md:flex relative md:h-[640px] lg:h-[886px] items-center justify-center"
             aria-hidden="true"
           >
             <div className="relative w-[648px] h-[591px] md:scale-100 lg:scale-[1.5] origin-center">

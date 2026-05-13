@@ -10,13 +10,13 @@ const variants = {
   "split-547": {
     grid: "lg:grid-cols-[minmax(0,547px)_1fr]",
     padding: "px-8 py-12 md:px-12 md:py-16 lg:px-16 lg:py-18",
-    bodyClass: "text-b2 text-brand-black max-w-[295px]",
+    bodyClass: "text-b2 md:max-w-[295px]",
     sizes: "(max-width: 1024px) 100vw, 733px",
   },
   "split-50": {
     grid: "lg:grid-cols-2",
     padding: "px-8 py-12 md:px-10 md:py-16 lg:px-10 lg:py-18",
-    bodyClass: "text-b2 text-brand-black",
+    bodyClass: "text-b2",
     sizes: "(max-width: 1024px) 100vw, 640px",
   },
 } as const;
@@ -59,10 +59,29 @@ export default function HeroCard({
           initial={{ opacity: 0, y: 32, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="overflow-hidden rounded-[40px] bg-white shadow-hero-card"
+          className="relative overflow-hidden rounded-[40px] bg-white shadow-hero-card"
         >
-          <div className={`grid grid-cols-1 ${v.grid} items-stretch lg:min-h-[631px]`}>
-            <div className={`flex flex-col justify-center gap-10 lg:gap-12 ${v.padding}`}>
+          {/* Mobile-only background image (decorative) */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 1.08 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.2, ease: "easeOut" }}
+            className="absolute inset-0 md:hidden"
+          >
+            <Image
+              src={imageSrc}
+              alt=""
+              fill
+              className="object-cover"
+              priority
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-black/30" />
+          </motion.div>
+
+          <div className={`relative grid grid-cols-1 ${v.grid} items-stretch min-h-[520px] md:min-h-0 lg:min-h-[631px]`}>
+            <div className={`relative z-10 flex flex-col justify-center gap-10 lg:gap-12 ${v.padding}`}>
               <div className="flex flex-col gap-4">
                 <motion.h1
                   id={headingId}
@@ -70,7 +89,7 @@ export default function HeroCard({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   // TODO(TW-060): no exact text token for 40/44 (mobile) or 56/60 (desktop); h2 is 48/56
-                  className="text-[40px] leading-[44px] md:text-[56px] md:leading-[60px] font-bold font-sans text-brand-black"
+                  className="text-[40px] leading-[44px] md:text-[56px] md:leading-[60px] font-bold font-sans text-white md:text-brand-black"
                 >
                   {title}
                 </motion.h1>
@@ -78,7 +97,7 @@ export default function HeroCard({
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-                  className={v.bodyClass}
+                  className={`${v.bodyClass} text-white md:text-brand-black`}
                 >
                   {body}
                 </motion.p>
@@ -109,11 +128,12 @@ export default function HeroCard({
                 </motion.button>
               )}
             </div>
+            {/* Desktop image column */}
             <motion.div
               initial={{ opacity: 0, scale: 1.08 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.1, delay: 0.2, ease: "easeOut" }}
-              className="relative min-h-[320px] lg:min-h-[631px] overflow-hidden"
+              className="hidden md:block relative md:min-h-[320px] lg:min-h-[631px] overflow-hidden"
             >
               <Image
                 src={imageSrc}
