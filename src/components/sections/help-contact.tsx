@@ -2,7 +2,6 @@
 
 import { useState, useId } from "react";
 import Image from "next/image";
-import { motion } from "motion/react";
 import Button from "@/components/ui/button";
 import { cdn } from "@/lib/cdn";
 
@@ -99,42 +98,22 @@ export default function HelpContact() {
     >
       <div className="relative mx-auto w-11/12 max-w-[1440px]">
         <header className="flex flex-col items-center gap-2 text-center">
-          <motion.h2
+          <h2
             id="help-heading"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
-            className="text-[36px] leading-[44px] md:text-h2 font-bold font-sans text-brand-primary"
+            className="anim-reveal-up text-[36px] leading-[44px] md:text-h2 font-bold font-sans text-brand-primary"
           >
             ¿Necesitas Ayuda?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.55, delay: 0.12, ease: "easeOut" }}
-            className="text-[18px] leading-7 md:text-[20px] md:leading-7 font-bold font-sans text-brand-black"
-          >
+          </h2>
+          <p className="anim-reveal-up text-[18px] leading-7 md:text-[20px] md:leading-7 font-bold font-sans text-brand-black">
             Estamos aquí para resolver tus dudas y mejorar tu experiencia
-          </motion.p>
+          </p>
         </header>
 
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="relative mt-14 mx-auto w-full lg:max-w-[1080px] xl:max-w-[1200px] rounded-3xl bg-grey-200 p-3 md:p-8 lg:p-8 xl:p-10 shadow-card"
-        >
+        <div className="anim-reveal-up relative mt-14 mx-auto w-full lg:max-w-[1080px] xl:max-w-[1200px] rounded-3xl bg-grey-200 p-3 md:p-8 lg:p-8 xl:p-10 shadow-card">
           <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] xl:grid-cols-[460px_1fr] items-center gap-8 lg:gap-10">
-            <motion.div
-              className="flex justify-center lg:justify-start"
+            <div
+              className="anim-reveal-left flex justify-center lg:justify-start"
               aria-hidden="true"
-              initial={{ opacity: 0, x: -48 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
             >
               <Image
                 src={cdn("/illustration/callcentergirl.svg")}
@@ -143,32 +122,24 @@ export default function HelpContact() {
                 height={434}
                 className="h-auto w-full max-w-[220px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-none"
               />
-            </motion.div>
+            </div>
 
             {submitState.status === "success" ? (
-              <motion.div
+              <div
                 role="status"
                 aria-live="polite"
-                initial={{ opacity: 0, x: 48 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-                className="w-full lg:max-w-[440px] xl:max-w-[560px] lg:justify-self-center rounded-2xl bg-white p-4 md:p-6 lg:p-8 text-brand-black"
+                className="anim-reveal-right w-full lg:max-w-[440px] xl:max-w-[560px] lg:justify-self-center rounded-2xl bg-white p-4 md:p-6 lg:p-8 text-brand-black"
               >
                 <p className="text-h5 font-sans">¡Mensaje enviado!</p>
                 <p className="mt-2 text-b2">
                   Gracias por escribirnos. Te respondemos pronto.
                 </p>
-              </motion.div>
+              </div>
             ) : (
-              <motion.form
+              <form
                 onSubmit={handleSubmit}
                 noValidate
-                initial={{ opacity: 0, x: 48 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-                className="w-full lg:max-w-[440px] xl:max-w-[560px] lg:justify-self-center flex flex-col gap-4 rounded-2xl bg-white p-4 md:p-6 lg:p-8"
+                className="anim-reveal-right w-full lg:max-w-[440px] xl:max-w-[560px] lg:justify-self-center flex flex-col gap-4 rounded-2xl bg-white p-4 md:p-6 lg:p-8"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1">
@@ -314,24 +285,17 @@ export default function HelpContact() {
                 <span aria-live="polite" className="sr-only">
                   {submitStatusMessage}
                 </span>
-              </motion.form>
+              </form>
             )}
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      <motion.div
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute hidden lg:block right-0 top-[55%] w-[280px] xl:w-[334px] z-10 select-none"
-        initial={{ opacity: 0, x: 40, rotate: -10 }}
-        whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="anim-reveal-right pointer-events-none absolute hidden lg:block right-0 top-[55%] w-[280px] xl:w-[334px] z-10 select-none"
       >
-        <motion.div
-          animate={{ y: [0, -10, 0], rotate: [0, 4, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        >
+        <div className="anim-float-slow">
           <Image
             src={cdn("/floating/pizza.svg")}
             alt=""
@@ -340,20 +304,16 @@ export default function HelpContact() {
             className="h-auto w-full drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)]"
             style={{ width: "auto", height: "auto" }}
           />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
-      <motion.div
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute hidden md:block left-0 bottom-12 w-[160px] lg:w-[244px] z-10 select-none"
-        initial={{ opacity: 0, x: -40, rotate: 10 }}
-        whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="anim-reveal-left pointer-events-none absolute hidden md:block left-0 bottom-12 w-[160px] lg:w-[244px] z-10 select-none"
       >
-        <motion.div
-          animate={{ y: [0, -8, 0], rotate: [0, -3, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="anim-float-slow"
+          style={{ animationDuration: "6s" }}
         >
           <Image
             src={cdn("/floating/egg.svg")}
@@ -363,8 +323,8 @@ export default function HelpContact() {
             className="h-auto w-full drop-shadow-[0_14px_14px_rgba(0,0,0,0.15)]"
             style={{ width: "auto", height: "auto" }}
           />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

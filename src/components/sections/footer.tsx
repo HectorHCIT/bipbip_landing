@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
 import SocialIconLink from "@/components/ui/social-icon-link";
 import FooterLinkIcon, {
@@ -71,13 +68,9 @@ export default function Footer() {
       className="bg-white text-brand-black"
     >
       <div className="relative overflow-hidden">
-        <motion.div
+        <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[300px] select-none"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="anim-reveal-up pointer-events-none absolute inset-x-0 bottom-0 h-[300px] select-none"
         >
           <Image
             src={cdn("/illustration/bgfotter.svg")}
@@ -86,17 +79,11 @@ export default function Footer() {
             sizes="100vw"
             className="object-cover object-bottom"
           />
-        </motion.div>
+        </div>
 
         <div className="relative mx-auto w-11/12 max-w-[1280px] pt-12 md:pt-16 pb-24 md:pb-56">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-12 items-start">
-            <motion.div
-              className="sm:col-span-2 md:col-span-3 lg:col-span-1 flex justify-center lg:justify-start"
-              initial={{ opacity: 0, y: -16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.55, ease: "easeOut" }}
-            >
+            <div className="anim-reveal-down sm:col-span-2 md:col-span-3 lg:col-span-1 flex justify-center lg:justify-start">
               <Image
                 src={cdn("/illustration/logofotter.svg")}
                 alt="BipBip"
@@ -104,23 +91,15 @@ export default function Footer() {
                 height={87}
                 className="w-[200px] md:w-[260px] lg:w-[280px] h-auto"
               />
-            </motion.div>
+            </div>
 
-            {linkColumns.map((col, index) => {
+            {linkColumns.map((col) => {
               const headingId = `footer-${col.title.replace(/\s+/g, "-")}`;
               return (
-                <motion.nav
+                <nav
                   key={col.title}
                   aria-labelledby={headingId}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.1 + index * 0.1,
-                    ease: "easeOut",
-                  }}
-                  className="text-center md:text-left"
+                  className="anim-reveal-up text-center md:text-left"
                 >
                   {/* TODO(TW-060): text-s1 token uses leading 24px and weight 600,
                       but this heading needs leading-7 (28px) and font-bold (700).
@@ -141,18 +120,12 @@ export default function Footer() {
                       </li>
                     ))}
                   </ul>
-                </motion.nav>
+                </nav>
               );
             })}
           </div>
 
-          <motion.div
-            className="relative mt-10 md:mt-12 lg:mt-16 flex flex-col items-center gap-4 md:flex-row md:justify-center lg:justify-start md:gap-3"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-          >
+          <div className="anim-reveal-up relative mt-10 md:mt-12 lg:mt-16 flex flex-col items-center gap-4 md:flex-row md:justify-center lg:justify-start md:gap-3">
             <BadgeLink
               href="https://play.google.com/store/apps/details?id=hn.cit.gccustomerapp"
               src={cdn("/illustration/playstore.svg")}
@@ -167,32 +140,18 @@ export default function Footer() {
               width={144}
               height={48}
             />
-          </motion.div>
+          </div>
         </div>
       </div>
 
       <div className="bg-brand-black text-white">
         <div className="mx-auto flex w-11/12 max-w-[1280px] flex-col items-center gap-4 py-5 md:flex-row md:justify-between md:py-4">
           <nav aria-label="Redes sociales" className="md:order-2">
-            <motion.ul
-              className="flex items-center gap-4"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.4 }}
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
-              }}
-            >
+            <ul className="anim-reveal-scale flex items-center gap-4">
               {socials.map((social) => (
-                <motion.li
+                <li
                   key={social.label}
-                  variants={{
-                    hidden: { opacity: 0, scale: 0.6 },
-                    visible: { opacity: 1, scale: 1 },
-                  }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
+                  className="inline-block transition-transform duration-200 hover:scale-110 motion-reduce:transform-none"
                 >
                   <SocialIconLink
                     href={social.href}
@@ -200,9 +159,9 @@ export default function Footer() {
                     label={social.label}
                     size={28}
                   />
-                </motion.li>
+                </li>
               ))}
-            </motion.ul>
+            </ul>
           </nav>
 
           <p className="text-caption text-center md:order-1 md:text-left">

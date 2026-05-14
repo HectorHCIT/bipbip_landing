@@ -114,9 +114,83 @@ body {
   animation: marquee-reverse linear infinite;
 }
 
+/* ── Entrance animations (CSS-only, server-renderable) ──────────────────── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-left {
+  from { opacity: 0; transform: translateX(-48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fade-in-right {
+  from { opacity: 0; transform: translateX(48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fade-in-scale {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* On-load animations (above-the-fold) */
+.anim-load-up    { animation: fade-in-up 0.6s ease-out both; }
+.anim-load-down  { animation: fade-in-down 0.55s ease-out both; }
+.anim-load-left  { animation: fade-in-left 0.6s ease-out both; }
+.anim-load-right { animation: fade-in-right 0.6s ease-out both; }
+.anim-load-scale { animation: fade-in-scale 0.5s ease-out both; }
+
+/* Stagger delay variants (used with anim-load-* above-the-fold) */
+.anim-delay-1 { animation-delay: 0.10s; }
+.anim-delay-2 { animation-delay: 0.20s; }
+.anim-delay-3 { animation-delay: 0.30s; }
+.anim-delay-4 { animation-delay: 0.45s; }
+.anim-delay-5 { animation-delay: 0.60s; }
+
+/* Scroll-driven animations (below-the-fold) — graceful fallback when unsupported */
+@supports (animation-timeline: view()) {
+  .anim-reveal-up,
+  .anim-reveal-down,
+  .anim-reveal-left,
+  .anim-reveal-right,
+  .anim-reveal-scale {
+    animation-timeline: view();
+    animation-range: entry 0% cover 25%;
+    animation-fill-mode: both;
+  }
+  .anim-reveal-up    { animation-name: fade-in-up; }
+  .anim-reveal-down  { animation-name: fade-in-down; }
+  .anim-reveal-left  { animation-name: fade-in-left; }
+  .anim-reveal-right { animation-name: fade-in-right; }
+  .anim-reveal-scale { animation-name: fade-in-scale; }
+}
+
+/* Infinite float (decorative floating items) */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.anim-float { animation: float-y 4s ease-in-out infinite; }
+.anim-float-slow { animation: float-y 5s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
-  .animate-marquee-reverse {
+  .animate-marquee-reverse,
+  .anim-load-up,
+  .anim-load-down,
+  .anim-load-left,
+  .anim-load-right,
+  .anim-load-scale,
+  .anim-reveal-up,
+  .anim-reveal-down,
+  .anim-reveal-left,
+  .anim-reveal-right,
+  .anim-reveal-scale,
+  .anim-float,
+  .anim-float-slow {
     animation: none;
   }
 }

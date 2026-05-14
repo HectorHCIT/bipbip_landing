@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
-import MotionProvider from "@/components/providers/motion-provider";
 import { JsonLd } from "@/components/seo/jsonld";
 import { cdn } from "@/lib/cdn";
 import {
@@ -123,7 +122,7 @@ export default function RootLayout({
         >
           Saltar al contenido
         </a>
-        <MotionProvider>{children}</MotionProvider>
+        {children}
       </body>
     </html>
   );

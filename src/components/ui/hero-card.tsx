@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "motion/react";
 import type { ReactElement } from "react";
 
 type HeroCardVariant = "split-547" | "split-50";
@@ -46,7 +43,7 @@ export default function HeroCard({
   // STY-005: replacing this ad-hoc CTA with the shared <Button> component is
   // out of scope here — requires verifying the variant prop API across pages.
   const ctaClass =
-    "inline-flex h-12 w-full md:max-w-[288px] items-center justify-center rounded-lg bg-brand-primary px-4 text-button text-white shadow-cta transition-opacity hover:opacity-95";
+    "anim-load-up anim-delay-3 inline-flex h-12 w-full md:max-w-[288px] items-center justify-center rounded-lg bg-brand-primary px-4 text-button text-white shadow-cta transition-[opacity,transform] duration-200 hover:opacity-95 hover:scale-[1.02] active:scale-[0.98]";
 
   return (
     <section
@@ -55,19 +52,11 @@ export default function HeroCard({
       className="pt-32 md:pt-36 lg:pt-32 pb-16"
     >
       <div className="mx-auto w-11/12 max-w-[1280px]">
-        <motion.div
-          initial={{ opacity: 0, y: 32, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative overflow-hidden rounded-[40px] bg-white shadow-hero-card"
-        >
+        <div className="anim-load-up relative overflow-hidden rounded-[40px] bg-white shadow-hero-card">
           {/* Mobile-only background image (decorative) */}
-          <motion.div
+          <div
             aria-hidden="true"
-            initial={{ opacity: 0, scale: 1.08 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, delay: 0.2, ease: "easeOut" }}
-            className="absolute inset-0 md:hidden"
+            className="anim-load-scale anim-delay-2 absolute inset-0 md:hidden"
           >
             <Image
               src={imageSrc}
@@ -78,63 +67,34 @@ export default function HeroCard({
               sizes="(max-width: 767px) 92vw, 1px"
             />
             <div className="absolute inset-0 bg-black/30" />
-          </motion.div>
+          </div>
 
           <div className={`relative grid grid-cols-1 ${v.grid} items-stretch min-h-[520px] md:min-h-0 lg:min-h-[631px]`}>
             <div className={`relative z-10 flex flex-col justify-center gap-10 lg:gap-12 ${v.padding}`}>
               <div className="flex flex-col gap-4">
-                <motion.h1
+                <h1
                   id={headingId}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
                   // TODO(TW-060): no exact text token for 40/44 (mobile) or 56/60 (desktop); h2 is 48/56
-                  className="text-[40px] leading-[44px] md:text-[56px] md:leading-[60px] font-bold font-sans text-white md:text-brand-black"
+                  className="anim-load-up text-[40px] leading-[44px] md:text-[56px] md:leading-[60px] font-bold font-sans text-white md:text-brand-black"
                 >
                   {title}
-                </motion.h1>
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-                  className={`${v.bodyClass} text-white md:text-brand-black`}
-                >
+                </h1>
+                <p className={`anim-load-up anim-delay-1 ${v.bodyClass} text-white md:text-brand-black`}>
                   {body}
-                </motion.p>
+                </p>
               </div>
               {ctaHref ? (
-                <motion.a
-                  href={ctaHref}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={ctaClass}
-                >
+                <a href={ctaHref} className={ctaClass}>
                   {ctaLabel}
-                </motion.a>
+                </a>
               ) : (
-                <motion.button
-                  type="button"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={ctaClass}
-                >
+                <button type="button" className={ctaClass}>
                   {ctaLabel}
-                </motion.button>
+                </button>
               )}
             </div>
             {/* Desktop image column */}
-            <motion.div
-              initial={{ opacity: 0, scale: 1.08 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.1, delay: 0.2, ease: "easeOut" }}
-              className="hidden md:block relative md:min-h-[320px] lg:min-h-[631px] overflow-hidden"
-            >
+            <div className="anim-load-scale anim-delay-2 hidden md:block relative md:min-h-[320px] lg:min-h-[631px] overflow-hidden">
               <Image
                 src={imageSrc}
                 alt={imageAlt}
@@ -143,9 +103,9 @@ export default function HeroCard({
                 priority
                 sizes={v.sizes}
               />
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

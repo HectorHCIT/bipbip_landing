@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
 import { cdn } from "@/lib/cdn";
 
@@ -11,35 +8,45 @@ const floatingItems = [
     width: 343,
     height: 309,
     className: "absolute top-[16px] left-[45px]",
-    delay: 0,
+    enterDelay: "0s",
+    floatDelay: "0s",
+    floatDuration: "4s",
   },
   {
     src: cdn("/floating/pizza.svg"),
     width: 253,
     height: 171,
     className: "absolute top-0 left-[334px]",
-    delay: 0.4,
+    enterDelay: "0.06s",
+    floatDelay: "0.4s",
+    floatDuration: "4.2s",
   },
   {
     src: cdn("/floating/egg.svg"),
     width: 247,
     height: 178,
     className: "absolute top-[200px] left-[401px]",
-    delay: 0.8,
+    enterDelay: "0.12s",
+    floatDelay: "0.8s",
+    floatDuration: "4.4s",
   },
   {
     src: cdn("/floating/cubo pollo.svg"),
     width: 281,
     height: 287,
     className: "absolute top-[291px] left-0",
-    delay: 1.2,
+    enterDelay: "0.18s",
+    floatDelay: "1.2s",
+    floatDuration: "4.6s",
   },
   {
     src: cdn("/floating/rice wolk.svg"),
     width: 204,
     height: 263,
     className: "absolute top-[328px] left-[362px]",
-    delay: 1.6,
+    enterDelay: "0.24s",
+    floatDelay: "1.6s",
+    floatDuration: "4.8s",
   },
 ] as const;
 
@@ -77,22 +84,14 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
           <div className="relative z-10 flex flex-col gap-10 w-full mx-auto justify-center items-start">
             {/* TODO(TW-060): partial token match — none of the responsive sizes (36/44/52/56) match text-h2 (48px) exactly */}
-            <motion.h1
+            <h1
               id="hero-heading"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-[36px] leading-[44px] sm:text-[44px] sm:leading-[52px] md:text-[52px] md:leading-[60px] lg:text-[56px] lg:leading-[64px] font-bold font-sans text-white md:text-brand-black motion-reduce:text-brand-black w-full"
+              className="anim-load-up text-[36px] leading-[44px] sm:text-[44px] sm:leading-[52px] md:text-[52px] md:leading-[60px] lg:text-[56px] lg:leading-[64px] font-bold font-sans text-white md:text-brand-black motion-reduce:text-brand-black w-full"
             >
               Tu comida favorita, más cerca que nunca!
-            </motion.h1>
+            </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="hidden md:flex flex-wrap items-center gap-4"
-            >
+            <div className="anim-load-up anim-delay-2 hidden md:flex flex-wrap items-center gap-4">
               <BadgeLink
                 href="https://play.google.com/store/apps/details?id=hn.cit.gccustomerapp"
                 src={cdn("/illustration/playstore.svg")}
@@ -109,7 +108,7 @@ export default function Hero() {
                 height={62}
                 className="rounded-lg w-[170px] md:w-[186px] [&_img]:w-full [&_img]:h-auto"
               />
-            </motion.div>
+            </div>
           </div>
 
           <div
@@ -118,37 +117,29 @@ export default function Hero() {
           >
             <div className="relative w-[648px] h-[591px] scale-[0.45] sm:scale-[0.6] md:scale-100 lg:scale-[1.5] origin-center">
               {floatingItems.map((item) => (
-                <motion.div
+                <div
                   key={item.src}
-                  className={item.className}
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    y: [0, -10, 0],
-                  }}
-                  viewport={{ amount: 0.1 }}
-                  transition={{
-                    opacity: { duration: 0.5, delay: item.delay * 0.15 },
-                    scale: { duration: 0.5, delay: item.delay * 0.15 },
-                    y: {
-                      duration: 4 + item.delay * 0.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: item.delay,
-                    },
-                  }}
+                  className={`anim-load-scale ${item.className}`}
+                  style={{ animationDelay: item.enterDelay }}
                 >
-                  <Image
-                    src={item.src}
-                    alt=""
-                    width={item.width}
-                    height={item.height}
-                    priority
-                    className="w-auto h-auto"
-                    style={{ width: "auto", height: "auto" }}
-                  />
-                </motion.div>
+                  <div
+                    className="anim-float"
+                    style={{
+                      animationDelay: item.floatDelay,
+                      animationDuration: item.floatDuration,
+                    }}
+                  >
+                    <Image
+                      src={item.src}
+                      alt=""
+                      width={item.width}
+                      height={item.height}
+                      priority
+                      className="w-auto h-auto"
+                      style={{ width: "auto", height: "auto" }}
+                    />
+                  </div>
+                </div>
               ))}
             </div>
           </div>

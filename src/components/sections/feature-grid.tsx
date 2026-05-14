@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "motion/react";
 import AnimatedSectionTitle from "@/components/ui/animated-section-title";
 import { cdn } from "@/lib/cdn";
 
@@ -10,16 +7,19 @@ const features = [
     icon: cdn("/icons/moto.svg"),
     title: "Envío a domicilio",
     body: "Tu comida favorita, directo a tu puerta. Pide con Bipbip y relájate mientras nosotros la llevamos.",
+    reveal: "anim-reveal-left",
   },
   {
     icon: cdn("/icons/bag.svg"),
     title: "Recoger en Restaurante",
     body: "Ordena desde la app y recoge tu pedido sin esperas. ¡Comodidad en cada paso!",
+    reveal: "anim-reveal-up",
   },
   {
     icon: cdn("/icons/spoon.svg"),
     title: "Comer en Restaurante",
     body: "Ordena desde la app y recoge tu pedido sin esperas. ¡Comodidad en cada paso!",
+    reveal: "anim-reveal-right",
   },
 ] as const;
 
@@ -37,24 +37,10 @@ export default function FeatureGrid() {
 
         <div className="relative mt-24 grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-16 lg:gap-20 lg:max-w-[1060px] lg:mx-auto">
           {features.map((feature, index) => (
-            <motion.article
+            <article
               key={feature.title}
-              initial={
-                index === 0
-                  ? { opacity: 0, x: -48 }
-                  : index === features.length - 1
-                    ? { opacity: 0, x: 48 }
-                    : { opacity: 0, y: 32 }
-              }
-              whileInView={{ opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.15,
-                ease: "easeOut",
-              }}
               className={
-                "relative flex flex-col items-center gap-6 rounded-3xl bg-white px-8 pt-12 pb-6 shadow-card" +
+                `${feature.reveal} relative flex flex-col items-center gap-6 rounded-3xl bg-white px-8 pt-12 pb-6 shadow-card` +
                 (index === 1 ? " md:mt-25" : "")
               }
             >
@@ -71,24 +57,16 @@ export default function FeatureGrid() {
               </div>
               <h3 className="text-h5 text-brand-black text-center">{feature.title}</h3>
               <p className="text-b2 text-brand-black text-center">{feature.body}</p>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>
 
-      <motion.div
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 bottom-0 z-10 hidden lg:block w-[538px] h-[342px] select-none"
-        initial={{ opacity: 0, x: -40 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="anim-reveal-left pointer-events-none absolute left-0 bottom-0 z-10 hidden lg:block w-[538px] h-[342px] select-none"
       >
-        <motion.div
-          className="relative size-full"
-          animate={{ y: [0, -12, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        >
+        <div className="anim-float-slow relative size-full">
           <Image
             src={cdn("/floating/cubo pollo.svg")}
             alt=""
@@ -96,8 +74,8 @@ export default function FeatureGrid() {
             sizes="538px"
             className="object-contain object-left-bottom"
           />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

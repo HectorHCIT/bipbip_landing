@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cdn } from "@/lib/cdn";
 
 const SCROLL_THRESHOLD = 80;
@@ -22,22 +21,24 @@ const navLinkClass =
   "relative whitespace-nowrap text-[15px] xl:text-[18px] leading-7 font-semibold text-white transition-colors hover:text-brand-yellow focus-visible:text-brand-yellow after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-0.5 after:rounded-full after:bg-brand-yellow after:scale-x-0 after:origin-center hover:after:scale-x-100 focus-visible:after:scale-x-100 after:transition-transform after:duration-300";
 
 export default function Header() {
-  const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > SCROLL_THRESHOLD);
-  });
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <motion.header
+    <header
       id="top"
-      initial={false}
-      animate={{ top: isScrolled ? 8 : 24 }}
-      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-      style={{ x: "-50%" }}
-      className={`fixed left-1/2 z-50 w-11/12 rounded-[28px] md:rounded-[48px] bg-brand-primary text-white transition-shadow duration-300 ${isScrolled ? "shadow-header-glow" : "shadow-header-glow-soft"}`}
+      className={`fixed left-1/2 -translate-x-1/2 z-50 w-11/12 rounded-[28px] md:rounded-[48px] bg-brand-primary text-white transition-[top,box-shadow] duration-300 ease-out ${
+        isScrolled
+          ? "top-2 shadow-header-glow"
+          : "top-6 shadow-header-glow-soft"
+      }`}
     >
       <div className="flex items-center gap-4 md:gap-6 lg:gap-8 xl:gap-10 px-5 md:px-6 lg:px-8 xl:px-10 py-3.5 md:py-4">
         <Link href="/" aria-label="BipBip — ir al inicio" className="shrink-0">
@@ -104,42 +105,43 @@ export default function Header() {
         </button>
       </div>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.nav
-            id="mobile-nav"
-            aria-label="Principal móvil"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="lg:hidden overflow-hidden"
-          >
-            <ul className="flex flex-col gap-1 px-5 pb-4 pt-1">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-lg px-3 py-3 text-[16px] leading-6 font-semibold hover:bg-white/10 focus-visible:bg-white/10 transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              <li className="px-3 pt-3 pb-1">
+      <div
+        className={`lg:hidden grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <nav
+          id="mobile-nav"
+          aria-label="Principal móvil"
+          aria-hidden={!open}
+          className="overflow-hidden"
+        >
+          <ul className="flex flex-col gap-1 px-5 pb-4 pt-1">
+            {navItems.map((item) => (
+              <li key={item.href}>
                 <Link
-                  href="/#download"
+                  href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-center h-11 w-full rounded-full bg-white text-button text-brand-primary shadow-cta hover:opacity-90 focus-visible:opacity-90 transition-opacity"
+                  tabIndex={open ? 0 : -1}
+                  className="block rounded-lg px-3 py-3 text-[16px] leading-6 font-semibold hover:bg-white/10 focus-visible:bg-white/10 transition-colors"
                 >
-                  Descargar app
+                  {item.label}
                 </Link>
               </li>
-            </ul>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </motion.header>
+            ))}
+            <li className="px-3 pt-3 pb-1">
+              <Link
+                href="/#download"
+                onClick={() => setOpen(false)}
+                tabIndex={open ? 0 : -1}
+                className="flex items-center justify-center h-11 w-full rounded-full bg-white text-button text-brand-primary shadow-cta hover:opacity-90 focus-visible:opacity-90 transition-opacity"
+              >
+                Descargar app
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
   );
 }

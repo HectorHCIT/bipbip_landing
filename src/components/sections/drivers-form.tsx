@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion, type Variants } from "motion/react";
 import { useId, type ReactNode } from "react";
 
 const inputClass =
@@ -17,15 +16,6 @@ const selectStyle = {
   backgroundRepeat: "no-repeat",
 } as const;
 
-const fieldRowVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
-
 function Field({
   label,
   required = false,
@@ -39,10 +29,7 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <label
-        htmlFor={htmlFor}
-        className="text-b3 text-grey-900"
-      >
+      <label htmlFor={htmlFor} className="text-b3 text-grey-900">
         {label}
         {required && (
           <span className="text-error" aria-hidden="true">
@@ -69,10 +56,7 @@ function FileField({
   const hintId = `${id}-${name}-hint`;
   return (
     <div className="flex flex-col gap-1">
-      <span
-        id={labelId}
-        className="text-b3 text-grey-900"
-      >
+      <span id={labelId} className="text-b3 text-grey-900">
         {label}
         {required && (
           <span className="text-error" aria-hidden="true">
@@ -138,20 +122,8 @@ export default function DriversForm() {
       className="bg-white pb-20 md:pb-24 lg:pb-28"
     >
       <div className="mx-auto w-11/12 max-w-[1280px]">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-[32px] bg-white px-6 py-12 md:px-8 md:py-16 shadow-hero-card"
-        >
-          <motion.header
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-12 flex flex-col items-center gap-2 text-center"
-          >
+        <div className="anim-reveal-up rounded-[32px] bg-white px-6 py-12 md:px-8 md:py-16 shadow-hero-card">
+          <header className="anim-reveal-up mb-12 flex flex-col items-center gap-2 text-center">
             <h2
               id="drivers-form-heading"
               // TODO(TW-060): no exact text-h2 token match for mobile (32px/40px); h2 token is 48px/56px
@@ -165,27 +137,15 @@ export default function DriversForm() {
             >
               Completa los campos para empezar a generar ingresos con entregas de Bip Bip.
             </p>
-          </motion.header>
+          </header>
 
-          <motion.form
+          <form
             className="flex flex-col gap-4"
             // TODO(forms): connect to API/server action — currently swallows submit
             onSubmit={(event) => event.preventDefault()}
             noValidate
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: { staggerChildren: 0.08, delayChildren: 0.15 },
-              },
-            }}
           >
-            <motion.div
-              variants={fieldRowVariants}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-            >
+            <div className="anim-reveal-up grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <Field label="Nombre" required htmlFor={firstNameId}>
                 <input
                   id={firstNameId}
@@ -218,12 +178,9 @@ export default function DriversForm() {
                   className={inputClass}
                 />
               </Field>
-            </motion.div>
+            </div>
 
-            <motion.div
-              variants={fieldRowVariants}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-            >
+            <div className="anim-reveal-up grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <Field label="Número de teléfono" required htmlFor={phoneId}>
                 <input
                   id={phoneId}
@@ -271,12 +228,11 @@ export default function DriversForm() {
                   <option value="bike">Bicicleta</option>
                 </select>
               </Field>
-            </motion.div>
+            </div>
 
-            <motion.fieldset
-              variants={fieldRowVariants}
+            <fieldset
               aria-labelledby={documentsLegendId}
-              className="flex flex-col gap-4 border-0 p-0 m-0"
+              className="anim-reveal-up flex flex-col gap-4 border-0 p-0 m-0"
             >
               <legend id={documentsLegendId} className="sr-only">
                 Documentación requerida
@@ -284,12 +240,11 @@ export default function DriversForm() {
               <FileField label="Foto de tu DNI" name="dni" required />
               <FileField label="Antecedentes penales" name="antecedentes" required />
               <FileField label="Foto de Licencia" name="licencia" required />
-            </motion.fieldset>
+            </fieldset>
 
-            <motion.label
-              variants={fieldRowVariants}
+            <label
               htmlFor={termsId}
-              className="flex items-start gap-4 pb-2 pt-2 cursor-pointer"
+              className="anim-reveal-up flex items-start gap-4 pb-2 pt-2 cursor-pointer"
             >
               <input
                 id={termsId}
@@ -313,19 +268,16 @@ export default function DriversForm() {
                   términos y condiciones.
                 </Link>
               </span>
-            </motion.label>
+            </label>
 
-            <motion.button
+            <button
               type="submit"
-              variants={fieldRowVariants}
-              whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
-              whileTap={{ scale: 0.98 }}
-              className="h-12 w-full rounded-lg bg-brand-primary text-button text-white shadow-cta transition-opacity hover:opacity-95"
+              className="anim-reveal-up h-12 w-full rounded-lg bg-brand-primary text-button text-white shadow-cta transition-[opacity,transform] duration-200 hover:opacity-95 hover:scale-[1.01] active:scale-[0.98]"
             >
               Aplicar ahora
-            </motion.button>
-          </motion.form>
-        </motion.div>
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );
