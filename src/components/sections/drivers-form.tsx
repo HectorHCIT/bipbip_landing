@@ -184,7 +184,7 @@ export default function DriversForm() {
           >
             <motion.div
               variants={fieldRowVariants}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             >
               <Field label="Nombre" required htmlFor={firstNameId}>
                 <input
@@ -222,7 +222,7 @@ export default function DriversForm() {
 
             <motion.div
               variants={fieldRowVariants}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             >
               <Field label="Número de teléfono" required htmlFor={phoneId}>
                 <input

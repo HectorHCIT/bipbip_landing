@@ -113,10 +113,10 @@ export default function Hero() {
           </div>
 
           <div
-            className="hidden md:flex relative md:h-[640px] lg:h-[886px] items-center justify-center"
+            className="flex relative h-[360px] sm:h-[460px] md:h-[640px] lg:h-[886px] items-center justify-center"
             aria-hidden="true"
           >
-            <div className="relative w-[648px] h-[591px] md:scale-100 lg:scale-[1.5] origin-center">
+            <div className="relative w-[648px] h-[591px] scale-[0.45] sm:scale-[0.6] md:scale-100 lg:scale-[1.5] origin-center">
               {floatingItems.map((item) => (
                 <motion.div
                   key={item.src}

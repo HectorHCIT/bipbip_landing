@@ -19,7 +19,7 @@ const navItems = [
 // but the design here uses leading-7 (28px). Either widen the token line-height
 // or define a header-specific text token before swapping these utilities.
 const navLinkClass =
-  "relative text-[16px] lg:text-[18px] leading-7 font-semibold text-white transition-colors hover:text-brand-yellow focus-visible:text-brand-yellow after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-0.5 after:rounded-full after:bg-brand-yellow after:scale-x-0 after:origin-center hover:after:scale-x-100 focus-visible:after:scale-x-100 after:transition-transform after:duration-300";
+  "relative whitespace-nowrap text-[15px] xl:text-[18px] leading-7 font-semibold text-white transition-colors hover:text-brand-yellow focus-visible:text-brand-yellow after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-0.5 after:rounded-full after:bg-brand-yellow after:scale-x-0 after:origin-center hover:after:scale-x-100 focus-visible:after:scale-x-100 after:transition-transform after:duration-300";
 
 export default function Header() {
   const { scrollY } = useScroll();
@@ -39,7 +39,7 @@ export default function Header() {
       style={{ x: "-50%" }}
       className={`fixed left-1/2 z-50 w-11/12 rounded-[28px] md:rounded-[48px] bg-brand-primary text-white transition-shadow duration-300 ${isScrolled ? "shadow-header-glow" : "shadow-header-glow-soft"}`}
     >
-      <div className="flex items-center gap-4 md:gap-10 px-5 md:px-10 py-3.5 md:py-4">
+      <div className="flex items-center gap-4 md:gap-6 lg:gap-8 xl:gap-10 px-5 md:px-6 lg:px-8 xl:px-10 py-3.5 md:py-4">
         <Link href="/" aria-label="BipBip — ir al inicio" className="shrink-0">
           <Image
             src={cdn("/illustration/Logonav.svg")}
@@ -54,7 +54,7 @@ export default function Header() {
 
         <nav
           aria-label="Principal"
-          className="hidden md:flex flex-1 items-center justify-end gap-8 lg:gap-10"
+          className="hidden lg:flex flex-1 items-center justify-end gap-5 xl:gap-10"
         >
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className={navLinkClass}>
@@ -63,7 +63,7 @@ export default function Header() {
           ))}
           <Link
             href="/#download"
-            className="inline-flex items-center justify-center h-11 rounded-full bg-white px-5 text-button text-brand-primary shadow-cta hover:opacity-90 focus-visible:opacity-90 transition-opacity"
+            className="inline-flex shrink-0 whitespace-nowrap items-center justify-center h-11 rounded-full bg-white px-5 text-button text-brand-primary shadow-cta hover:opacity-90 focus-visible:opacity-90 transition-opacity"
           >
             Descargar app
           </Link>
@@ -75,7 +75,7 @@ export default function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          className="ml-auto md:hidden flex size-11 min-h-11 min-w-11 items-center justify-center rounded-full hover:bg-white/10 focus-visible:bg-white/10 transition-colors"
+          className="ml-auto lg:hidden flex size-11 min-h-11 min-w-11 items-center justify-center rounded-full hover:bg-white/10 focus-visible:bg-white/10 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@ export default function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="md:hidden overflow-hidden"
+            className="lg:hidden overflow-hidden"
           >
             <ul className="flex flex-col gap-1 px-5 pb-4 pt-1">
               {navItems.map((item) => (

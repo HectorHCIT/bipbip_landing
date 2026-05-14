@@ -129,7 +129,7 @@ export default function HelpContact() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] xl:grid-cols-[460px_1fr] items-center gap-8 lg:gap-10">
             <motion.div
-              className="hidden md:flex justify-center lg:justify-start"
+              className="flex justify-center lg:justify-start"
               aria-hidden="true"
               initial={{ opacity: 0, x: -48 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -141,7 +141,7 @@ export default function HelpContact() {
                 alt=""
                 width={368}
                 height={434}
-                className="h-auto w-full max-w-[280px] md:max-w-[340px] lg:max-w-none"
+                className="h-auto w-full max-w-[220px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-none"
               />
             </motion.div>
 

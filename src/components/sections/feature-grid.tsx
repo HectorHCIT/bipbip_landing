@@ -35,7 +35,7 @@ export default function FeatureGrid() {
           Elije cómo disfrutar tu comida
         </AnimatedSectionTitle>
 
-        <div className="relative mt-24 grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-12 lg:gap-20 lg:max-w-[1060px] lg:mx-auto">
+        <div className="relative mt-24 grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-16 lg:gap-20 lg:max-w-[1060px] lg:mx-auto">
           {features.map((feature, index) => (
             <motion.article
               key={feature.title}
