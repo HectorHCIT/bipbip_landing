@@ -19,7 +19,7 @@ export default function FeatureCards({
 }): ReactElement {
   const last = cards.length - 1;
   return (
-    <div className="relative mt-32 grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-12 lg:gap-20 lg:max-w-[1060px] lg:mx-auto">
+    <div className="relative mt-32 grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-16 lg:gap-20 lg:max-w-[1060px] lg:mx-auto">
       {cards.map((card, index) => (
         <motion.article
           key={card.title}

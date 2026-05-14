@@ -46,7 +46,7 @@ export default function DriversFeatures() {
 
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute right-6 top-12 hidden md:block w-[234px] h-[156px] select-none"
+        className="pointer-events-none absolute -right-8 -top-6 hidden lg:block w-[200px] h-[134px] xl:w-[234px] xl:h-[156px] xl:right-6 xl:top-4 select-none"
         initial={{ opacity: 0, rotate: -12 }}
         whileInView={{ opacity: 1, rotate: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -61,7 +61,7 @@ export default function DriversFeatures() {
             src={cdn("/floating/pizza.svg")}
             alt=""
             fill
-            sizes="(max-width: 768px) 0px, 234px"
+            sizes="(max-width: 1024px) 0px, 234px"
             className="object-contain"
           />
         </motion.div>

@@ -6,7 +6,7 @@ export default function LegalHero({ title }: { title: string }): ReactElement {
   return (
     <section
       aria-labelledby="legal-hero-heading"
-      className="relative h-[420px] md:h-[480px] lg:h-[530px] overflow-hidden"
+      className="relative h-[420px] md:h-[480px] lg:h-[530px] overflow-hidden rounded-b-3xl md:rounded-b-[40px]"
     >
       <Image
         src={cdn("/illustration/Overlay+Background.jpg")}

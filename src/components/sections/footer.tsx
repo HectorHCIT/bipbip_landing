@@ -5,33 +5,47 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import BadgeLink from "@/components/ui/badge-link";
 import SocialIconLink from "@/components/ui/social-icon-link";
+import FooterLinkIcon, {
+  type FooterLinkIconKind,
+} from "@/components/ui/footer-link-icon";
 import { cdn } from "@/lib/cdn";
 
-const linkColumns = [
+interface FooterLink {
+  readonly href: string;
+  readonly label: string;
+  readonly icon: FooterLinkIconKind;
+}
+
+interface FooterColumn {
+  readonly title: string;
+  readonly links: readonly FooterLink[];
+}
+
+const linkColumns: readonly FooterColumn[] = [
   {
     title: "Nosotros",
     links: [
-      { href: "/#rewards", label: "Programa de Lealtad" },
-      { href: "/#help", label: "Contáctanos" },
-      { href: "/drivers", label: "Repartidores" },
-      { href: "/restaurants", label: "Restaurantes" },
+      { href: "/#rewards", label: "Programa de Lealtad", icon: "loyalty" },
+      { href: "/#help", label: "Contáctanos", icon: "phone" },
+      { href: "/drivers", label: "Repartidores", icon: "bike" },
+      { href: "/restaurants", label: "Restaurantes", icon: "store" },
     ],
   },
   {
     title: "App Cliente",
     links: [
-      { href: "/privacy", label: "Políticas de Privacidad" },
-      { href: "/terms", label: "Términos & Condiciones" },
+      { href: "/privacy", label: "Políticas de Privacidad", icon: "info" },
+      { href: "/terms", label: "Términos & Condiciones", icon: "info" },
     ],
   },
   {
     title: "App Restaurantes",
     links: [
-      { href: "/privacy", label: "Políticas de Privacidad" },
-      { href: "/terms", label: "Términos & Condiciones" },
+      { href: "/privacy", label: "Políticas de Privacidad", icon: "info" },
+      { href: "/terms", label: "Términos & Condiciones", icon: "info" },
     ],
   },
-] as const;
+];
 
 const socials = [
   {
@@ -47,7 +61,7 @@ const socials = [
 ] as const;
 
 const linkClass =
-  "text-b3 text-brand-black hover:text-brand-primary focus-visible:text-brand-primary transition-colors";
+  "inline-flex items-center gap-2.5 text-b3 text-brand-black hover:text-brand-primary focus-visible:text-brand-primary transition-colors";
 
 export default function Footer() {
   return (
@@ -75,9 +89,9 @@ export default function Footer() {
         </motion.div>
 
         <div className="relative mx-auto w-11/12 max-w-[1280px] pt-12 md:pt-16 pb-24 md:pb-56">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-12 items-start">
             <motion.div
-              className="sm:col-span-2 md:col-span-1 flex justify-center md:justify-start"
+              className="sm:col-span-2 md:col-span-3 lg:col-span-1 flex justify-center lg:justify-start"
               initial={{ opacity: 0, y: -16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -88,7 +102,7 @@ export default function Footer() {
                 alt="BipBip"
                 width={303}
                 height={87}
-                className="w-[200px] md:w-[240px] lg:w-[280px] h-auto"
+                className="w-[200px] md:w-[260px] lg:w-[280px] h-auto"
               />
             </motion.div>
 
@@ -121,6 +135,7 @@ export default function Footer() {
                     {col.links.map((link) => (
                       <li key={link.label}>
                         <Link href={link.href} className={linkClass}>
+                          <FooterLinkIcon kind={link.icon} />
                           {link.label}
                         </Link>
                       </li>
@@ -132,7 +147,7 @@ export default function Footer() {
           </div>
 
           <motion.div
-            className="relative mt-10 md:mt-16 flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-start md:gap-3"
+            className="relative mt-10 md:mt-12 lg:mt-16 flex flex-col items-center gap-4 md:flex-row md:justify-center lg:justify-start md:gap-3"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}

@@ -116,7 +116,7 @@ export default function Rewards() {
           </motion.p>
         </header>
 
-        <div className="relative mt-32 grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-12 lg:gap-20">
+        <div className="relative mt-32 grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-16 lg:gap-20">
           {benefits.map((benefit, index) => (
             <motion.article
               key={benefit.title}
