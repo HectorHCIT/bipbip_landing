@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "motion/react";
 import AnimatedSectionTitle from "@/components/ui/animated-section-title";
 import { cdn } from "@/lib/cdn";
 
@@ -94,16 +91,10 @@ export default function RestaurantsBrands() {
         </AnimatedSectionTitle>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-        className="mt-16 flex flex-col gap-8 md:gap-10"
-      >
+      <div className="anim-reveal-up mt-16 flex flex-col gap-8 md:gap-10">
         <MarqueeRow items={row1} duration={50} />
         <MarqueeRow items={row2} duration={55} reverse />
-      </motion.div>
+      </div>
     </section>
   );
 }
