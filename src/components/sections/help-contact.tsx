@@ -68,8 +68,19 @@ export default function HelpContact() {
 
     setSubmitState({ status: "submitting" });
     try {
-      // TODO(forms): replace simulated delay with real submit (server action / API).
-      await new Promise<void>((r) => setTimeout(r, 800));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as
+          | { error?: string }
+          | null;
+        throw new Error(
+          data?.error ?? "No pudimos enviar tu mensaje. Intenta de nuevo."
+        );
+      }
       setSubmitState({ status: "success" });
     } catch (error) {
       const message =
@@ -93,24 +104,24 @@ export default function HelpContact() {
   return (
     <section
       id="help"
-      className="relative overflow-hidden bg-white pt-20 pb-32 md:pt-24 md:pb-40 lg:pt-28 lg:pb-48"
+      className="relative overflow-hidden bg-white pt-20 pb-32 md:pt-24 md:pb-40 lg:pt-28 lg:pb-48 xl:pt-36 xl:pb-56"
       aria-labelledby="help-heading"
     >
       <div className="relative mx-auto w-11/12 max-w-[1440px]">
         <header className="flex flex-col items-center gap-2 text-center">
           <h2
             id="help-heading"
-            className="anim-reveal-up text-[36px] leading-[44px] md:text-h2 font-bold font-sans text-brand-primary"
+            className="anim-reveal-up text-[36px] leading-[44px] md:text-h2 xl:text-[56px] xl:leading-[64px] font-bold font-sans text-brand-primary"
           >
             ¿Necesitas Ayuda?
           </h2>
-          <p className="anim-reveal-up text-[18px] leading-7 md:text-[20px] md:leading-7 font-bold font-sans text-brand-black">
+          <p className="anim-reveal-up text-[18px] leading-7 md:text-[20px] md:leading-7 xl:text-[24px] xl:leading-8 font-bold font-sans text-brand-black">
             Estamos aquí para resolver tus dudas y mejorar tu experiencia
           </p>
         </header>
 
-        <div className="anim-reveal-up relative mt-14 mx-auto w-full lg:max-w-[1080px] xl:max-w-[1200px] rounded-3xl bg-grey-200 p-3 md:p-8 lg:p-8 xl:p-10 shadow-card">
-          <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] xl:grid-cols-[460px_1fr] items-center gap-8 lg:gap-10">
+        <div className="anim-reveal-up relative mt-14 mx-auto w-full lg:max-w-[1080px] xl:max-w-[1320px] rounded-3xl bg-grey-200 p-3 md:p-8 lg:p-8 xl:p-12 shadow-card">
+          <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] xl:grid-cols-[540px_1fr] items-center gap-8 lg:gap-10 xl:gap-14">
             <div
               className="anim-reveal-left flex justify-center lg:justify-start"
               aria-hidden="true"
@@ -121,6 +132,7 @@ export default function HelpContact() {
                 width={368}
                 height={434}
                 className="h-auto w-full max-w-[220px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-none"
+                style={{ width: "auto", height: "auto" }}
               />
             </div>
 
@@ -128,7 +140,7 @@ export default function HelpContact() {
               <div
                 role="status"
                 aria-live="polite"
-                className="anim-reveal-right w-full lg:max-w-[440px] xl:max-w-[560px] lg:justify-self-center rounded-2xl bg-white p-4 md:p-6 lg:p-8 text-brand-black"
+                className="anim-load-right w-full lg:max-w-[440px] xl:max-w-[640px] lg:justify-self-center rounded-2xl bg-white p-4 md:p-6 lg:p-8 text-brand-black"
               >
                 <p className="text-h5 font-sans">¡Mensaje enviado!</p>
                 <p className="mt-2 text-b2">
@@ -139,7 +151,7 @@ export default function HelpContact() {
               <form
                 onSubmit={handleSubmit}
                 noValidate
-                className="anim-reveal-right w-full lg:max-w-[440px] xl:max-w-[560px] lg:justify-self-center flex flex-col gap-4 rounded-2xl bg-white p-4 md:p-6 lg:p-8"
+                className="anim-reveal-right w-full lg:max-w-[440px] xl:max-w-[640px] lg:justify-self-center flex flex-col gap-4 rounded-2xl bg-white p-4 md:p-6 lg:p-8"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1">
@@ -309,7 +321,7 @@ export default function HelpContact() {
 
       <div
         aria-hidden="true"
-        className="anim-reveal-left pointer-events-none absolute hidden md:block left-0 bottom-12 w-[160px] lg:w-[244px] z-10 select-none"
+        className="anim-reveal-left pointer-events-none absolute hidden md:block left-0 bottom-12 w-[160px] lg:w-[244px] xl:w-[280px] z-10 select-none"
       >
         <div
           className="anim-float-slow"
