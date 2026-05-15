@@ -81,15 +81,15 @@ export default function Footer() {
           />
         </div>
 
-        <div className="relative mx-auto w-11/12 max-w-[1280px] pt-12 md:pt-16 pb-24 md:pb-56">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-12 items-start">
+        <div className="relative mx-auto w-11/12 max-w-[1280px] pt-12 md:pt-16 pb-24 md:pb-32 lg:pb-40 xl:pb-56">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-6 xl:gap-12 items-start">
             <div className="anim-reveal-down sm:col-span-2 md:col-span-3 lg:col-span-1 flex justify-center lg:justify-start">
               <Image
                 src={cdn("/illustration/logofotter.svg")}
                 alt="BipBip"
                 width={303}
                 height={87}
-                className="w-[200px] md:w-[260px] lg:w-[280px] h-auto"
+                className="w-[200px] md:w-[260px] lg:w-[180px] xl:w-[280px] h-auto"
               />
             </div>
 
@@ -125,13 +125,14 @@ export default function Footer() {
             })}
           </div>
 
-          <div className="anim-reveal-up relative mt-10 md:mt-12 lg:mt-16 flex flex-col items-center gap-4 md:flex-row md:justify-center lg:justify-start md:gap-3">
+          <div className="anim-reveal-up relative mt-10 md:mt-12 lg:mt-10 xl:mt-16 flex flex-col items-center gap-4 md:flex-row md:justify-center lg:justify-start md:gap-3">
             <BadgeLink
               href="https://play.google.com/store/apps/details?id=hn.cit.gccustomerapp"
               src={cdn("/illustration/playstore.svg")}
               alt="Disponible en Google Play"
               width={162}
               height={48}
+              className="[&_img]:w-[140px]! [&_img]:h-auto! md:[&_img]:w-auto! md:[&_img]:h-auto! lg:[&_img]:w-[113px]! lg:[&_img]:h-[34px]! xl:[&_img]:w-auto! xl:[&_img]:h-auto!"
             />
             <BadgeLink
               href="https://apps.apple.com/hn/app/bip-bip/id1501865149"
@@ -139,6 +140,7 @@ export default function Footer() {
               alt="Descargar en App Store"
               width={144}
               height={48}
+              className="[&_img]:w-[140px]! [&_img]:h-auto! md:[&_img]:w-auto! md:[&_img]:h-auto! lg:[&_img]:w-[101px]! lg:[&_img]:h-[34px]! xl:[&_img]:w-auto! xl:[&_img]:h-auto!"
             />
           </div>
         </div>

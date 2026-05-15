@@ -27,7 +27,7 @@ export default function FeatureGrid() {
   return (
     <section
       id="features"
-      className="relative overflow-hidden bg-white pt-20 pb-30 md:pt-24 md:pb-36 lg:pt-28 lg:pb-40"
+      className="relative overflow-hidden bg-white pt-20 pb-30 md:pt-24 md:pb-36 lg:pt-28 lg:pb-32 xl:pb-40"
       aria-labelledby="features-heading"
     >
       <div className="relative mx-auto w-11/12">
@@ -64,7 +64,7 @@ export default function FeatureGrid() {
 
       <div
         aria-hidden="true"
-        className="anim-reveal-left pointer-events-none absolute left-0 bottom-0 z-10 hidden lg:block w-[538px] h-[342px] select-none"
+        className="anim-reveal-left pointer-events-none absolute left-0 bottom-0 z-10 hidden lg:block w-[400px] h-[254px] xl:w-[538px] xl:h-[342px] select-none"
       >
         <div className="anim-float-slow relative size-full">
           <Image

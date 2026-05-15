@@ -32,7 +32,7 @@ export default function DriversFeatures() {
     <section
       id="drivers-features"
       aria-labelledby="drivers-features-heading"
-      className="relative overflow-hidden bg-white pt-20 pb-32 md:pt-24 md:pb-44 lg:pt-28 lg:pb-56"
+      className="relative overflow-hidden bg-white pt-20 pb-32 md:pt-24 md:pb-44 lg:pt-28 lg:pb-40 xl:pb-56"
     >
       <div className="relative mx-auto w-11/12">
         <AnimatedSectionTitle id="drivers-features-heading">
@@ -43,7 +43,7 @@ export default function DriversFeatures() {
 
       <div
         aria-hidden="true"
-        className="anim-reveal-scale pointer-events-none absolute -right-8 -top-6 hidden lg:block w-[200px] h-[134px] xl:w-[234px] xl:h-[156px] xl:right-6 xl:top-4 select-none"
+        className="anim-reveal-scale pointer-events-none absolute -right-8 top-16 hidden lg:block w-[200px] h-[134px] xl:w-[234px] xl:h-[156px] xl:right-6 xl:top-4 select-none"
       >
         <div className="anim-float relative size-full">
           <Image
@@ -58,7 +58,7 @@ export default function DriversFeatures() {
 
       <div
         aria-hidden="true"
-        className="anim-reveal-scale pointer-events-none absolute right-8 bottom-16 hidden md:block w-[260px] h-[240px] select-none"
+        className="anim-reveal-scale pointer-events-none absolute right-8 bottom-16 hidden md:block w-[260px] h-[240px] lg:w-[160px] lg:h-[148px] lg:right-2 lg:bottom-4 xl:w-[260px] xl:h-[240px] xl:right-8 xl:bottom-16 select-none"
       >
         <div
           className="anim-float-slow relative size-full"
@@ -76,7 +76,7 @@ export default function DriversFeatures() {
 
       <div
         aria-hidden="true"
-        className="anim-reveal-left pointer-events-none absolute -left-12 bottom-0 hidden md:block w-[420px] h-[380px] select-none"
+        className="anim-reveal-left pointer-events-none absolute -left-12 bottom-0 hidden md:block w-[420px] h-[380px] lg:w-[320px] lg:h-[290px] xl:w-[420px] xl:h-[380px] select-none"
       >
         <div
           className="anim-float relative size-full"

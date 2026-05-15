@@ -16,7 +16,7 @@ export default function AppDownload() {
       <div className="relative mx-auto w-11/12 max-w-[480px] md:max-w-[560px] lg:max-w-none">
         <div
           aria-hidden="true"
-          className="anim-reveal-scale pointer-events-none absolute -top-4 -right-6 w-[200px] md:-top-10 md:right-0 md:w-[240px] lg:-top-16 lg:w-[320px] z-10 select-none"
+          className="anim-reveal-scale pointer-events-none absolute -top-4 -right-6 w-[200px] md:-top-10 md:right-0 md:w-[240px] lg:-top-12 lg:w-[260px] xl:-top-16 xl:w-[320px] z-10 select-none"
         >
           <div className="anim-float-slow">
             <Image
@@ -30,7 +30,7 @@ export default function AppDownload() {
           </div>
         </div>
 
-        <div className="relative lg:aspect-[1280/440]">
+        <div className="relative lg:aspect-[1280/560] xl:aspect-[1280/440]">
           {/* Mobile portrait shape (sm). Stretches to fill via preserveAspectRatio="none". */}
           <svg
             aria-hidden="true"
@@ -67,7 +67,7 @@ export default function AppDownload() {
               d="M0 135.655C0 106.251 22.7409 81.8551 52.0722 79.7928L1183.69 0.226073C1235.75 -3.43458 1280 37.8132 1280 90.0044V349.87C1280 400.953 1237.53 441.795 1186.49 439.801L53.8142 395.556C23.7596 394.382 0 369.676 0 339.599V135.655Z"
             />
           </svg>
-          <div className="relative grid h-full grid-cols-1 lg:grid-cols-2 items-center gap-10 md:gap-10 lg:gap-16 px-6 py-24 pb-32 md:px-10 md:py-28 md:pb-32 lg:px-24 lg:py-0 lg:pb-0">
+          <div className="relative grid h-full grid-cols-1 lg:grid-cols-2 items-center gap-10 md:gap-10 lg:gap-8 xl:gap-16 px-6 py-24 pb-32 md:px-10 md:py-28 md:pb-32 lg:px-10 lg:py-0 lg:pb-0 xl:px-24">
             <div className="anim-reveal-left relative flex justify-center lg:justify-start lg:-translate-y-6">
               <Image
                 src={cdn("/illustration/phonepreview.svg")}
@@ -75,15 +75,15 @@ export default function AppDownload() {
                 aria-hidden="true"
                 width={420}
                 height={520}
-                className="h-auto w-full max-w-[260px] md:max-w-[320px] lg:max-w-[400px] drop-shadow-[20px_20px_64px_rgba(0,0,0,0.45)]"
+                className="h-auto w-full max-w-[260px] md:max-w-[320px] lg:max-w-[300px] xl:max-w-[400px] drop-shadow-[20px_20px_64px_rgba(0,0,0,0.45)]"
                 style={{ width: "auto", height: "auto" }}
               />
             </div>
 
-            <div className="flex flex-col items-center gap-6 md:gap-6 lg:gap-7 text-center lg:items-center lg:text-center">
+            <div className="flex flex-col items-center gap-6 md:gap-6 lg:gap-7 text-center lg:items-center lg:text-center lg:-translate-y-16 xl:translate-y-0">
               <h2
                 id="download-heading"
-                className="anim-reveal-right text-[34px] leading-[42px] md:text-[40px] md:leading-[48px] lg:text-[44px] lg:leading-[52px] xl:text-h2 font-bold font-sans text-white"
+                className="anim-reveal-right text-[34px] leading-[42px] md:text-[40px] md:leading-[48px] lg:text-[34px] lg:leading-[42px] xl:text-[44px] xl:leading-[52px] 2xl:text-h2 font-bold font-sans text-white"
               >
                 ¡Descarga la App y empieza a disfrutar!
               </h2>
@@ -100,7 +100,7 @@ export default function AppDownload() {
                   alt="Disponible en Google Play"
                   width={234}
                   height={70}
-                  className="rounded-md"
+                  className="rounded-md [&_img]:w-[200px]! [&_img]:h-auto! md:[&_img]:w-auto! md:[&_img]:h-auto! lg:[&_img]:w-[164px]! lg:[&_img]:h-[49px]! xl:[&_img]:w-auto! xl:[&_img]:h-auto!"
                 />
                 <BadgeLink
                   href={IOS_URL}
@@ -108,7 +108,7 @@ export default function AppDownload() {
                   alt="Descargar en App Store"
                   width={210}
                   height={70}
-                  className="rounded-md"
+                  className="rounded-md [&_img]:w-[200px]! [&_img]:h-auto! md:[&_img]:w-auto! md:[&_img]:h-auto! lg:[&_img]:w-[147px]! lg:[&_img]:h-[49px]! xl:[&_img]:w-auto! xl:[&_img]:h-auto!"
                 />
               </div>
             </div>

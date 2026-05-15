@@ -91,7 +91,7 @@ export default function Rewards() {
           </p>
         </header>
 
-        <div className="relative mt-32 grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-16 lg:gap-20">
+        <div className="relative mt-32 grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-12 lg:gap-12 xl:gap-20">
           {benefits.map((benefit) => (
             <article
               key={benefit.title}

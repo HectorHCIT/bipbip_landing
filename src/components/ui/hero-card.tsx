@@ -5,14 +5,14 @@ type HeroCardVariant = "split-547" | "split-50";
 
 const variants = {
   "split-547": {
-    grid: "lg:grid-cols-[minmax(0,547px)_1fr]",
-    padding: "px-8 py-12 md:px-12 md:py-16 lg:px-16 lg:py-18",
+    grid: "lg:grid-cols-[minmax(0,440px)_1fr] xl:grid-cols-[minmax(0,547px)_1fr]",
+    padding: "px-8 py-12 md:px-12 md:py-16 lg:px-10 lg:py-12 xl:px-16 xl:py-18",
     bodyClass: "text-b2 md:max-w-[295px]",
     sizes: "(max-width: 1024px) 100vw, 733px",
   },
   "split-50": {
     grid: "lg:grid-cols-2",
-    padding: "px-8 py-12 md:px-10 md:py-16 lg:px-10 lg:py-18",
+    padding: "px-8 py-12 md:px-10 md:py-16 lg:px-8 lg:py-12 xl:px-10 xl:py-18",
     bodyClass: "text-b2",
     sizes: "(max-width: 1024px) 100vw, 640px",
   },
@@ -69,13 +69,13 @@ export default function HeroCard({
             <div className="absolute inset-0 bg-black/30" />
           </div>
 
-          <div className={`relative grid grid-cols-1 ${v.grid} items-stretch min-h-[520px] md:min-h-0 lg:min-h-[631px]`}>
-            <div className={`relative z-10 flex flex-col justify-center gap-10 lg:gap-12 ${v.padding}`}>
+          <div className={`relative grid grid-cols-1 ${v.grid} items-stretch min-h-[520px] md:min-h-0 lg:min-h-[480px] xl:min-h-[631px]`}>
+            <div className={`relative z-10 flex flex-col justify-center gap-10 lg:gap-8 xl:gap-12 ${v.padding}`}>
               <div className="flex flex-col gap-4">
                 <h1
                   id={headingId}
                   // TODO(TW-060): no exact text token for 40/44 (mobile) or 56/60 (desktop); h2 is 48/56
-                  className="anim-load-up text-[40px] leading-[44px] md:text-[56px] md:leading-[60px] font-bold font-sans text-white md:text-brand-black"
+                  className="anim-load-up text-[40px] leading-[44px] md:text-[56px] md:leading-[60px] lg:text-[44px] lg:leading-[52px] xl:text-[56px] xl:leading-[60px] font-bold font-sans text-white md:text-brand-black"
                 >
                   {title}
                 </h1>
@@ -94,7 +94,7 @@ export default function HeroCard({
               )}
             </div>
             {/* Desktop image column */}
-            <div className="anim-load-scale anim-delay-2 hidden md:block relative md:min-h-[320px] lg:min-h-[631px] overflow-hidden">
+            <div className="anim-load-scale anim-delay-2 hidden md:block relative md:min-h-[320px] lg:min-h-[480px] xl:min-h-[631px] overflow-hidden">
               <Image
                 src={imageSrc}
                 alt={imageAlt}
