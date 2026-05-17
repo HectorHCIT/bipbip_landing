@@ -30,33 +30,33 @@ export default function FeatureGrid() {
       className="relative overflow-hidden bg-white pt-20 pb-30 md:pt-24 md:pb-36 lg:pt-28 lg:pb-32 xl:pb-40"
       aria-labelledby="features-heading"
     >
-      <div className="relative mx-auto w-11/12">
+      <div className="relative mx-auto w-11/12 xl:w-full xl:max-w-[1440px] xl:px-8">
         <AnimatedSectionTitle id="features-heading">
           Elije cómo disfrutar tu comida
         </AnimatedSectionTitle>
 
-        <div className="relative mt-24 grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-16 lg:gap-20 lg:max-w-[1060px] lg:mx-auto">
+        <div className="relative mt-24 grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-16 lg:gap-20 lg:max-w-[1060px] lg:mx-auto xl:max-w-none">
           {features.map((feature, index) => (
             <article
               key={feature.title}
               className={
-                `${feature.reveal} relative flex flex-col items-center gap-6 rounded-3xl bg-white px-8 pt-12 pb-6 shadow-card` +
+                `${feature.reveal} relative flex flex-col items-center gap-6 xl:gap-8 rounded-3xl bg-white px-8 pt-12 pb-6 xl:px-10 xl:pt-16 xl:pb-10 shadow-card` +
                 (index === 1 ? " md:mt-25" : "")
               }
             >
               {/* TODO(STY-008): --shadow-card uses opacity 0.05; this raw value uses 0.08 — confirm intended token before swapping */}
-              <div className="absolute -top-11 left-1/2 -translate-x-1/2 flex size-22 items-center justify-center rounded-full bg-white shadow-[0_5px_12px_rgba(0,0,0,0.08)]">
+              <div className="absolute -top-11 xl:-top-14 left-1/2 -translate-x-1/2 flex size-22 xl:size-28 items-center justify-center rounded-full bg-white shadow-[0_5px_12px_rgba(0,0,0,0.08)]">
                 <Image
                   src={feature.icon}
                   alt=""
                   aria-hidden="true"
                   width={56}
                   height={56}
-                  className="size-14"
+                  className="size-14 xl:size-18"
                 />
               </div>
-              <h3 className="text-h5 text-brand-black text-center">{feature.title}</h3>
-              <p className="text-b2 text-brand-black text-center">{feature.body}</p>
+              <h3 className="text-h5 xl:text-[24px] xl:leading-8 text-brand-black text-center">{feature.title}</h3>
+              <p className="text-b2 xl:text-[18px] xl:leading-7 text-brand-black text-center">{feature.body}</p>
             </article>
           ))}
         </div>

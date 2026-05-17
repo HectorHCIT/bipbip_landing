@@ -34,7 +34,7 @@ export default function DriversFeatures() {
       aria-labelledby="drivers-features-heading"
       className="relative overflow-hidden bg-white pt-20 pb-32 md:pt-24 md:pb-44 lg:pt-28 lg:pb-40 xl:pb-56"
     >
-      <div className="relative mx-auto w-11/12">
+      <div className="relative mx-auto w-11/12 xl:w-full xl:max-w-[1440px] xl:px-8">
         <AnimatedSectionTitle id="drivers-features-heading">
           Únete a la Bip Bip
         </AnimatedSectionTitle>

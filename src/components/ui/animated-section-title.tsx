@@ -3,8 +3,8 @@ import type { ReactElement, ReactNode } from "react";
 import { cdn } from "@/lib/cdn";
 
 const widthMap = {
-  default: "w-[260px] md:w-[420px] lg:w-[552px]",
-  wide: "w-[320px] md:w-[520px] lg:w-[681px]",
+  default: "w-[260px] md:w-[420px] lg:w-[552px] xl:w-[640px]",
+  wide: "w-[320px] md:w-[520px] lg:w-[681px] xl:w-[800px]",
 } as const;
 
 export type AnimatedSectionTitleWidth = keyof typeof widthMap;
@@ -22,7 +22,7 @@ export default function AnimatedSectionTitle({
     <header className="flex flex-col items-center gap-2 text-center">
       <h2
         id={id}
-        className="anim-reveal-up text-[40px] leading-[48px] md:text-h2 font-bold font-sans text-brand-black"
+        className="anim-reveal-up text-[40px] leading-[48px] md:text-h2 xl:text-[56px] xl:leading-[64px] font-bold font-sans text-brand-black"
       >
         {children}
       </h2>

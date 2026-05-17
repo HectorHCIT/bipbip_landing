@@ -31,9 +31,9 @@ export default function RestaurantsFeatures() {
     <section
       id="restaurants-features"
       aria-labelledby="restaurants-features-heading"
-      className="relative overflow-hidden bg-white pt-20 pb-20 md:pt-24 md:pb-28 lg:pt-28 lg:pb-32"
+      className="relative overflow-hidden bg-white pt-20 pb-20 md:pt-24 md:pb-28 lg:pt-28 lg:pb-32 xl:pt-36 xl:pb-40"
     >
-      <div className="relative mx-auto w-11/12">
+      <div className="relative mx-auto w-11/12 xl:w-full xl:max-w-[1440px] xl:px-8">
         <AnimatedSectionTitle id="restaurants-features-heading">
           Haz crecer tu restaurante con BipBip
         </AnimatedSectionTitle>

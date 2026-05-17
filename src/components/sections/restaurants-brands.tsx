@@ -83,7 +83,7 @@ export default function RestaurantsBrands() {
     <section
       id="restaurants-brands"
       aria-labelledby="restaurants-brands-heading"
-      className="bg-white pt-10 pb-24 md:pb-28 lg:pb-32"
+      className="bg-white pt-10 pb-24 md:pb-28 lg:pb-32 xl:pb-40"
     >
       <div className="mx-auto w-11/12 max-w-[1280px]">
         <AnimatedSectionTitle id="restaurants-brands-heading" width="wide">
