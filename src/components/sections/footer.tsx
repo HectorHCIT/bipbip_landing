@@ -167,7 +167,7 @@ export default function Footer() {
           </nav>
 
           <p className="text-caption text-center md:order-1 md:text-left">
-            © {new Date().getFullYear()} Derechos Reservados Grupo Comidas
+            © {new Date().getFullYear()} Derechos Reservados Bip Services
           </p>
 
           <div className="flex items-center gap-2 md:order-3">
