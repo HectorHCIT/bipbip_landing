@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
+import { RevealObserver } from "@/components/reveal-observer";
 import { JsonLd } from "@/components/seo/jsonld";
 import { cdn } from "@/lib/cdn";
 import {
@@ -123,6 +124,7 @@ export default function RootLayout({
           Saltar al contenido
         </a>
         {children}
+        <RevealObserver />
       </body>
     </html>
   );
