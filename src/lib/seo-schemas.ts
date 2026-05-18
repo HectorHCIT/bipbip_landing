@@ -1,4 +1,5 @@
 import { cdn } from "@/lib/cdn";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/mobile-app";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 type Schema = Record<string, unknown>;
@@ -107,6 +108,29 @@ export function webPageSchema(input: WebPageSchemaInput): ReadonlyArray<Schema> 
   };
 
   return [webPage, breadcrumbList];
+}
+
+/**
+ * MobileApplication schema — declares the BipBip customer app for both
+ * platforms. Emitted once globally from the root layout so it is visible to
+ * crawlers on every page (helps App/Play indexing).
+ */
+export function mobileApplicationSchema(): Schema {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    name: "BipBip",
+    operatingSystem: "ANDROID, IOS",
+    applicationCategory: "BusinessApplication",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "HNL",
+    },
+    url: SITE_URL,
+    installUrl: PLAY_STORE_URL,
+    downloadUrl: APP_STORE_URL,
+  };
 }
 
 export type ServiceAudience = "drivers" | "restaurants";

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { cdn } from "@/lib/cdn";
 
-export const SITE_URL = "https://bipbip.hn";
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bipbip.hn";
 export const SITE_NAME = "BipBip";
 export const SITE_LOCALE = "es_HN";
 export const DEFAULT_DESCRIPTION =
