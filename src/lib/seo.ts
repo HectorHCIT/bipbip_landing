@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { cdn } from "@/lib/cdn";
 
+// Use `||` (not `??`) so empty strings fall back to the default. Vercel can
+// surface an env declared without a value as `""`, which would otherwise pass
+// through and crash `new URL(SITE_URL)` in metadataBase.
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://bipbip.hn";
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://bipbip.hn";
 export const SITE_NAME = "BipBip";
 export const SITE_LOCALE = "es_HN";
 export const DEFAULT_DESCRIPTION =
