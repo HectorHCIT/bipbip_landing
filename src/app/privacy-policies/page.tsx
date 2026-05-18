@@ -13,7 +13,7 @@ const PRIVACY_DESCRIPTION =
 export const metadata: Metadata = pageMetadata({
   title: "Políticas de Privacidad",
   description: PRIVACY_DESCRIPTION,
-  path: "/privacy",
+  path: "/privacy-policies",
 });
 
 export default function PrivacyPage() {
@@ -21,12 +21,12 @@ export default function PrivacyPage() {
     <>
       <JsonLd
         data={webPageSchema({
-          path: "/privacy",
+          path: "/privacy-policies",
           name: "Políticas de Privacidad",
           description: PRIVACY_DESCRIPTION,
           breadcrumbs: [
             { name: "Inicio", path: "/" },
-            { name: "Políticas de Privacidad", path: "/privacy" },
+            { name: "Políticas de Privacidad", path: "/privacy-policies" },
           ],
         })}
       />

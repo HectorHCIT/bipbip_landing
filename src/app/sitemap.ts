@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     {
-      url: `${SITE_URL}/privacy`,
+      url: `${SITE_URL}/privacy-policies`,
       lastModified: now,
       changeFrequency: "yearly",
       priority: 0.3,

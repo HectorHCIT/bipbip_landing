@@ -6,11 +6,6 @@ import { useEffect } from 'react';
 const REVEAL_SELECTOR =
   '.anim-reveal-up, .anim-reveal-down, .anim-reveal-left, .anim-reveal-right, .anim-reveal-scale';
 
-function isInViewport(el: Element): boolean {
-  const rect = el.getBoundingClientRect();
-  return rect.top < window.innerHeight + 80 && rect.bottom > -80;
-}
-
 export function RevealObserver() {
   const pathname = usePathname();
 
@@ -18,6 +13,7 @@ export function RevealObserver() {
     let cancelled = false;
     let io: IntersectionObserver | null = null;
     let mo: MutationObserver | null = null;
+    let timer: number | null = null;
     let onLoad: (() => void) | null = null;
 
     const setup = () => {
@@ -37,6 +33,11 @@ export function RevealObserver() {
         return;
       }
 
+      // IntersectionObserver fires once synchronously on observe() with the
+      // current state, so elements already in viewport reveal themselves
+      // without any manual getBoundingClientRect — and crucially, the
+      // callback runs as a microtask AFTER the current render tick, avoiding
+      // DOM mutations mid-hydration that cause SSR mismatches.
       io = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
@@ -53,11 +54,7 @@ export function RevealObserver() {
       const register = (el: Element) => {
         if (seen.has(el) || el.classList.contains('is-revealed')) return;
         seen.add(el);
-        if (isInViewport(el)) {
-          reveal(el);
-        } else {
-          io?.observe(el);
-        }
+        io?.observe(el);
       };
 
       initial.forEach(register);
@@ -74,22 +71,23 @@ export function RevealObserver() {
       mo.observe(document.body, { childList: true, subtree: true });
     };
 
-    if (document.readyState === 'complete') {
-      const raf = requestAnimationFrame(setup);
-      return () => {
-        cancelled = true;
-        cancelAnimationFrame(raf);
-        io?.disconnect();
-        mo?.disconnect();
-      };
-    }
+    // Defer to a macrotask so React 19 Streaming SSR has flushed every
+    // pending hydration microtask before we touch the DOM.
+    const schedule = () => {
+      timer = window.setTimeout(setup, 0);
+    };
 
-    onLoad = setup;
-    window.addEventListener('load', onLoad, { once: true });
+    if (document.readyState === 'complete') {
+      schedule();
+    } else {
+      onLoad = schedule;
+      window.addEventListener('load', onLoad, { once: true });
+    }
 
     return () => {
       cancelled = true;
       if (onLoad) window.removeEventListener('load', onLoad);
+      if (timer !== null) clearTimeout(timer);
       io?.disconnect();
       mo?.disconnect();
     };

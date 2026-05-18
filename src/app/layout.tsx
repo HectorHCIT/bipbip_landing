@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { RevealObserver } from "@/components/reveal-observer";
 import { JsonLd } from "@/components/seo/jsonld";
 import { cdn } from "@/lib/cdn";
+import { ANDROID_PACKAGE, IOS_APP_ID } from "@/lib/mobile-app";
 import {
   DEFAULT_DESCRIPTION,
   SITE_LOCALE,
@@ -10,7 +11,11 @@ import {
   SITE_URL,
   TWITTER_HANDLE,
 } from "@/lib/seo";
-import { organizationSchema, websiteSchema } from "@/lib/seo-schemas";
+import {
+  mobileApplicationSchema,
+  organizationSchema,
+  websiteSchema,
+} from "@/lib/seo-schemas";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -74,6 +79,13 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/manifest.webmanifest",
+  itunes: {
+    appId: IOS_APP_ID,
+    appArgument: SITE_URL,
+  },
+  other: {
+    "google-play-app": `app-id=${ANDROID_PACKAGE}`,
+  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
@@ -116,7 +128,13 @@ export default function RootLayout({
   return (
     <html lang="es" className={poppins.variable}>
       <body>
-        <JsonLd data={[organizationSchema(), websiteSchema()]} />
+        <JsonLd
+          data={[
+            organizationSchema(),
+            websiteSchema(),
+            mobileApplicationSchema(),
+          ]}
+        />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:p-3 focus:rounded focus:text-brand-black focus:outline-2 focus:outline-brand-primary"
