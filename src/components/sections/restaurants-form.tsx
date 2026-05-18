@@ -268,7 +268,7 @@ export default function RestaurantsForm() {
                 <span className="text-b3 text-brand-black">
                   Acepto que he leído y estoy de acuerdo con las{" "}
                   <Link
-                    href="/privacy"
+                    href="/privacy-policies"
                     className="underline hover:text-brand-primary focus-visible:text-brand-primary transition-colors"
                   >
                     políticas de privacidad

@@ -31,14 +31,14 @@ const linkColumns: readonly FooterColumn[] = [
   {
     title: "App Cliente",
     links: [
-      { href: "/privacy", label: "Políticas de Privacidad", icon: "info" },
+      { href: "/privacy-policies", label: "Políticas de Privacidad", icon: "info" },
       { href: "/terms", label: "Términos & Condiciones", icon: "info" },
     ],
   },
   {
     title: "App Restaurantes",
     links: [
-      { href: "/privacy", label: "Políticas de Privacidad", icon: "info" },
+      { href: "/privacy-policies", label: "Políticas de Privacidad", icon: "info" },
       { href: "/terms", label: "Términos & Condiciones", icon: "info" },
     ],
   },
