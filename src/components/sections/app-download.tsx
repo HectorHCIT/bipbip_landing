@@ -5,6 +5,7 @@ import { cdn } from "@/lib/cdn";
 const IOS_URL = "https://apps.apple.com/hn/app/bip-bip/id1501865149";
 const ANDROID_URL =
   "https://play.google.com/store/apps/details?id=hn.cit.gccustomerapp";
+const HUAWEI_URL = "https://appgallery.huawei.com/#/app/C102925853";
 
 export default function AppDownload() {
   return (
@@ -16,7 +17,7 @@ export default function AppDownload() {
       <div className="relative mx-auto w-11/12 max-w-[480px] md:max-w-[560px] lg:max-w-none">
         <div
           aria-hidden="true"
-          className="anim-reveal-scale pointer-events-none absolute -top-4 -right-6 w-[200px] md:-top-10 md:right-0 md:w-[240px] lg:-top-12 lg:w-[260px] xl:-top-16 xl:w-[320px] z-10 select-none"
+          className="anim-reveal-scale pointer-events-none absolute -top-4 -right-6 w-[200px] md:-top-10 md:right-0 md:w-[240px] lg:-top-16 lg:w-[260px] xl:-top-16 xl:w-[320px] z-10 select-none"
         >
           <div className="anim-float-slow">
             <Image
@@ -100,7 +101,7 @@ export default function AppDownload() {
                   alt="Disponible en Google Play"
                   width={234}
                   height={70}
-                  className="rounded-md [&_img]:w-[200px]! [&_img]:h-auto! md:[&_img]:w-auto! md:[&_img]:h-auto! lg:[&_img]:w-[164px]! lg:[&_img]:h-[49px]! xl:[&_img]:w-auto! xl:[&_img]:h-auto!"
+                  className="rounded-md [&_img]:w-[200px]! [&_img]:h-auto! lg:[&_img]:w-auto! lg:[&_img]:h-[49px]! xl:[&_img]:h-[60px]!"
                 />
                 <BadgeLink
                   href={IOS_URL}
@@ -108,7 +109,15 @@ export default function AppDownload() {
                   alt="Descargar en App Store"
                   width={210}
                   height={70}
-                  className="rounded-md [&_img]:w-[200px]! [&_img]:h-auto! md:[&_img]:w-auto! md:[&_img]:h-auto! lg:[&_img]:w-[147px]! lg:[&_img]:h-[49px]! xl:[&_img]:w-auto! xl:[&_img]:h-auto!"
+                  className="rounded-md [&_img]:w-[200px]! [&_img]:h-auto! lg:[&_img]:w-auto! lg:[&_img]:h-[49px]! xl:[&_img]:h-[60px]!"
+                />
+                <BadgeLink
+                  href={HUAWEI_URL}
+                  src={cdn("/icons/huawei-appgallery.svg")}
+                  alt="Explorar en AppGallery"
+                  width={234}
+                  height={70}
+                  className="rounded-md [&_img]:w-[200px]! [&_img]:h-auto! lg:[&_img]:w-auto! lg:[&_img]:h-[49px]! xl:[&_img]:h-[60px]!"
                 />
               </div>
             </div>

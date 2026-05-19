@@ -108,6 +108,14 @@ export default function Hero() {
                 height={62}
                 className="rounded-lg w-[170px] md:w-[186px] [&_img]:w-full [&_img]:h-auto"
               />
+              <BadgeLink
+                href="https://appgallery.huawei.com/#/app/C102925853"
+                src={cdn("/icons/huawei-appgallery.svg")}
+                alt="Explorar en AppGallery"
+                width={209}
+                height={62}
+                className="rounded-lg w-[170px] md:w-[209px] [&_img]:w-full [&_img]:h-auto"
+              />
             </div>
           </div>
 

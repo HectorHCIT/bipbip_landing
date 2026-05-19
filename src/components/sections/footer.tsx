@@ -142,6 +142,14 @@ export default function Footer() {
               height={48}
               className="[&_img]:w-[140px]! [&_img]:h-auto! md:[&_img]:w-auto! md:[&_img]:h-auto! lg:[&_img]:w-[101px]! lg:[&_img]:h-[34px]! xl:[&_img]:w-[120px]! xl:[&_img]:h-[40px]!"
             />
+            <BadgeLink
+              href="https://appgallery.huawei.com/#/app/C102925853"
+              src={cdn("/icons/huawei-appgallery.svg")}
+              alt="Explorar en AppGallery"
+              width={162}
+              height={48}
+              className="[&_img]:w-[140px]! [&_img]:h-auto! md:[&_img]:w-auto! md:[&_img]:h-auto! lg:[&_img]:w-[113px]! lg:[&_img]:h-[34px]! xl:[&_img]:w-[135px]! xl:[&_img]:h-[40px]!"
+            />
           </div>
         </div>
       </div>
