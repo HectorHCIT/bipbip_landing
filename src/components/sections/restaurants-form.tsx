@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState, type ReactNode } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 
 const inputClass =
   "h-12 w-full rounded-lg border border-grey-200 bg-white px-4 py-2 text-b3 text-grey-700 placeholder:text-grey-500 shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary focus-visible:border-brand-primary transition-colors";
@@ -15,6 +15,24 @@ const selectStyle = {
   backgroundPosition: "right 16px center",
   backgroundRepeat: "no-repeat",
 } as const;
+
+// 2026-06-15 00:00 in UTC-6 (Honduras) == 2026-06-15 06:00 UTC.
+// Comparing against this absolute UTC instant keeps server and client agreeing
+// regardless of which timezone the runtime reports.
+const FUTURE_CITIES_RELEASE_AT_MS = Date.UTC(2026, 5, 15, 6, 0, 0);
+
+const BASE_CITIES = [
+  { value: "tegucigalpa", label: "Tegucigalpa" },
+  { value: "sps", label: "San Pedro Sula" },
+] as const;
+
+const FUTURE_CITIES = [
+  { value: "progreso", label: "Progreso" },
+  { value: "choloma", label: "Choloma" },
+  { value: "la-lopez", label: "La Lopez" },
+  { value: "siguatepeque", label: "Siguatepeque" },
+  { value: "comayagua", label: "Comayagua" },
+] as const;
 
 type SubmitState =
   | { status: "idle" }
@@ -60,6 +78,20 @@ export default function RestaurantsForm() {
   const termsId = useId();
 
   const [submitState, setSubmitState] = useState<SubmitState>({ status: "idle" });
+
+  // Gated client-side to avoid hydration mismatch when the page HTML is
+  // statically cached. SSR always emits the base list; the extra cities pop in
+  // after mount once the release instant has passed.
+  const [showFutureCities, setShowFutureCities] = useState(false);
+  useEffect(() => {
+    if (Date.now() >= FUTURE_CITIES_RELEASE_AT_MS) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShowFutureCities(true);
+    }
+  }, []);
+  const cities = showFutureCities
+    ? [...BASE_CITIES, ...FUTURE_CITIES]
+    : BASE_CITIES;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -215,10 +247,11 @@ export default function RestaurantsForm() {
                     <option value="" disabled>
                       Selecciona tu ciudad
                     </option>
-                    <option value="tegucigalpa">Tegucigalpa</option>
-                    <option value="sps">San Pedro Sula</option>
-                    <option value="lc">La Ceiba</option>
-                    <option value="catacamas">Catacamas</option>
+                    {cities.map((city) => (
+                      <option key={city.value} value={city.value}>
+                        {city.label}
+                      </option>
+                    ))}
                   </select>
                 </Field>
               </div>
