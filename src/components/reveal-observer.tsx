@@ -90,6 +90,14 @@ export function RevealObserver() {
       if (timer !== null) clearTimeout(timer);
       io?.disconnect();
       mo?.disconnect();
+      // Strip is-revealed before unmount so a subsequent re-hydration (Fast
+      // Refresh, viewport-toolbar toggle, etc.) sees a DOM that matches the
+      // server-rendered HTML again. Without this the observer-added class
+      // persists on elements while the server still renders without it,
+      // tripping React's hydration check.
+      document
+        .querySelectorAll('.is-revealed')
+        .forEach((el) => el.classList.remove('is-revealed'));
     };
   }, [pathname]);
 
