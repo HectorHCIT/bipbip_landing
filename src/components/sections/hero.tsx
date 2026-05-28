@@ -1,6 +1,15 @@
+import { headers } from "next/headers";
 import Image from "next/image";
+import { HeroVideo } from "@/components/sections/hero-video";
 import BadgeLink from "@/components/ui/badge-link";
 import { cdn } from "@/lib/cdn";
+
+// Crawlers, link previewers and AI scrapers don't render the page — they only
+// fetch resources referenced in the HTML. Not emitting the <video> tag for
+// them avoids ~24 MB per hit from every Googlebot/FacebookExternalHit/GPTBot
+// pass without affecting any human visitor.
+const BOT_UA_PATTERN =
+  /bot|crawler|spider|crawling|facebookexternalhit|whatsapp|telegram|preview|fetch|headlesschrome|lighthouse|pagespeed|gtmetrix|pingdom|slackbot|discord|linkedin|yandex|baidu|duckduck|applebot|googleother|google-inspectiontool|claudebot|anthropic-ai|gptbot|ccbot|perplexity/i;
 
 const floatingItems = [
   {
@@ -50,7 +59,10 @@ const floatingItems = [
   },
 ] as const;
 
-export default function Hero() {
+export default async function Hero() {
+  const userAgent = (await headers()).get("user-agent") ?? "";
+  const isBot = BOT_UA_PATTERN.test(userAgent);
+
   return (
     <section
       id="hero"
@@ -68,16 +80,7 @@ export default function Hero() {
           className="object-cover object-center"
           priority
         />
-        <video
-          className="absolute inset-0 h-full w-full object-cover md:hidden motion-reduce:hidden"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-        >
-          <source src={cdn("/video.mp4")} type="video/mp4" />
-        </video>
+        {!isBot && <HeroVideo src={cdn("/videoV2.mp4")} />}
       </div>
 
       <div className="relative mx-auto w-11/12">

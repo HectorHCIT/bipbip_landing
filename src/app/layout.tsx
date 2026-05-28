@@ -127,6 +127,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={poppins.variable}>
+      <head>
+        <link rel="preconnect" href="https://static2.bipbip.hn" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://static2.bipbip.hn" />
+      </head>
       <body>
         <JsonLd
           data={[
