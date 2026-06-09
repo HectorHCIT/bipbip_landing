@@ -59,6 +59,9 @@ export async function POST(request: Request): Promise<Response> {
   if (!firstName || !lastName) {
     return NextResponse.json({ error: "Nombre y apellido son obligatorios." }, { status: 400 });
   }
+  if (!documentId) {
+    return NextResponse.json({ error: "El número de documento es obligatorio." }, { status: 400 });
+  }
   if (!phone || !PHONE_RE.test(phone)) {
     return NextResponse.json({ error: "Teléfono inválido." }, { status: 400 });
   }

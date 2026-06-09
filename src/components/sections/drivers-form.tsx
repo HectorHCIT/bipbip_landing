@@ -22,6 +22,27 @@ const PDF_ACCEPT = "application/pdf";
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 const PDF_TYPES = new Set(["application/pdf"]);
 
+const PHONE_RE = /^[+\d][\d\s\-()]{6,}$/;
+
+type FieldErrors = Record<string, string>;
+
+function validateFields(data: FormData): FieldErrors {
+  const errors: FieldErrors = {};
+  const get = (key: string) =>
+    typeof data.get(key) === "string" ? (data.get(key) as string).trim() : "";
+
+  if (!get("firstName")) errors.firstName = "Ingresa tu nombre.";
+  if (!get("lastName")) errors.lastName = "Ingresa tu apellido.";
+  if (!get("documentId")) errors.documentId = "Ingresa tu número de documento.";
+  const phone = get("phone");
+  if (!phone) errors.phone = "Ingresa tu número de teléfono.";
+  else if (!PHONE_RE.test(phone)) errors.phone = "Ingresa un teléfono válido.";
+  if (!get("city")) errors.city = "Selecciona tu ciudad.";
+  if (!get("vehicle")) errors.vehicle = "Selecciona tu tipo de vehículo.";
+
+  return errors;
+}
+
 type FileKey = "dni" | "licencia" | "antecedentes";
 
 type FileSlot = { file: File | null; error: string | null };
@@ -44,11 +65,15 @@ function Field({
   label,
   required = false,
   htmlFor,
+  error,
+  errorId,
   children,
 }: {
   label: string;
   required?: boolean;
   htmlFor: string;
+  error?: string | undefined;
+  errorId?: string | undefined;
   children: ReactNode;
 }) {
   return (
@@ -62,6 +87,11 @@ function Field({
         )}
       </label>
       {children}
+      {error && (
+        <span id={errorId} role="alert" className="anim-load-down text-caption text-error">
+          {error}
+        </span>
+      )}
     </div>
   );
 }
@@ -183,6 +213,21 @@ export default function DriversForm() {
 
   const [files, setFiles] = useState<FilesState>(INITIAL_FILES);
   const [submitState, setSubmitState] = useState<SubmitState>({ status: "idle" });
+  const [errors, setErrors] = useState<FieldErrors>({});
+
+  function clearError(name: string) {
+    setErrors((prev) => {
+      if (!prev[name]) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
+  }
+
+  function handleFieldChange(event: React.ChangeEvent<HTMLFormElement>) {
+    const name = (event.target as unknown as { name?: string }).name;
+    if (name) clearError(name);
+  }
 
   function handleFileChange(key: FileKey, file: File | null) {
     if (!file) {
@@ -195,25 +240,34 @@ export default function DriversForm() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formEl = event.currentTarget;
 
+    const fieldErrors = validateFields(new FormData(formEl));
     const missing = (Object.keys(files) as FileKey[]).filter((k) => !files[k].file);
-    if (missing.length > 0) {
-      setFiles((prev) => {
-        const next = { ...prev };
-        for (const key of missing) {
-          next[key] = { file: null, error: "Este archivo es obligatorio." };
-        }
-        return next;
-      });
+
+    if (Object.keys(fieldErrors).length > 0 || missing.length > 0) {
+      setErrors(fieldErrors);
+      if (missing.length > 0) {
+        setFiles((prev) => {
+          const next = { ...prev };
+          for (const key of missing) {
+            next[key] = { file: null, error: "Este archivo es obligatorio." };
+          }
+          return next;
+        });
+      }
       setSubmitState({
         status: "error",
-        message: "Faltan documentos por adjuntar.",
+        message:
+          missing.length > 0
+            ? "Faltan documentos por adjuntar."
+            : "Revisa los campos marcados.",
       });
       return;
     }
+    setErrors({});
 
     setSubmitState({ status: "submitting" });
-    const formEl = event.currentTarget;
     const formData = new FormData(formEl);
     formData.set("dni", files.dni.file!);
     formData.set("licencia", files.licencia.file!);
@@ -283,6 +337,7 @@ export default function DriversForm() {
             <form
               className="flex flex-col gap-4"
               onSubmit={handleSubmit}
+              onChange={handleFieldChange}
               noValidate
             >
               <div
@@ -296,7 +351,13 @@ export default function DriversForm() {
               </div>
 
               <div className="anim-reveal-up grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <Field label="Nombre" required htmlFor={firstNameId}>
+                <Field
+                  label="Nombre"
+                  required
+                  htmlFor={firstNameId}
+                  error={errors.firstName}
+                  errorId={`${firstNameId}-error`}
+                >
                   <input
                     id={firstNameId}
                     type="text"
@@ -304,10 +365,18 @@ export default function DriversForm() {
                     autoComplete="given-name"
                     placeholder="Ej. Luis Carlos"
                     required
+                    aria-invalid={errors.firstName ? true : undefined}
+                    aria-describedby={errors.firstName ? `${firstNameId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>
-                <Field label="Apellido" required htmlFor={lastNameId}>
+                <Field
+                  label="Apellido"
+                  required
+                  htmlFor={lastNameId}
+                  error={errors.lastName}
+                  errorId={`${lastNameId}-error`}
+                >
                   <input
                     id={lastNameId}
                     type="text"
@@ -315,23 +384,40 @@ export default function DriversForm() {
                     autoComplete="family-name"
                     placeholder="Ej. Fernández León"
                     required
+                    aria-invalid={errors.lastName ? true : undefined}
+                    aria-describedby={errors.lastName ? `${lastNameId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>
-                <Field label="Nº Documento Identidad" htmlFor={documentIdId}>
+                <Field
+                  label="Nº Documento Identidad"
+                  required
+                  htmlFor={documentIdId}
+                  error={errors.documentId}
+                  errorId={`${documentIdId}-error`}
+                >
                   <input
                     id={documentIdId}
                     type="text"
                     name="documentId"
                     autoComplete="off"
                     placeholder="Ej. 1234567898765"
+                    required
+                    aria-invalid={errors.documentId ? true : undefined}
+                    aria-describedby={errors.documentId ? `${documentIdId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>
               </div>
 
               <div className="anim-reveal-up grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <Field label="Número de teléfono" required htmlFor={phoneId}>
+                <Field
+                  label="Número de teléfono"
+                  required
+                  htmlFor={phoneId}
+                  error={errors.phone}
+                  errorId={`${phoneId}-error`}
+                >
                   <input
                     id={phoneId}
                     type="tel"
@@ -339,16 +425,26 @@ export default function DriversForm() {
                     autoComplete="tel"
                     placeholder="Ej. +50499123456"
                     required
+                    aria-invalid={errors.phone ? true : undefined}
+                    aria-describedby={errors.phone ? `${phoneId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>
-                <Field label="Ciudad" required htmlFor={cityId}>
+                <Field
+                  label="Ciudad"
+                  required
+                  htmlFor={cityId}
+                  error={errors.city}
+                  errorId={`${cityId}-error`}
+                >
                   <select
                     id={cityId}
                     name="city"
                     autoComplete="address-level2"
                     defaultValue=""
                     required
+                    aria-invalid={errors.city ? true : undefined}
+                    aria-describedby={errors.city ? `${cityId}-error` : undefined}
                     style={selectStyle}
                     className={`${inputClass} appearance-none pr-10`}
                   >
@@ -361,12 +457,20 @@ export default function DriversForm() {
                     <option value="catacamas">Catacamas</option>
                   </select>
                 </Field>
-                <Field label="Tipo de vehículo" required htmlFor={vehicleId}>
+                <Field
+                  label="Tipo de vehículo"
+                  required
+                  htmlFor={vehicleId}
+                  error={errors.vehicle}
+                  errorId={`${vehicleId}-error`}
+                >
                   <select
                     id={vehicleId}
                     name="vehicle"
                     defaultValue=""
                     required
+                    aria-invalid={errors.vehicle ? true : undefined}
+                    aria-describedby={errors.vehicle ? `${vehicleId}-error` : undefined}
                     style={selectStyle}
                     className={`${inputClass} appearance-none pr-10`}
                   >

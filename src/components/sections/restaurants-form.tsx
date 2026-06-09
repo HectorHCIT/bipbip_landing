@@ -16,6 +16,32 @@ const selectStyle = {
   backgroundRepeat: "no-repeat",
 } as const;
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[+\d][\d\s\-()]{6,}$/;
+
+type FieldErrors = Record<string, string>;
+
+function validate(data: FormData): FieldErrors {
+  const errors: FieldErrors = {};
+  const get = (key: string) =>
+    typeof data.get(key) === "string" ? (data.get(key) as string).trim() : "";
+
+  if (!get("firstName")) errors.firstName = "Ingresa tu nombre.";
+  if (!get("lastName")) errors.lastName = "Ingresa tu apellido.";
+  const email = get("email");
+  if (!email) errors.email = "Ingresa tu correo electrónico.";
+  else if (!EMAIL_RE.test(email)) errors.email = "Ingresa un correo válido.";
+  const phone = get("phone");
+  if (!phone) errors.phone = "Ingresa tu número de teléfono.";
+  else if (!PHONE_RE.test(phone)) errors.phone = "Ingresa un teléfono válido.";
+  if (!get("address")) errors.address = "Ingresa la dirección del negocio.";
+  if (!get("city")) errors.city = "Selecciona tu ciudad.";
+  if (!get("businessType")) errors.businessType = "Selecciona el tipo de negocio.";
+  if (!get("brandName")) errors.brandName = "Ingresa el nombre de la marca.";
+
+  return errors;
+}
+
 // 2026-06-15 00:00 in UTC-6 (Honduras) == 2026-06-15 06:00 UTC.
 // Comparing against this absolute UTC instant keeps server and client agreeing
 // regardless of which timezone the runtime reports.
@@ -44,11 +70,15 @@ function Field({
   label,
   required = false,
   htmlFor,
+  error,
+  errorId,
   children,
 }: {
   label: string;
   required?: boolean;
   htmlFor: string;
+  error?: string | undefined;
+  errorId?: string | undefined;
   children: ReactNode;
 }) {
   return (
@@ -62,6 +92,11 @@ function Field({
         )}
       </label>
       {children}
+      {error && (
+        <span id={errorId} role="alert" className="anim-load-down text-caption text-error">
+          {error}
+        </span>
+      )}
     </div>
   );
 }
@@ -78,6 +113,21 @@ export default function RestaurantsForm() {
   const termsId = useId();
 
   const [submitState, setSubmitState] = useState<SubmitState>({ status: "idle" });
+  const [errors, setErrors] = useState<FieldErrors>({});
+
+  function clearError(name: string) {
+    setErrors((prev) => {
+      if (!prev[name]) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
+  }
+
+  function handleFieldChange(event: React.ChangeEvent<HTMLFormElement>) {
+    const name = (event.target as unknown as { name?: string }).name;
+    if (name) clearError(name);
+  }
 
   // Gated client-side to avoid hydration mismatch when the page HTML is
   // statically cached. SSR always emits the base list; the extra cities pop in
@@ -95,8 +145,16 @@ export default function RestaurantsForm() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitState({ status: "submitting" });
     const form = new FormData(event.currentTarget);
+
+    const validationErrors = validate(form);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+    setErrors({});
+
+    setSubmitState({ status: "submitting" });
     const payload = Object.fromEntries(form.entries());
 
     try {
@@ -164,6 +222,7 @@ export default function RestaurantsForm() {
             <form
               className="flex flex-col gap-4"
               onSubmit={handleSubmit}
+              onChange={handleFieldChange}
               noValidate
             >
               <div
@@ -177,7 +236,13 @@ export default function RestaurantsForm() {
               </div>
 
               <div className="anim-reveal-up grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <Field label="Nombre" required htmlFor={firstNameId}>
+                <Field
+                  label="Nombre"
+                  required
+                  htmlFor={firstNameId}
+                  error={errors.firstName}
+                  errorId={`${firstNameId}-error`}
+                >
                   <input
                     id={firstNameId}
                     type="text"
@@ -185,10 +250,18 @@ export default function RestaurantsForm() {
                     autoComplete="given-name"
                     placeholder="Ej. Luis Carlos"
                     required
+                    aria-invalid={errors.firstName ? true : undefined}
+                    aria-describedby={errors.firstName ? `${firstNameId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>
-                <Field label="Apellido" required htmlFor={lastNameId}>
+                <Field
+                  label="Apellido"
+                  required
+                  htmlFor={lastNameId}
+                  error={errors.lastName}
+                  errorId={`${lastNameId}-error`}
+                >
                   <input
                     id={lastNameId}
                     type="text"
@@ -196,10 +269,18 @@ export default function RestaurantsForm() {
                     autoComplete="family-name"
                     placeholder="Ej. Fernández León"
                     required
+                    aria-invalid={errors.lastName ? true : undefined}
+                    aria-describedby={errors.lastName ? `${lastNameId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>
-                <Field label="Correo electrónico" required htmlFor={emailId}>
+                <Field
+                  label="Correo electrónico"
+                  required
+                  htmlFor={emailId}
+                  error={errors.email}
+                  errorId={`${emailId}-error`}
+                >
                   <input
                     id={emailId}
                     type="email"
@@ -208,13 +289,21 @@ export default function RestaurantsForm() {
                     placeholder="Ej. prueba@email.com"
                     required
                     aria-required="true"
+                    aria-invalid={errors.email ? true : undefined}
+                    aria-describedby={errors.email ? `${emailId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>
               </div>
 
               <div className="anim-reveal-up grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <Field label="Número de teléfono" required htmlFor={phoneId}>
+                <Field
+                  label="Número de teléfono"
+                  required
+                  htmlFor={phoneId}
+                  error={errors.phone}
+                  errorId={`${phoneId}-error`}
+                >
                   <input
                     id={phoneId}
                     type="tel"
@@ -222,25 +311,45 @@ export default function RestaurantsForm() {
                     autoComplete="tel"
                     placeholder="Ej. +50499123456"
                     required
+                    aria-invalid={errors.phone ? true : undefined}
+                    aria-describedby={errors.phone ? `${phoneId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>
-                <Field label="Dirección del negocio" htmlFor={addressId}>
+                <Field
+                  label="Dirección del negocio"
+                  required
+                  htmlFor={addressId}
+                  error={errors.address}
+                  errorId={`${addressId}-error`}
+                >
                   <input
                     id={addressId}
                     type="text"
                     name="address"
                     autoComplete="street-address"
                     placeholder="Ej. Av circunvalación..."
+                    required
+                    aria-invalid={errors.address ? true : undefined}
+                    aria-describedby={errors.address ? `${addressId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>
-                <Field label="Ciudad" htmlFor={cityId}>
+                <Field
+                  label="Ciudad"
+                  required
+                  htmlFor={cityId}
+                  error={errors.city}
+                  errorId={`${cityId}-error`}
+                >
                   <select
                     id={cityId}
                     name="city"
                     autoComplete="address-level2"
                     defaultValue=""
+                    required
+                    aria-invalid={errors.city ? true : undefined}
+                    aria-describedby={errors.city ? `${cityId}-error` : undefined}
                     style={selectStyle}
                     className={`${inputClass} appearance-none pr-10`}
                   >
@@ -257,11 +366,20 @@ export default function RestaurantsForm() {
               </div>
 
               <div className="anim-reveal-up grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Field label="Tipo de negocio" htmlFor={businessTypeId}>
+                <Field
+                  label="Tipo de negocio"
+                  required
+                  htmlFor={businessTypeId}
+                  error={errors.businessType}
+                  errorId={`${businessTypeId}-error`}
+                >
                   <select
                     id={businessTypeId}
                     name="businessType"
                     defaultValue=""
+                    required
+                    aria-invalid={errors.businessType ? true : undefined}
+                    aria-describedby={errors.businessType ? `${businessTypeId}-error` : undefined}
                     style={selectStyle}
                     className={`${inputClass} appearance-none pr-10`}
                   >
@@ -275,7 +393,13 @@ export default function RestaurantsForm() {
                     <option value="other">Otro</option>
                   </select>
                 </Field>
-                <Field label="Nombre de la marca" required htmlFor={brandNameId}>
+                <Field
+                  label="Nombre de la marca"
+                  required
+                  htmlFor={brandNameId}
+                  error={errors.brandName}
+                  errorId={`${brandNameId}-error`}
+                >
                   <input
                     id={brandNameId}
                     type="text"
@@ -283,6 +407,8 @@ export default function RestaurantsForm() {
                     autoComplete="organization"
                     placeholder="Ej. La Pizzería del Centro"
                     required
+                    aria-invalid={errors.brandName ? true : undefined}
+                    aria-describedby={errors.brandName ? `${brandNameId}-error` : undefined}
                     className={inputClass}
                   />
                 </Field>

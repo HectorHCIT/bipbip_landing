@@ -33,6 +33,9 @@ function validate(body: Record<string, unknown>):
   if (!firstName || !lastName) return { ok: false, error: "Nombre y apellido son obligatorios." };
   if (!email || !EMAIL_RE.test(email)) return { ok: false, error: "Email inválido." };
   if (!phone || !PHONE_RE.test(phone)) return { ok: false, error: "Teléfono inválido." };
+  if (!address) return { ok: false, error: "La dirección del negocio es obligatoria." };
+  if (!city) return { ok: false, error: "La ciudad es obligatoria." };
+  if (!businessType) return { ok: false, error: "El tipo de negocio es obligatorio." };
   if (!brandName) return { ok: false, error: "El nombre de la marca es obligatorio." };
 
   for (const value of [firstName, lastName, email, phone, address, city, businessType, brandName]) {
