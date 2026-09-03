@@ -7,6 +7,7 @@ import RestaurantsBrands from "@/components/sections/restaurants-brands";
 import RestaurantsForm from "@/components/sections/restaurants-form";
 import { JsonLd } from "@/components/seo/jsonld";
 import { pageMetadata } from "@/lib/seo";
+import { getCities } from "@/lib/cities";
 import { serviceSchema, webPageSchema } from "@/lib/seo-schemas";
 
 const RESTAURANTS_DESCRIPTION =
@@ -19,7 +20,9 @@ export const metadata: Metadata = pageMetadata({
   ogImagePath: "/og/restaurants.png",
 });
 
-export default function RestaurantsPage() {
+export default async function RestaurantsPage() {
+  const cities = await getCities();
+
   return (
     <>
       <JsonLd
@@ -41,7 +44,7 @@ export default function RestaurantsPage() {
         <RestaurantsHero />
         <RestaurantsFeatures />
         <RestaurantsBrands />
-        <RestaurantsForm />
+        <RestaurantsForm cities={cities} />
       </main>
       <Footer />
     </>

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useState, type ReactNode } from "react";
+import { useId, useState, type ReactNode } from "react";
+import type { City } from "@/lib/cities";
 
 const inputClass =
   "h-12 w-full rounded-lg border border-grey-200 bg-white px-4 py-2 text-b3 text-grey-700 placeholder:text-grey-500 shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary focus-visible:border-brand-primary transition-colors";
@@ -41,24 +42,6 @@ function validate(data: FormData): FieldErrors {
 
   return errors;
 }
-
-// 2026-06-15 00:00 in UTC-6 (Honduras) == 2026-06-15 06:00 UTC.
-// Comparing against this absolute UTC instant keeps server and client agreeing
-// regardless of which timezone the runtime reports.
-const FUTURE_CITIES_RELEASE_AT_MS = Date.UTC(2026, 5, 15, 6, 0, 0);
-
-const BASE_CITIES = [
-  { value: "tegucigalpa", label: "Tegucigalpa" },
-  { value: "sps", label: "San Pedro Sula" },
-] as const;
-
-const FUTURE_CITIES = [
-  { value: "progreso", label: "Progreso" },
-  { value: "choloma", label: "Choloma" },
-  { value: "la-lopez", label: "La Lopez" },
-  { value: "siguatepeque", label: "Siguatepeque" },
-  { value: "comayagua", label: "Comayagua" },
-] as const;
 
 type SubmitState =
   | { status: "idle" }
@@ -101,7 +84,7 @@ function Field({
   );
 }
 
-export default function RestaurantsForm() {
+export default function RestaurantsForm({ cities }: { cities: readonly City[] }) {
   const firstNameId = useId();
   const lastNameId = useId();
   const emailId = useId();
@@ -128,20 +111,6 @@ export default function RestaurantsForm() {
     const name = (event.target as unknown as { name?: string }).name;
     if (name) clearError(name);
   }
-
-  // Gated client-side to avoid hydration mismatch when the page HTML is
-  // statically cached. SSR always emits the base list; the extra cities pop in
-  // after mount once the release instant has passed.
-  const [showFutureCities, setShowFutureCities] = useState(false);
-  useEffect(() => {
-    if (Date.now() >= FUTURE_CITIES_RELEASE_AT_MS) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setShowFutureCities(true);
-    }
-  }, []);
-  const cities = showFutureCities
-    ? [...BASE_CITIES, ...FUTURE_CITIES]
-    : BASE_CITIES;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -357,8 +326,8 @@ export default function RestaurantsForm() {
                       Selecciona tu ciudad
                     </option>
                     {cities.map((city) => (
-                      <option key={city.value} value={city.value}>
-                        {city.label}
+                      <option key={city.id} value={city.name}>
+                        {city.name}
                       </option>
                     ))}
                   </select>
