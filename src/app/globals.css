@@ -150,7 +150,9 @@ body {
 .anim-delay-4 { animation-delay: 0.45s; }
 .anim-delay-5 { animation-delay: 0.60s; }
 
-/* Scroll-driven animations (below-the-fold) — JS observer adds .is-revealed */
+/* Scroll-driven animations (below-the-fold) — JS observer sets [data-revealed].
+   An attribute React does not render is invisible to its hydration check, so
+   the observer can mark the DOM before hydration without a class mismatch. */
 .anim-reveal-up,
 .anim-reveal-down,
 .anim-reveal-left,
@@ -159,11 +161,11 @@ body {
   opacity: 0;
   will-change: opacity, transform;
 }
-.anim-reveal-up.is-revealed    { animation: fade-in-up 0.6s ease-out both; }
-.anim-reveal-down.is-revealed  { animation: fade-in-down 0.55s ease-out both; }
-.anim-reveal-left.is-revealed  { animation: fade-in-left 0.6s ease-out both; }
-.anim-reveal-right.is-revealed { animation: fade-in-right 0.6s ease-out both; }
-.anim-reveal-scale.is-revealed { animation: fade-in-scale 0.5s ease-out both; }
+.anim-reveal-up[data-revealed]    { animation: fade-in-up 0.6s ease-out both; }
+.anim-reveal-down[data-revealed]  { animation: fade-in-down 0.55s ease-out both; }
+.anim-reveal-left[data-revealed]  { animation: fade-in-left 0.6s ease-out both; }
+.anim-reveal-right[data-revealed] { animation: fade-in-right 0.6s ease-out both; }
+.anim-reveal-scale[data-revealed] { animation: fade-in-scale 0.5s ease-out both; }
 
 /* Infinite float (decorative floating items) */
 @keyframes float-y {

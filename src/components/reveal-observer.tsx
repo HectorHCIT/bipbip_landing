@@ -23,7 +23,7 @@ export function RevealObserver() {
       const supportsIO = typeof IntersectionObserver !== 'undefined';
 
       const reveal = (el: Element) => {
-        el.classList.add('is-revealed');
+        el.setAttribute('data-revealed', '');
       };
 
       const initial = document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR);
@@ -35,9 +35,7 @@ export function RevealObserver() {
 
       // IntersectionObserver fires once synchronously on observe() with the
       // current state, so elements already in viewport reveal themselves
-      // without any manual getBoundingClientRect — and crucially, the
-      // callback runs as a microtask AFTER the current render tick, avoiding
-      // DOM mutations mid-hydration that cause SSR mismatches.
+      // without any manual getBoundingClientRect.
       io = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
@@ -52,7 +50,7 @@ export function RevealObserver() {
 
       const seen = new WeakSet<Element>();
       const register = (el: Element) => {
-        if (seen.has(el) || el.classList.contains('is-revealed')) return;
+        if (seen.has(el) || el.hasAttribute('data-revealed')) return;
         seen.add(el);
         io?.observe(el);
       };
@@ -90,14 +88,6 @@ export function RevealObserver() {
       if (timer !== null) clearTimeout(timer);
       io?.disconnect();
       mo?.disconnect();
-      // Strip is-revealed before unmount so a subsequent re-hydration (Fast
-      // Refresh, viewport-toolbar toggle, etc.) sees a DOM that matches the
-      // server-rendered HTML again. Without this the observer-added class
-      // persists on elements while the server still renders without it,
-      // tripping React's hydration check.
-      document
-        .querySelectorAll('.is-revealed')
-        .forEach((el) => el.classList.remove('is-revealed'));
     };
   }, [pathname]);
 
