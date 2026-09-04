@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useId, useRef, useState, type ReactNode } from "react";
+import type { City } from "@/lib/cities";
 
 const inputClass =
   "h-12 w-full rounded-lg border border-grey-200 bg-white px-4 py-2 text-b3 text-grey-700 placeholder:text-grey-500 shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary focus-visible:border-brand-primary transition-colors";
@@ -201,7 +202,7 @@ const INITIAL_FILES: FilesState = {
   antecedentes: { file: null, error: null },
 };
 
-export default function DriversForm() {
+export default function DriversForm({ cities }: { cities: readonly City[] }) {
   const firstNameId = useId();
   const lastNameId = useId();
   const documentIdId = useId();
@@ -451,10 +452,11 @@ export default function DriversForm() {
                     <option value="" disabled>
                       Selecciona tu ciudad
                     </option>
-                    <option value="tegucigalpa">Tegucigalpa</option>
-                    <option value="sps">San Pedro Sula</option>
-                    <option value="lc">La Ceiba</option>
-                    <option value="catacamas">Catacamas</option>
+                    {cities.map((city) => (
+                      <option key={city.id} value={city.name}>
+                        {city.name}
+                      </option>
+                    ))}
                   </select>
                 </Field>
                 <Field

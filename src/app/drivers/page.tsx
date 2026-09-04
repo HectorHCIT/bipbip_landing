@@ -6,6 +6,7 @@ import DriversFeatures from "@/components/sections/drivers-features";
 import DriversForm from "@/components/sections/drivers-form";
 import { JsonLd } from "@/components/seo/jsonld";
 import { pageMetadata } from "@/lib/seo";
+import { getDriverCities } from "@/lib/cities";
 import { serviceSchema, webPageSchema } from "@/lib/seo-schemas";
 
 const DRIVERS_DESCRIPTION =
@@ -18,7 +19,9 @@ export const metadata: Metadata = pageMetadata({
   ogImagePath: "/og/drivers.png",
 });
 
-export default function DriversPage() {
+export default async function DriversPage() {
+  const cities = await getDriverCities();
+
   return (
     <>
       <JsonLd
@@ -39,7 +42,7 @@ export default function DriversPage() {
       <main id="main">
         <DriversHero />
         <DriversFeatures />
-        <DriversForm />
+        <DriversForm cities={cities} />
       </main>
       <Footer />
     </>
