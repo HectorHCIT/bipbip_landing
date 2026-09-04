@@ -2,7 +2,7 @@ import Image from "next/image";
 import AnimatedSectionTitle from "@/components/ui/animated-section-title";
 import { cdn } from "@/lib/cdn";
 
-type Brand = { src: string; alt: string };
+type Brand = { src: string; alt: string; shape?: "circle" };
 
 const row1: Brand[] = [
   { src: cdn("/brands/KFC_logo .jpg"), alt: "KFC" },
@@ -18,6 +18,8 @@ const row1: Brand[] = [
   { src: cdn("/brands/Alamitos_Logo .png"), alt: "Alamitos" },
   { src: cdn("/brands/ChinaWok_Logo .jpg"), alt: "China Wok" },
   { src: cdn("/brands/McDonald's_logo .png"), alt: "McDonald's" },
+  { src: cdn("/brands/alitas_aleman.jpg"), alt: "Alitas El Alemán", shape: "circle" },
+  { src: cdn("/brands/TAMAGOO.jpg"), alt: "Tamagoo", shape: "circle" },
 ];
 
 const row2: Brand[] = [
@@ -34,6 +36,7 @@ const row2: Brand[] = [
   { src: cdn("/brands/PastelitosMonica_Logo .jpg"), alt: "Pastelitos Mónica" },
   { src: cdn("/brands/PolloselHondureño_logo .jpg"), alt: "Pollos el Hondureño" },
   { src: cdn("/brands/LaFondaMexicanFood_Logo .jpg"), alt: "La Fonda Mexican Food" },
+  { src: cdn("/brands/nicolatis.jpg"), alt: "Nicolatis", shape: "circle" },
 ];
 
 function MarqueeRow({
@@ -58,21 +61,28 @@ function MarqueeRow({
         } group-hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:[animation:none]`}
         style={{ animationDuration: `${duration}s` }}
       >
-        {doubled.map((brand, index) => (
-          <div
-            key={`${brand.alt}-${index}`}
-            className="relative h-16 w-[150px] shrink-0 md:h-20 md:w-[180px]"
-            aria-hidden={index >= items.length ? "true" : undefined}
-          >
-            <Image
-              src={brand.src}
-              alt={index >= items.length ? "" : brand.alt}
-              fill
-              sizes="180px"
-              className="object-contain"
-            />
-          </div>
-        ))}
+        {doubled.map((brand, index) => {
+          const isCircle = brand.shape === "circle";
+          return (
+            <div
+              key={`${brand.alt}-${index}`}
+              className={`relative shrink-0 ${
+                isCircle
+                  ? "h-16 w-16 overflow-hidden rounded-full md:h-20 md:w-20"
+                  : "h-16 w-[150px] md:h-20 md:w-[180px]"
+              }`}
+              aria-hidden={index >= items.length ? "true" : undefined}
+            >
+              <Image
+                src={brand.src}
+                alt={index >= items.length ? "" : brand.alt}
+                fill
+                sizes={isCircle ? "80px" : "180px"}
+                className={isCircle ? "object-cover" : "object-contain"}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
