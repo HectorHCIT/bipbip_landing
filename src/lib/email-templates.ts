@@ -191,13 +191,6 @@ export interface DriversPayload {
   vehicle: string;
 }
 
-const CITY_LABEL: Record<string, string> = {
-  tegucigalpa: "Tegucigalpa",
-  sps: "San Pedro Sula",
-  lc: "La Ceiba",
-  catacamas: "Catacamas",
-};
-
 const VEHICLE_LABEL: Record<string, string> = {
   moto: "Motocicleta",
   car: "Automóvil",
@@ -218,18 +211,17 @@ export function renderDriversEmail(payload: DriversPayload): {
   text: string;
 } {
   const fullName = `${payload.firstName} ${payload.lastName}`.trim();
-  const city = CITY_LABEL[payload.city] ?? payload.city;
   const vehicle = VEHICLE_LABEL[payload.vehicle] ?? payload.vehicle;
 
   const rowsHtml =
     row("Nombre", fullName) +
     row("Nº Documento", payload.documentId || "—") +
     row("Teléfono", payload.phone) +
-    row("Ciudad", city) +
+    row("Ciudad", payload.city) +
     row("Tipo de vehículo", vehicle, true);
 
   const html = wrap({
-    preheader: `${fullName} aplicó como repartidor en ${city}`,
+    preheader: `${fullName} aplicó como repartidor en ${payload.city}`,
     eyebrow: "Aplicación de repartidor",
     title: `${fullName} quiere ser repartidor`,
     rowsHtml,
@@ -242,7 +234,7 @@ export function renderDriversEmail(payload: DriversPayload): {
     textRow("Nombre", fullName) +
     textRow("Documento", payload.documentId || "—") +
     textRow("Teléfono", payload.phone) +
-    textRow("Ciudad", city) +
+    textRow("Ciudad", payload.city) +
     textRow("Vehículo", vehicle) +
     `\nDocumentos adjuntos: DNI, licencia, antecedentes penales.\n`;
 
@@ -270,7 +262,7 @@ export function renderRestaurantsEmail(payload: RestaurantsPayload): {
   text: string;
 } {
   const fullName = `${payload.firstName} ${payload.lastName}`.trim();
-  const city = payload.city ? (CITY_LABEL[payload.city] ?? payload.city) : "—";
+  const city = payload.city || "—";
   const businessType = payload.businessType
     ? (BUSINESS_LABEL[payload.businessType] ?? payload.businessType)
     : "—";
