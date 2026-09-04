@@ -16,10 +16,8 @@ const row1: Brand[] = [
   { src: cdn("/brands/Dennys_Logo .png"), alt: "Denny's" },
   { src: cdn("/brands/Fridays_logo .png"), alt: "TGI Fridays" },
   { src: cdn("/brands/Alamitos_Logo .png"), alt: "Alamitos" },
-  { src: cdn("/brands/ChinaWok_Logo .jpg"), alt: "China Wok" },
   { src: cdn("/brands/McDonald's_logo .png"), alt: "McDonald's" },
   { src: cdn("/brands/alitas_aleman.jpg"), alt: "Alitas El Alemán", shape: "circle" },
-  { src: cdn("/brands/TAMAGOO.jpg"), alt: "Tamagoo", shape: "circle" },
 ];
 
 const row2: Brand[] = [
@@ -28,11 +26,11 @@ const row2: Brand[] = [
   { src: cdn("/brands/TacoPollo_Logo .png"), alt: "Taco Pollo" },
   { src: cdn("/brands/LaCacerola_logo .jpg"), alt: "La Cacerola" },
   { src: cdn("/brands/LaPikalita_Logo .png"), alt: "La Pikalita" },
+  { src: cdn("/brands/TAMAGOO.jpg"), alt: "Tamagoo", shape: "circle" },
   { src: cdn("/brands/totosPizza_Logo .png"), alt: "Toto's Pizza" },
-  { src: cdn("/brands/churrinChurron_logo .jpg"), alt: "Churrin Churron" },
   { src: cdn("/brands/PolloCampesino_Logo .jpg"), alt: "Pollo Campesino" },
+  { src: cdn("/brands/ChinaWok_Logo .jpg"), alt: "China Wok" },
   { src: cdn("/brands/BaleadasExpress_logo .jpg"), alt: "Baleadas Express" },
-  { src: cdn("/brands/GoldChickenGold_Logo .png"), alt: "Gold Chicken Gold" },
   { src: cdn("/brands/PastelitosMonica_Logo .jpg"), alt: "Pastelitos Mónica" },
   { src: cdn("/brands/PolloselHondureño_logo .jpg"), alt: "Pollos el Hondureño" },
   { src: cdn("/brands/LaFondaMexicanFood_Logo .jpg"), alt: "La Fonda Mexican Food" },
