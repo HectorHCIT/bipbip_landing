@@ -196,7 +196,7 @@ export default function PrivacyContent() {
       <ol>
         <li>
           Enviando correo electrónico a{" "}
-          <a href="mailto:sacinterno@bipbip.hn">sacinterno@bipbip.hn</a>.
+          <a href="mailto:soporte@bipbip.hn">soporte@bipbip.hn</a>.
         </li>
         <li>
           Escribiendo al chat de ayuda de Bip Bip App: Sección de Ayuda &gt;&gt; Chat SAC.
